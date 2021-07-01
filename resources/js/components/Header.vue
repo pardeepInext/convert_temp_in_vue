@@ -18,7 +18,20 @@
         <img :src="`${asset}assets/img/logo.png`" alt="" />
       </router-link>
     </div>
-    <div id="mobile-menu-wrap"></div>
+    <div id="mobile-menu-wrap">
+      <div class="slicknav_menu">
+        <nav class="slicknav_nav slicknav_hidden">
+             <ul>
+                <main-menu
+                  v-for="mainMenu in mainMenus"
+                  :key="mainMenu.name"
+                  :menu="mainMenu"
+                  placement="mobile"
+                ></main-menu>
+              </ul>
+        </nav>
+      </div>
+    </div>
     <div class="om-widget">
       <ul>
         <li><i class="bi bi-envelope"></i> Aler.support@gmail.com</li>
@@ -34,6 +47,7 @@
         v-for="social in socials"
         :social="social"
         :key="social.icon"
+         placement ="mobile"
       />
     </div>
   </div>
@@ -76,6 +90,7 @@
                   v-for="mainMenu in mainMenus"
                   :key="mainMenu.name"
                   :menu="mainMenu"
+                  placement ='main'
                 ></main-menu>
               </ul>
             </nav>
@@ -98,16 +113,11 @@
 <script>
 import SocialMenu from "./SocialMenu.vue";
 import MainMenu from "./MainMenu.vue";
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       responsiveClass: false,
-      socials: [
-        { href: "javascript.void(0);", icon: "bi bi-facebook" },
-        { href: "javascript.void(0);", icon: "bi bi-youtube" },
-        { href: "javascript.void(0);", icon: "bi bi-twitter" },
-        { href: "javascript.void(0);", icon: "bi bi-instagram" },
-      ],
       mainMenus: [
         {
           name: "Home",
@@ -141,7 +151,7 @@ export default {
             },
             {
               name: "Property Submit",
-              href: "",
+              href: "/property-submit",
               hasChild: false,
             },
           ],
@@ -153,12 +163,12 @@ export default {
         },
         {
           name: "About",
-          href: "",
+          href: "/about",
           hasChild: false,
         },
         {
           name: "Blog",
-          href: "",
+          href: "/blogs",
           hasChild: false,
         },
         {
@@ -174,7 +184,7 @@ export default {
     MainMenu,
   },
   computed: {
-    asset: () => window.asset,
+    ...mapState(["asset","socials"]),
   },
   methods: {
     responsiveBtn() {
@@ -186,8 +196,7 @@ export default {
 </script>
 
 <style scoped>
-.main-menu,
-a {
-  text-decoration: none;
+.slicknav_nav ul,.slicknav_nav ul li ul {
+  list-style: none;
 }
 </style>

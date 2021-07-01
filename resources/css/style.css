@@ -1594,11 +1594,11 @@ ol {
   position: relative;
 }
 .breadcrumb-text .bt-option a:after {
-  position: absolute;
+  /* position: absolute;
   right: -18px;
-  top: -1px;
-  content: "5";
-  font-family: "ElegantIcons";
+  top: -1px; */
+  /* content: "5"; */
+  /* font-family: "ElegantIcons"; */
 }
 .breadcrumb-text .bt-option a i {
   margin-right: 4px;
