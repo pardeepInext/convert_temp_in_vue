@@ -26,3 +26,8 @@ Route::get('/blog/{id}',[BlogController::class,'show']);
 Route::post('/countries',[PropertyController::class,'getCountry']);
 Route::post('/states',[PropertyController::class,'getStates']);
 Route::post('/city',[PropertyController::class,'getCity']);
+
+//submit property
+Route::prefix('propery')->group(function () {
+      Route::post('/',[PropertyController::class,'submitProperty']); 
+});

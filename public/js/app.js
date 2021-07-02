@@ -22040,7 +22040,7 @@ var actions = {
             case 0:
               commit = _ref3.commit;
               _context3.next = 3;
-              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.post('api/cities', data).then(function (res) {
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.post('api/city', data).then(function (res) {
                 return commit('GET_CITIES', res.data);
               })["catch"](function (err) {
                 return console.log(err);
@@ -22052,6 +22052,33 @@ var actions = {
           }
         }
       }, _callee3);
+    }))();
+  },
+  insertProperty: function insertProperty(_ref4, data) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              commit = _ref4.commit;
+              _context4.next = 3;
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.post('api/propery', data, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+              }).then(function (resp) {
+                return console.log(resp);
+              })["catch"](function (err) {
+                return console.log(err);
+              });
+
+            case 3:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
     }))();
   }
 };

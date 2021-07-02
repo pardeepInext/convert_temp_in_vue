@@ -15,16 +15,22 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->integer('location_id');
-            $table->enum('type',['rent','sale']);
-            $table->enum('status',['appartment','house','office','villa','store','resturent']);
-            $table->integer('price');
-            $table->integer('feature_id');
-            $table->json('interested');
-            $table->integer('owner');
-            $table->string('image');
-            $table->boolean('is_open');
+            $table->string('title')->nullable();
+            $table->string('type')->nullable();
+            $table->string('status')->nullable();
+            $table->integer('price')->nullable();
+            $table->json('interested')->nullable();
+            $table->string('property_id')->nullable();
+            $table->string('size')->nullable();
+            $table->string('prefix')->nullable();
+            $table->string('bedrooms')->nullable();
+            $table->string('bathrooms')->nullable();
+            $table->string('garages')->nullable();
+            $table->string('year_built')->nullable();
+            $table->string('tour_url')->nullable();
+            $table->integer('owner')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('is_open')->nullable();
             $table->timestamps();
         });
     }

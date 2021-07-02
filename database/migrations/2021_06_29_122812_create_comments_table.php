@@ -19,6 +19,14 @@ class CreateCommentsTable extends Migration
             $table->string('comment');
             $table->string('name');
             $table->string('email');
+            $table->string('property_id');
+            $table->string('property_size');
+            $table->string('property_prefix');
+            $table->string('bedrooms');
+            $table->string('bathrooms');
+            $table->string('garages');
+            $table->string('year_built');
+            $table->string('tour_url');
             $table->timestamps();
         });
     }
