@@ -29,6 +29,7 @@ class Propery extends JsonResource
             'address' => $this->address,
             'features' => $this->features,
             'images' => $this->images,
+            'location' => $this->address,
 
         ];
     }

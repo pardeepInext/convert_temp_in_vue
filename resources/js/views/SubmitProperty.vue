@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb :breadcrumb="breadcrumb" />
     <!-- Property Submit Section Begin -->
     <section class="property-submit-section spad">
       <div class="container">
@@ -334,6 +335,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import Breadcrumb from "../components/Breadcrumb.vue";
 export default {
   data() {
     return {
@@ -375,6 +377,7 @@ export default {
     };
   },
   components: {
+    Breadcrumb
   },
   computed: {
     ...mapState(["propertyStatus", "propertyTypes", "propertyFeatures"]),

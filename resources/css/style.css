@@ -738,7 +738,7 @@ ol {
   background: #666666;
 }
 
-.more-option .card-heading a:after,
+/* .more-option .card-heading a:after,
 .more-option .card-heading > a:after {
   position: absolute;
   left: 0;
@@ -757,16 +757,16 @@ ol {
   font-family: "ElegantIcons";
   color: #ffffff;
   background: #00C89E;
-}
+} */
 
-.more-option .card-heading a[aria-expanded=true]:after,
+/* .more-option .card-heading a[aria-expanded=true]:after,
 .more-option .card-heading > a.active:after {
   content: "K";
   font-size: 16px;
   font-family: "ElegantIcons";
   color: #ffffff;
   background: #00C89E;
-}
+} */
 
 /*-------------------------
   Property Section

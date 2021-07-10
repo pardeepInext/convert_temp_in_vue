@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb :breadcrumb="breadcrumb" />
     <section class="contact-form-section spad">
       <div class="container">
         <div class="row">
@@ -31,12 +32,17 @@
 </template>
 
 <script>
+import Breadcrumb from "../components/Breadcrumb.vue";
 export default {
   components: {
-   },
+    Breadcrumb,
+  },
   data() {
     return {
-    
+      breadcrumb: {
+        name: "Contact Us",
+        img: "breadcrumb-contact-bg.jpg",
+      },
     };
   },
 };

@@ -34,100 +34,79 @@
     </section>
     <section class="categories-section">
       <div class="cs-item-list">
-        <div
-          class="cs-item set-bg"
-          :style="{
-            backgroundImage: `url('${asset}assets/img/categories/cat-1.jpg')`,
-          }"
-        >
-          <div class="cs-text">
-            <h5>Apartment</h5>
-            <span>230 property</span>
-          </div>
-        </div>
-        <div
-          class="cs-item set-bg"
-          :style="{
-            backgroundImage: `url('${asset}assets/img/categories/cat-2.jpg')`,
-          }"
-        >
-          <div class="cs-text">
-            <h5>Villa</h5>
-            <span>230 property</span>
-          </div>
-        </div>
-        <div
-          class="cs-item set-bg"
-          :style="{
-            backgroundImage: `url('${asset}assets/img/categories/cat-3.jpg')`,
-          }"
-        >
-          <div class="cs-text">
-            <h5>House</h5>
-            <span>230 property</span>
-          </div>
-        </div>
-        <div
-          class="cs-item set-bg"
-          :style="{
-            backgroundImage: `url('${asset}assets/img/categories/cat-4.jpg')`,
-          }"
-        >
-          <div class="cs-text">
-            <h5>Restaurent</h5>
-            <span>230 property</span>
-          </div>
-        </div>
-        <div
-          class="cs-item set-bg"
-          :style="{
-            backgroundImage: `url('${asset}assets/img/categories/cat-1.jpg')`,
-          }"
-        >
-          <div class="cs-text">
-            <h5>Office</h5>
-            <span>230 property</span>
-          </div>
-        </div>
+        <peroperty-count
+          v-for="propertyCount in propertyCounts"
+          :key="propertyCount"
+          :peropertyCount="propertyCount"
+        />
       </div>
     </section>
-    <hero-slider :sliders="slider" />
+    <hero-slider :sliders="slider" :placement="'home'" />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import HeroSlider from "../components/HeroSlider.vue";
+import PeropertyCount from "../components/PropertyCount.vue";
 export default {
   data() {
     return {
       slider: [
         {
           id: 1,
-          img: "/hero/hero-1.jpg",
+          image: "/hero/hero-1.jpg",
           name: "Balaji Symphony",
           type: "rent",
           price: "65",
         },
         {
           id: 2,
-          img: "/hero/hero-2.jpg",
+          image: "/hero/hero-2.jpg",
           name: "Balaji Symphony 2",
           type: "Buy",
           price: "45",
         },
         {
           id: 3,
-          img: "/hero/hero-3.jpg",
+          image: "/hero/hero-3.jpg",
           name: "Balaji Symphony 3",
           type: "rent",
           price: "65",
+        },
+      ],
+      propertyCounts: [
+        {
+          name: "Apartment",
+          count: "230",
+          img: "cat-1.jpg",
+        },
+        {
+          name: "Villa",
+          count: "145",
+          img: "cat-2.jpg",
+        },
+        {
+          name: "House",
+          count: "245",
+          img: "cat-3.jpg",
+        },
+        {
+          name: "Restaurent",
+          count: "300",
+          img: "cat-4.jpg",
+        },
+        {
+          name: "Office",
+          count: "400",
+          img: "cat-5.jpg",
         },
       ],
     };
   },
   components: {
     HeroSlider,
+    PeropertyCount,
   },
   computed: {
     ...mapState(["asset"]),
@@ -150,11 +129,10 @@ input {
 
 input:focus,
 button:focus,
-button:active,
-button:hover {
+button:active {
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
-  border: 1px solid #00c89d;
+  /* border: 1px solid #00c89d; */
 }
 </style>

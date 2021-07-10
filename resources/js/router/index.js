@@ -11,26 +11,28 @@ const routes = [
         component: () => import('../views/Home')
     },
     {
-        path: '/property',
+        path: '/properties',
+        name: 'properties',
+        meta: {
+            title: 'Properties',
+            
+        },
+        component: () => import('../views/Property')
+    },
+    {
+        path: '/property/:id',
         name: 'property',
         meta: {
             title: 'Property',
-            breadcrumb: {
-                name: "Property",
-                img: "breadcrumb-bg.jpg",
-            }
+            
         },
-        component: () => import('../views/Property')
+        component: () => import('../views/ProperyDetails')
     },
     {
         path: '/property-submit',
         name: 'property-submit',
         meta: {
             title: 'PropertySubmit',
-            breadcrumb: {
-                name: "Property",
-                img: "breadcrumb-2.jpg",
-            }
         },
         component: () => import('../views/SubmitProperty'),
     },
@@ -39,10 +41,6 @@ const routes = [
         name: 'about',
         meta: {
             title: 'About',
-            breadcrumb: {
-                name: "About",
-                img: "breadcrumb-bg.jpg",
-            }
         },
         component: () => import('../views/About')
     },
@@ -51,10 +49,6 @@ const routes = [
         name: 'blogs',
         meta: {
             title: 'Blogs',
-            breadcrumb: {
-                name: "Blogs",
-                img: "breadcrumb-3.jpg",
-            }
         },
         component: () => import('../views/Blogs')
     },
@@ -67,11 +61,7 @@ const routes = [
         path: '/contactus',
         name: 'contactus',
         meta: {
-            title: 'Contact Us',
-            breadcrumb: {
-                name: "Contact Us",
-                img: "breadcrumb-contact-bg.jpg",
-            }
+            title: 'Contact Us', 
         },
         component: () => import('../views/ContactUs')
     },

@@ -131,7 +131,7 @@ export default {
           childMenus: [
             {
               name: "Property",
-              href: "/property",
+              href: "/properties",
               hasChild: false,
             },
             {

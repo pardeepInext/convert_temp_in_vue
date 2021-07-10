@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb :breadcrumb="breadcrumb" />
     <section class="blog-section spad">
       <div class="container">
         <div class="row">
@@ -80,6 +81,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import SocialMenu from "../components/SocialMenu.vue";
+import Breadcrumb from "../components/Breadcrumb.vue";
 import Blog from "../components/Blog.vue";
 export default {
   data() {
@@ -93,6 +95,7 @@ export default {
   components: {
     Blog,
     SocialMenu,
+    Breadcrumb
   },
   computed: {
     ...mapState("Blog", [

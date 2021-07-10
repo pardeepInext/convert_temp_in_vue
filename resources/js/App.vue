@@ -1,6 +1,5 @@
 <template>
   <Header />
-  <breadcrumb  v-if="breadcrumb" :breadcrumb="breadcrumb" />
   <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
       <component :is="Component" :key="$route.path" />
@@ -11,18 +10,15 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
-import Breadcrumb from './components/Breadcrumb.vue';
 export default {
   name: "App",
   components: {
     Header,
     Footer,
-    Breadcrumb,
   },
   data() {
     return {
-      isViewLoading: false,
-      breadcrumb:{},
+     
     };
   },
   watch: {
@@ -30,7 +26,6 @@ export default {
       immediate: true,
       handler(to, from) {
         document.title = to.meta.title || "Aler";
-        this.breadcrumb = to.meta.breadcrumb; 
       },
     },
   },

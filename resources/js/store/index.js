@@ -53,7 +53,8 @@ const store = createStore({
 
     },
     actions: {
-        scrollToTop:() => window.scrollTo(0,200)
+        scrollToTop: () => window.scrollTo(0, 200),
+        titleCase: (txt) => txt,
     },
     modules: {
         Blog,

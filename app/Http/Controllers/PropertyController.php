@@ -19,9 +19,10 @@ class PropertyController extends Controller
 
     function index()
     {
+
         return ResoucePropery::collection(Property::paginate(2));
     }
-    
+
     public function create(Request $request)
     {
 

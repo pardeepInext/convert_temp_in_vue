@@ -9,11 +9,3 @@ const app = createApp(App)
 .use(store)
 .mount('#app');
     
-
-//adding loader before each route view
-Router.beforeEach((to, from, next) => {  
-    app.$data.isViewLoading = true;
-    next()
-})
-//desable loader when component is loading
-Router.afterEach(() => app.$data.isViewLoading = false)

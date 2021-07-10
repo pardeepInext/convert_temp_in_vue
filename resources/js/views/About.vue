@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb :breadcrumb="breadcrumb" />
     <section class="about-section spad">
       <div class="container">
         <div class="row">
@@ -85,14 +86,21 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import Breadcrumb from "../components/Breadcrumb.vue";
 export default {
   data() {
-    return {};
+    return {
+      breadcrumb: {
+        name: "About",
+        img: "breadcrumb-bg.jpg",
+      },
+    };
   },
   computed: {
     ...mapState(["asset"]),
   },
   components: {
+    Breadcrumb,
   },
 };
 </script>

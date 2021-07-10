@@ -5,7 +5,7 @@
     data-bs-ride="carousel"
   >
     <div class="carousel-inner">
-       <hero-slide  v-for="(slider,index) in sliders"  :key="slider.name" :slide="slider" :index="index"/>
+       <hero-slide  v-for="(slider,index) in sliders"  :key="slider" :slide="slider" :index="index" :placement="placement" />
     </div>
     <button
       class="carousel-control-prev"
@@ -31,7 +31,7 @@
 <script>
 import HeroSlide from '../components/HeroSlide.vue';
 export default {
-  props: ["sliders"],
+  props: ["sliders","placement"],
   components:{
         HeroSlide
   }

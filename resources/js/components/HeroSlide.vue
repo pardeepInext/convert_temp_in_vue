@@ -1,10 +1,7 @@
 <template>
-  <div :class="['carousel-item', slide.id == 1 ? 'active' : '']" ref="slide">
-    <div
-      class="property-slide"
-      :style="{ backgroundImage: `url('${asset}assets/img/${slide.img}')` }"
-    >
-      <div class="row">
+  <div :class="['carousel-item', index == 0 ? 'active' : '']" ref="slide">
+    <div class="property-slide" :style="{ backgroundImage: `url('${asset}${imgPath}')` }">
+      <div class="row" v-if="placement == 'home'">
         <div class="col-lg-12">
           <div class="slider-propery-info hc-inner-text">
             <div class="hc-text">
@@ -34,14 +31,16 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  props: ["slide"],
+  props: ["slide", "placement","index"],
   computed: {
     ...mapState(["asset"]),
-    
+    imgPath() {
+      return this.$props.placement == "home"
+        ? `assets/img/${this.$props.slide.image}`
+        : `assets/img/property/${this.$props.slide.image}`;
+    },
   },
-  mounted(){
-    
-  }
+  
 };
 </script>
 

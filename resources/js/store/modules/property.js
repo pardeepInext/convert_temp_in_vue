@@ -9,6 +9,11 @@ const states = {
     submitError: {},
     submitLoading: false,
     submitSuccess: false,
+    properties: {},
+    propertiesData:[],
+    propertiesLoading: false,
+    property: [],
+    propertyLoading: false
 };
 
 const mutations = {
@@ -19,6 +24,10 @@ const mutations = {
     GET_SUBMIT_ERROR: (states, payload) => states.submitError = payload,
     SUBMIT_LOADING: (states, payload) => states.submitLoading = payload,
     SUBMIT_SUCCESS: (states, payload) => states.submitSuccess = payload,
+    GET_PROPERTIES: (states, payload) => states.properties = payload,
+    PROPERTIES_LOADING: (states, payload) => states.propertiesLoading = payload,
+    GET_PROPERTY: (states, payload) => states.property = payload,
+    PROPERTY_LOADING: (states, payload) => states.propertyLoading = payload,
 };
 
 const actions = {
@@ -54,13 +63,36 @@ const actions = {
             })
             .catch((error) => commit('SUBMIT_LOADING', false));
 
+    },
+    async fetchproperties({ commit}, data) {
+        commit('PROPERTIES_LOADING', true);
+        axios.get(`api/propery?page=${data.page}`, data)
+            .then((res) => {
+                commit('GET_PROPERTIES', res);
+                commit('PROPERTIES_LOADING', false);
+            })
+            .catch((err) => console.log(err));
+    },
+    async fetchproperty({ commit }, id) {
+        commit('PROPERTY_LOADING', true);
+        axios.get(`api/propery/${id}`)
+            .then((res) => {
+                commit('GET_PROPERTY', res.data.data)
+                commit('PROPERTY_LOADING', false)
+            })
+            .catch((err) => console.log(err));
     }
 
 };
+const getters = {
+    getProperties: (state) => state.properties,
+     
+}
 
 const Property = {
     namespaced: true,
     states,
+    getters,
     mutations,
     actions
 }
