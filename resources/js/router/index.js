@@ -15,7 +15,7 @@ const routes = [
         name: 'properties',
         meta: {
             title: 'Properties',
-            
+
         },
         component: () => import('../views/Property')
     },
@@ -24,7 +24,7 @@ const routes = [
         name: 'property',
         meta: {
             title: 'Property',
-            
+
         },
         component: () => import('../views/ProperyDetails')
     },
@@ -61,10 +61,55 @@ const routes = [
         path: '/contactus',
         name: 'contactus',
         meta: {
-            title: 'Contact Us', 
+            title: 'Contact Us',
         },
         component: () => import('../views/ContactUs')
     },
+    {
+        path: '/login',
+        name: 'login',
+        meta: {
+            title: 'Sign In',
+            guard: 'guest',
+        },
+        component: () => import('../views/Login')
+    },
+    {
+        path: '/register',
+        name: 'register',
+        meta: {
+            title: 'Sign Up',
+            guard: 'guest',
+        },
+        component: () => import('../views/Register')
+    },
+    {
+        path: '/forgotpassword',
+        name: 'forgotpassword',
+        meta: {
+            title: 'Forgot Password',
+            guard: 'guest',
+        },
+        component: () => import('../views/ForgotPassword')
+
+    },
+    {
+        path: '/user/:id',
+        name: 'sendvarificationlink',
+        meta: {
+            title: 'User',
+        },
+        component: () => import('../views/404')
+
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: 'notfound',
+        meta: {
+            title: 'Not Found',
+        },
+        component: () => import('../views/404')
+    }
 
 ]
 
@@ -75,6 +120,13 @@ const Router = createRouter({
     routes,
 });
 
+Router.beforeEach((to, from, next) => {
+    if (localStorage.getItem('token')) {
+        if (to.matched.some(route => route.meta.guard === 'guest')) next({ name: 'home' })
+        else next();
+    }
+    next();
+})
 
 
 

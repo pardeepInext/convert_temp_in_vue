@@ -29,7 +29,9 @@ export default {
       },
     },
   },
-  mounted() {},
+  mounted() {
+    
+  },
 };
 </script>
 <style lang="css" scoped>

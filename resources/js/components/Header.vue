@@ -21,14 +21,14 @@
     <div id="mobile-menu-wrap">
       <div class="slicknav_menu">
         <nav class="slicknav_nav slicknav_hidden">
-             <ul>
-                <main-menu
-                  v-for="mainMenu in mainMenus"
-                  :key="mainMenu.name"
-                  :menu="mainMenu"
-                  placement="mobile"
-                ></main-menu>
-              </ul>
+          <ul>
+            <main-menu
+              v-for="mainMenu in mainMenus"
+              :key="mainMenu.name"
+              :menu="mainMenu"
+              placement="mobile"
+            ></main-menu>
+          </ul>
         </nav>
       </div>
     </div>
@@ -40,14 +40,14 @@
           <span>125-668-886</span>
         </li>
       </ul>
-      <router-link class="hw-btn" :to="{name:'property-submit'}">Submit property</router-link>
+      <router-link class="hw-btn" :to="{ name: 'login' }">Login</router-link>
     </div>
     <div class="om-social">
       <social-menu
         v-for="social in socials"
         :social="social"
         :key="social.icon"
-         placement ="mobile"
+        placement="mobile"
       />
     </div>
   </div>
@@ -71,7 +71,22 @@
                   <span>125-668-886</span>
                 </li>
               </ul>
-               <router-link class="hw-btn" :to="{name:'property-submit'}">Submit property</router-link>
+              <button
+                class="hw-btn logout"
+                v-if="token || isAuth"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Logout
+              </button>
+              <router-link class="hw-btn" :to="{ name: 'login' }" v-else
+                >Login</router-link
+              >
+              <div class="collapse" id="collapseExample">
+                <a href="javascript:void(0);" @click="logout(user.id)">Logout</a>
+              </div>
             </div>
           </div>
         </div>
@@ -90,7 +105,7 @@
                   v-for="mainMenu in mainMenus"
                   :key="mainMenu.name"
                   :menu="mainMenu"
-                  placement ='main'
+                  placement="main"
                 ></main-menu>
               </ul>
             </nav>
@@ -113,7 +128,7 @@
 <script>
 import SocialMenu from "./SocialMenu.vue";
 import MainMenu from "./MainMenu.vue";
-import { mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
@@ -164,19 +179,27 @@ export default {
     MainMenu,
   },
   computed: {
-    ...mapState(["asset","socials"]),
+    ...mapState(["asset", "socials"]),
+    ...mapState('Auth',['isAuth']),
+    ...mapGetters(['token','user']),
   },
   methods: {
     responsiveBtn() {
       this.responsiveClass = !this.responsiveClass;
     },
+    ...mapActions("Auth", ["logout"]),
   },
   mounted() {},
 };
 </script>
 
 <style scoped>
-.slicknav_nav ul,.slicknav_nav ul li ul {
+.slicknav_nav ul,
+.slicknav_nav ul li ul {
   list-style: none;
+}
+.logout {
+  outline: none;
+  border: none;
 }
 </style>
