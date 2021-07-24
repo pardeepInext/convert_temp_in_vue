@@ -154,7 +154,7 @@
                       aria-labelledby="profile-tab"
                     >
                       <div class="tab-details">
-                         <h4 class="text-center my-4">Property Features</h4>
+                        <h4 class="text-center my-4">Property Features</h4>
                         <ul class="left-table">
                           <li
                             v-for="feature in property.features"
@@ -193,25 +193,45 @@
             <div class="property-sidebar">
               <div class="single-sidebar">
                 <div class="section-title sidebar-title">
-                  <h5>Agent</h5>
+                  <h5>Posted By</h5>
                 </div>
                 <div class="top-agent">
                   <div class="ta-item">
                     <div
                       class="ta-pic set-bg"
                       data-setbg="img/property/details/sidebar/ta-1.jpg"
+                      :style="{
+                        backgroundImage: `url('${profileImage(
+                            property.postedBy.provider_id,
+                            property.postedBy.proifie_image,
+                            property.postedBy.img,
+                        )}')`,
+                      }"
                     ></div>
                     <div class="ta-text">
-                      <h6><a href="#">Ashton Kutcher</a></h6>
-                      <span>Team Leader</span>
-                      <div class="ta-num">123-455-688</div>
+                      <h6>
+                        <a href="#">{{ property.postedBy.name }}</a>
+                      </h6>
+                      <div class="ta-num">
+                        {{
+                          property.postedBy.email
+                            ? property.postedBy.email
+                            : "No Email available"
+                        }}
+                      </div>
+                      <div class="float-end pe-2">
+                        <button type="button" class="btn btn-sm btn-primary">
+                          <i class="fas fa-comment-dots"></i>
+                          Chat
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="single-sidebar">
                 <div class="section-title sidebar-title">
-                  <h5>mortgage calculator</h5>
+                  <h5>EMI calculator</h5>
                 </div>
                 <form class="calculator-form" @submit.prevent="calculateEMI">
                   <div class="filter-input">
@@ -231,7 +251,7 @@
                   <div class="filter-input">
                     <p>Term(year)</p>
                     <select name="" id="" class="form-control" v-model="term">
-                      <option value="3" selected>3 Years</option>
+                      <option value="3">3 Years</option>
                       <option value="4">4 Years</option>
                       <option value="5">5 Years</option>
                       <option value="6">20 Years</option>
@@ -248,10 +268,13 @@
                     />
                   </div>
                   <button type="submit" class="site-btn">Calculate</button>
-                  <h4 v-if="emi > 0">
-                    Emi is &#36; <span class="pt-price">{{ emi }}</span
-                    >/month
-                  </h4>
+                  <div
+                    class="section-title sidebar-title"
+                    v-if="emi > 0"
+                    :style="{ position: absolute }"
+                  >
+                    <h5>EMI IS <span class="pt-price">&#36;</span>{{ emi }}</h5>
+                  </div>
                 </form>
               </div>
             </div>
@@ -272,7 +295,7 @@ export default {
     return {
       loanAmount: 0,
       interest: 0,
-      term: "",
+      term: 3,
       emi: 0,
     };
   },
@@ -291,6 +314,9 @@ export default {
       this.emi = Math.round((interestAmount + principle) / months);
     },
     featuresImg: (value) => value.replace(" ", "_"),
+    profileImage(prover_id, proifie_image, img) {
+      return typeof prover_id == "string" ? img : proifie_image;
+    },
   },
   mounted() {
     this.fetchproperty(this.$route.params.id);

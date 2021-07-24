@@ -4626,18 +4626,24 @@ li .richText-btn[data-command=toggleCode] {
   }
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.btn-primary{
-    background-color: #00C89E;
-    border-color: #00C89E;
+.btn-primary {
+    background-color: #00c89e;
+    border-color: #00c89e;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background-color: #009e7d;
-    border-color: #009e7d
+    border-color: #009e7d;
 }
 
+select:focus,select:active {
+    border-color: #00c89e;
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+}
 

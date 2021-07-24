@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\UserResource;
 
 class Propery extends JsonResource
 {
@@ -30,6 +31,7 @@ class Propery extends JsonResource
             'features' => $this->features,
             'images' => $this->images,
             'location' => $this->address,
+            'postedBy' => $this->postedBy,
 
         ];
     }

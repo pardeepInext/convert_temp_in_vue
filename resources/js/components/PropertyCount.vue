@@ -53,7 +53,7 @@ export default {
     let that = this;
     document.addEventListener("scroll", that.animateCounter);
   },
-  destroyed() {
+  unmounted() {
     let that = this;
     document.removeEventListener("scroll", that.animateCounter);
   },

@@ -101,7 +101,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var that = this;
     document.addEventListener("scroll", that.animateCounter);
   },
-  destroyed: function destroyed() {
+  unmounted: function unmounted() {
     var that = this;
     document.removeEventListener("scroll", that.animateCounter);
   }
@@ -181,56 +181,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  metaInfo: function metaInfo() {
-    var _this = this;
-
-    return {
-      script: [{
-        src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCj7x4x98mJgF9SHxXTREmLcGuAiqHYl_4&libraries=places",
-        async: true,
-        defer: true,
-        callback: function callback() {
-          return _this.MapsInit();
-        } // will declare it in methods
-
-      }]
-    };
-  },
-  watch: {
-    search: function search(newValue) {
-      if (newValue) {
-        this.service.getPlacePredictions({
-          input: this.location,
-          types: ["(cities)"]
-        }, this.displaySuggestions);
-      }
-    }
-  },
   components: {
     HeroSlider: _components_HeroSlider_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     PeropertyCount: _components_PropertyCount_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(["asset"])),
-  methods: {
-    MapsInit: function MapsInit() {
-      this.service = new window.google.maps.places.AutocompleteService();
-    },
-    displaySuggestions: function displaySuggestions(predictions, status) {
-      if (status !== window.google.maps.places.PlacesServiceStatus.OK) {
-        this.searchResults = [];
-        return;
-      }
-
-      this.searchResults = predictions.map(function (prediction) {
-        return prediction.description;
-      });
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(["asset"])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)("HomePage", ['getLocationResult'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('HomePage', ['searchDropDown', 'searchProperty'])), {}, {
+    locationSearch: function locationSearch() {
+      if (this.search.length > 2) this.searchDropDown(this.search);
     }
-  },
-  mounted: function mounted() {
-    var recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute("src", "https://maps.googleapis.com/maps/api/js?key=AIzaSyCj7x4x98mJgF9SHxXTREmLcGuAiqHYl_4&callback=initMap", "async", "defer");
-    document.head.appendChild(recaptchaScript);
-  }
+  }),
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -427,25 +388,22 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_6 = {
   "class": "input-group mb-3"
 };
+var _hoisted_7 = {
+  id: "locations"
+};
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  "class": "btn btn-primary",
-  type: "button",
-  id: "button-addon2",
-  style: {
-    "background": "#00c89e",
-    "border": "1px solid #00c89d"
-  }
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "bi bi-search"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Search ")], -1
+}, null, -1
 /* HOISTED */
 );
 
-var _hoisted_8 = {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Search ");
+
+var _hoisted_10 = {
   "class": "categories-section"
 };
-var _hoisted_9 = {
+var _hoisted_11 = {
   "class": "cs-item-list",
   ref: "propertycount"
 };
@@ -455,7 +413,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_hero_slider = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("hero-slider");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-    onScroll: _cache[2] || (_cache[2] = function () {
+    onScroll: _cache[4] || (_cache[4] = function () {
       return _ctx.testScrol && _ctx.testScrol.apply(_ctx, arguments);
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", {
@@ -464,19 +422,47 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       backgroundImage: "url('".concat(_ctx.asset, "assets/img/blog/bh-bg.jpg')")
     }
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-    type: "text",
+    type: "search",
     "class": "form-control",
-    placeholder: "Type your requirement",
-    "aria-label": "Recipient's username",
-    "aria-describedby": "button-addon2",
+    placeholder: "Type your location",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.search = $event;
+    }),
+    onKeyup: _cache[2] || (_cache[2] = function () {
+      return $options.locationSearch && $options.locationSearch.apply($options, arguments);
+    }),
+    list: "locations",
+    autocomplete: "off"
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("datalist", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.getLocationResult, function (location, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("option", {
+      key: index,
+      innerHTML: location,
+      onClick: function onClick($event) {
+        return _ctx.getOptionValue(location);
+      }
+    }, null, 8
+    /* PROPS */
+    , ["innerHTML", "onClick"]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "btn btn-primary",
+    type: "button",
+    id: "button-addon2",
+    style: {
+      "background": "#00c89e",
+      "border": "1px solid #00c89d"
+    },
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.searchProperty($data.search);
     })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search]]), _hoisted_7])])])])])], 4
+  }, [_hoisted_8, _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.getProperties), 1
+  /* TEXT */
+  )])])])])])], 4
   /* STYLE */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.propertyCounts, function (propertyCount) {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.propertyCounts, function (propertyCount) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_peroperty_count, {
       key: propertyCount,
       peropertyCount: propertyCount

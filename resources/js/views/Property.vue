@@ -28,8 +28,28 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <select
+              name=""
+              id=""
+              class="form-control float-end"
+              style="width: 30%"
+              v-model="propertyFetch.type"
+            >
+              <option selected value="">--Select Property Type--</option>
+              <option
+                :value="propertyType"
+                v-for="propertyType in propertyTypes"
+                :key="propertyType"
+              >
+                {{ propertyType.toUpperCase() }}
+              </option>
+            </select>
+          </div>
+        </div>
         <div class="search-form-content">
-          <form action="#" class="filter-form">
+          <form class="filter-form" @submit.prevent="searchFilter">
             <div class="number-wrap my-2">
               <div class="quantity">
                 <input
@@ -51,7 +71,10 @@
                   <div
                     class="quantity-button quantity-down"
                     @click="
-                      propertyFetch.bedroom = Number(propertyFetch.bedroom) - 1
+                      propertyFetch.bedroom =
+                        propertyFetch.bedroom > 1
+                          ? Number(propertyFetch.bedroom) - 1
+                          : propertyFetch.bedroom
                     "
                   >
                     -
@@ -80,7 +103,9 @@
                     class="quantity-button quantity-down"
                     @click="
                       propertyFetch.bathroom =
-                        Number(propertyFetch.bathroom) - 1
+                        propertyFetch.bathroom > 1
+                          ? Number(propertyFetch.bathroom) - 1
+                          : propertyFetch.bathroom
                     "
                   >
                     -
@@ -108,7 +133,10 @@
                   <div
                     class="quantity-button quantity-down"
                     @click="
-                      propertyFetch.garage = Number(propertyFetch.garage) - 1
+                      propertyFetch.garage > 1
+                        ? (propertyFetch.garage =
+                            Number(propertyFetch.garage) - 1)
+                        : propertyFetch.garage
                     "
                   >
                     -
@@ -138,72 +166,41 @@
               </div>
               <div id="price-range" class="slider"></div>
             </div>
-            <button type="button" class="search-btn sm-width">Search</button>
+            <button type="submit" class="search-btn sm-width">Search</button>
           </form>
-        </div>
-        <div class="more-option">
-          <div class="accordion" id="accordionExample">
-            <div class="card">
-              <div class="card-heading active">
-                <a
-                  data-bs-toggle="collapse"
-                  href="#collapseOne"
-                  @click="() => (moreOption = !moreOption)"
-                >
-                  <i
-                    class="bi"
-                    :class="moreOption ? 'bi-plus-lg' : 'bi-dash-lg'"
-                  ></i>
-                  More Search Options
-                </a>
-              </div>
-              <div id="collapseOne" class="collapse">
-                <div class="card-body">
-                  <div class="mo-list">
-                    <div
-                      class="ml-column"
-                      v-for="propertyFeature in propertyFeatures"
-                      :key="propertyFeature"
-                    >
-                      <label
-                        :for="feature"
-                        v-for="feature in propertyFeature"
-                        :key="feature"
-                        >{{ feature }}
-                        <input type="checkbox" :id="feature" :value="feature" v-model="propertyFetch.feature" />
-                        <span class="checkbox"></span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
     <section class="property-section spad">
       <div class="container">
-        <div class="row" v-if="getProperties">
-          <property
-            v-for="property in propertyList"
-            :key="property.id"
-            :property="property"
-          />
-          <div class="col-lg-12">
-            <div class="loadmore-btn">
-              <button
-                v-if="
-                  getProperties.data.meta.current_page !=
-                  getProperties.data.meta.last_page
-                "
-                @click="loadMoreProperty"
-                :disabled="propertiesLoading"
-              >
-                <i class="fas fa-spinner fa-spin" v-if="propertiesLoading"></i>
-                Load More
-              </button>
+        <div v-if="getProperties">
+          <div v-if="propertyList.length > 0" class="row">
+            <property
+              v-for="property in propertyList"
+              :key="property.id"
+              :property="property"
+            />
+            <div class="col-lg-12">
+              <div class="loadmore-btn">
+                <button
+                  v-if="
+                    getProperties.data.meta.current_page !=
+                    getProperties.data.meta.last_page
+                  "
+                  @click="loadMoreProperty"
+                  :disabled="propertiesLoading"
+                >
+                  <i
+                    class="fas fa-spinner fa-spin"
+                    v-if="propertiesLoading"
+                  ></i>
+                  Load More
+                </button>
+              </div>
             </div>
+          </div>
+          <div class="row section-title" v-else>
+            <h4>No Property Available</h4>
           </div>
         </div>
       </div>
@@ -215,6 +212,7 @@ import { mapActions, mapGetters, mapState } from "vuex";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Property from "../components/Property";
 import noUiSlider from "nouislider";
+import axios from "../store/axios";
 export default {
   data() {
     return {
@@ -230,20 +228,21 @@ export default {
         garage: "",
         price: [],
         size: [],
-        feature:[],
+        feature: [],
+        type: "",
       },
       property: [],
       moreOption: false,
       cbItems: ["rent", "sale"],
       sliderOption: {
-        start: [20, 80],
+        start: [326300, 601800],
         connect: "lower",
         connect: true,
-        step: 10,
+        step: 100,
         cssPrefix: "noUi-",
         range: {
           min: 0,
-          max: 100,
+          max: 1000000,
         },
       },
     };
@@ -253,12 +252,16 @@ export default {
     Property,
   },
   computed: {
-    ...mapState(["propertyFeatures"]),
+    ...mapState(["propertyFeatures", "propertyTypes"]),
     ...mapState("Property", ["propertiesLoading"]),
     ...mapGetters("Property", ["getProperties"]),
+    ...mapGetters("HomePage", ["getSearchProperty"]),
     propertyList() {
       this.getProperties.data.data.forEach((data) => this.property.push(data));
       return this.property;
+    },
+    priceSliderOption() {
+      return this.maxPrice ? this.maxPrice : "test";
     },
   },
   methods: {
@@ -268,13 +271,55 @@ export default {
       this.propertyFetch.page = this.getProperties.data.meta.current_page + 1;
       this.fetchproperties(this.propertyFetch);
     },
+    searchFilter() {
+      this.propertyList.length = 0;
+      this.propertyFetch.page = 1;
+      this.fetchproperties(this.propertyFetch);
+    },
+    calcPercent: (value, percent) =>
+      Math.round(parseInt(value) / 100) * percent,
   },
-  mounted() {
+  async mounted() {
     this.fetchproperties(this.propertyFetch);
+    let maxData = {};
+    let _this = this;
+    //ajax for getting max slider values
+    await axios
+      .get("api/propery/maxvalue/")
+      .then((res) => (maxData = res.data))
+      .catch((err) => {
+        console.log(err);
+      });
 
-    //init slider
-    noUiSlider.create(this.$refs.price, this.sliderOption);
-    noUiSlider.create(this.$refs.size, this.sliderOption);
+    //slider init
+    noUiSlider.create(this.$refs.price, {
+      start: [
+        _this.calcPercent(maxData.price, 20),
+        _this.calcPercent(maxData.price, 50),
+      ],
+      connect: "lower",
+      connect: true,
+      step: _this.calcPercent(maxData.price, 10),
+      cssPrefix: "noUi-",
+      range: {
+        min: 0,
+        max: parseInt(maxData.price),
+      },
+    });
+    noUiSlider.create(this.$refs.size, {
+      start: [
+        _this.calcPercent(maxData.size, 20),
+        _this.calcPercent(maxData.size, 50),
+      ],
+      connect: "lower",
+      connect: true,
+      step: _this.calcPercent(maxData.size, 10),
+      cssPrefix: "noUi-",
+      range: {
+        min: 0,
+        max: parseInt(maxData.size),
+      },
+    });
 
     //updating value of slider
     this.$refs.price.noUiSlider.on(

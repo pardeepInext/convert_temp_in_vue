@@ -109,6 +109,14 @@ const routes = [
             title: 'Not Found',
         },
         component: () => import('../views/404')
+    },
+    {
+        path:'/chat',
+        name:'chat',
+        meta:{
+            title:'Chat'
+        },
+        component: () => import('../views/Chat')
     }
 
 ]

@@ -3,6 +3,8 @@ import Blog from './modules/blogs';
 import Property from './modules/property';
 import Auth from './modules/auth';
 import ProfileEdit from './modules/profile_edit';
+import HomePage from './modules/homepage';
+import Chat from './modules/chat';
 
 let asset = document.querySelector('meta[name="asset"]').content;
 
@@ -58,7 +60,7 @@ const store = createStore({
     },
     getters: {
         token: (state) => state.token = localStorage.getItem("token") ? localStorage.getItem("token") : false,
-        user: (state) =>  state.user =  localStorage.getItem("user")? JSON.parse(localStorage.getItem("user")) : {},
+        user: (state) => state.user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
 
     },
     actions: {
@@ -69,7 +71,9 @@ const store = createStore({
         Blog,
         Property,
         Auth,
-        ProfileEdit
+        ProfileEdit,
+        HomePage,
+        Chat
     }
 });
 

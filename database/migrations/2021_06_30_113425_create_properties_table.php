@@ -28,7 +28,7 @@ class CreatePropertiesTable extends Migration
             $table->string('garages')->nullable();
             $table->string('year_built')->nullable();
             $table->string('tour_url')->nullable();
-            $table->integer('owner')->nullable();
+            $table->integer('user_id')->nullable();
             $table->boolean('is_open')->nullable();
             $table->timestamps();
         });

@@ -37,4 +37,8 @@ class Property extends Model
     function images(){
         return $this->hasMany(PropertyImage::class);
     }
+
+    function postedBy(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
 }

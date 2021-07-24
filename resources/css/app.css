@@ -2,21 +2,26 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
-@import 'nouislider/dist/nouislider.css';
+@import "nouislider/dist/nouislider.css";
 @import "./style.css";
 
-
-a{
+a {
     text-decoration: none;
 }
 
-.btn-primary{
-    background-color: #00C89E;
-    border-color: #00C89E;
+.btn-primary {
+    background-color: #00c89e;
+    border-color: #00c89e;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background-color: #009e7d;
-    border-color: #009e7d
+    border-color: #009e7d;
 }
 
+select:focus,select:active {
+    border-color: #00c89e;
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+}

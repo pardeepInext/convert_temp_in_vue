@@ -35,10 +35,15 @@
         <div class="pi-agent">
           <div class="pa-item">
             <div class="pa-info">
-              <img src="img/property/posted-by/pb-1.jpg" alt="" />
-              <h6>Ashton Kutcher</h6>
+              <img :src="profileImage(property.postedBy.provider_id,property.postedBy.proifie_image,property.postedBy.img)" alt="" />
+              <h6>{{ property.postedBy.name }}</h6>
             </div>
-            <div class="pa-text">123-455-688</div>
+            <div class="float-end">
+              <button type="button" class="btn btn-sm btn-primary">
+                <i class="fas fa-comment-dots"></i>
+                Chat
+              </button>
+            </div>
           </div>
         </div>
         <router-link
@@ -46,7 +51,7 @@
           :to="{ name: 'property', params: { id: property.id } }"
         >
         <i class="bi bi-card-list"></i> 
-          Details
+          Property Details
         </router-link>
       </div>
     </div>
@@ -60,6 +65,11 @@ export default {
   computed: {
     ...mapState(["asset"]),
   },
+  methods:{
+    profileImage(prover_id,proifie_image,img){
+       return typeof prover_id == "string" ? img : proifie_image;
+    }
+  }
 };
 </script>
 

@@ -8,8 +8,8 @@ const state = {
      isRegister: false,
      isAuth: false,
      registerError: {},
-     isFacebookLogin:false,
-     isGoogleLogin:false,
+     isFacebookLogin: false,
+     isGoogleLogin: false,
 }
 
 const mutations = {
@@ -18,14 +18,13 @@ const mutations = {
      Login_Error: (state, payload) => state.loginError = payload,
      Register_Error: (state, payload) => state.registerError = payload,
      Is_Auth: (state, payload) => state.isAuth = payload,
-     Is_FacebookLogin :(state,payload) => state.isFacebookLogin = payload,
-     Is_GoogleLogin: (state,payload) => state.Is_GoogleLogin = payload
+     Is_FacebookLogin: (state, payload) => state.isFacebookLogin = payload,
+     Is_GoogleLogin: (state, payload) => state.Is_GoogleLogin = payload
 }
 
 const actions = {
      async socialLogin({ commit, dispatch }, provider) {
           provider == 'google' ? dispatch('googleLogin', provider) : dispatch('facebookLogin', provider);
-          commit('Is_SocialLogin',true);
      },
      async login({ commit, dispatch }, data) {
           commit('Is_Login', true);
@@ -68,29 +67,28 @@ const actions = {
           commit('Is_Auth', false)
           router.push({ name: 'login' })
      },
-     async googleLogin({ dispatch,commit }, payload) {
-          commit('Is_GoogleLogin',true);
+     async googleLogin({ dispatch, commit }, payload) {
+          commit('Is_GoogleLogin', true);
           let googleCientId = "792301159599-14g22n0nse0g5t6hcft7r97jforbemn1.apps.googleusercontent.com";
           let accesstoken = "";
           let auth2 = await loadAuth2(gapi, googleCientId).then(resp => console.log(resp)).catch(err => console.log(err));
           await gapi.auth2.getAuthInstance().signIn().then(success => dispatch('afterSocialLogin', { token: success.xc.access_token, provider: payload }))
                .then(err => console.log(err));
-          commit('Is_GoogleLogin',false);     
+          commit('Is_GoogleLogin', false);
      },
-     async facebookLogin({ dispatch,commit }, payload) {
+     async facebookLogin({ dispatch, commit }, payload) {
           const api = facebookLogin({ appId: '790958838264301' });
-          commit('Is_FacebookLogin',true);
+          commit('Is_FacebookLogin', true);
           await api.login().then(resp => dispatch('afterSocialLogin', { token: resp.authResponse.accessToken, provider: payload }))
                .catch((err) => console.log(err));
-          commit('Is_FacebookLogin',false);
+          commit('Is_FacebookLogin', false);
      },
-     async afterSocialLogin({commit,dispatch}, payload) {
-          await axios.post('api/sociallogin',payload)
-          .then(res=> {
-               res.data.success ? dispatch('afterAuth', { token: res.data.token, user: res.data.user }) : commit('Login_Error', res.data.errors);
-               commit('Is_SocialLogin',false);
-          })
-          .catch(err=>console.log(err));
+     async afterSocialLogin({ commit, dispatch }, payload) {
+          await axios.post('api/sociallogin', payload)
+               .then(res => {
+                    res.data.success ? dispatch('afterAuth', { token: res.data.token, user: res.data.user }) : commit('Login_Error', res.data.errors);
+               })
+               .catch(err => console.log(err));
 
      }
 }

@@ -10,17 +10,32 @@ use App\Models\Location;
 use App\Models\Property;
 use App\Models\PropertyFeature;
 use App\Models\PropertyImage;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\Propery as ResoucePropery;
+
+use function PHPUnit\Framework\isEmpty;
 
 class PropertyController extends Controller
 {
 
-    function index()
+    function index(Request $request)
     {
 
-        return ResoucePropery::collection(Property::paginate(2));
+        $status = $request->status ? $request->status : "rent";
+        $property = Property::where('status', $status);
+
+        if (!is_null($request->bedroom)) $property->where('bedrooms', $request->bedroom);
+
+        if (!is_null($request->bathroom)) $property->where('bathrooms', $request->bathrooms);
+        
+        if (!is_null($request->garage)) $property->where('garages', $request->garage);
+        
+        if (!is_null($request->price)) $property->whereBetween('price', $request->price);
+        
+        if(!is_null($request->size)) $property->whereBetween('size', $request->size);
+
+        if(!is_null($request->type)) $property->where('type', $request->type);
+        return ResoucePropery::collection($property->paginate(3));
     }
 
     public function create(Request $request)
@@ -97,5 +112,46 @@ class PropertyController extends Controller
     function show($id)
     {
         return new ResoucePropery(Property::findOrFail($id));
+    }
+
+    function homePageSearch(Request $request)
+    {
+        $search = [];
+        $countries = Country::select('name')->where('name', 'like', "$request->search%")->limit(5)->get();
+        if ($countries->count() > 0) {
+            foreach ($countries as $country) {
+                $search[$country->name] = "$country->name in <b>(country)</b>";
+            }
+        }
+
+        $states =  State::select('name')->where('name', 'like', "$request->search%")->limit(5)->get();
+        if ($states->count() > 0) {
+            foreach ($states as $state) {
+                $search[$state->name] = "$state->name in <b>(State)</b>";
+            }
+        }
+
+        $cities =  City::select('name')->where('name', 'like', "$request->search%")->limit(5)->get();
+        if ($cities->count() > 0) {
+            foreach ($cities as $city) {
+                $search[$city->name] = "$city->name in <b>(city)</b>";
+            }
+        }
+
+        return $search;
+    }
+
+    function search(Request $request)
+    {
+        if ($request->column && $request->value) {
+            return Location::where($request->column, '=', $request->value)->with('property')->paginate(10);
+        }
+    }
+
+    function getMaxSliderValue()
+    {
+        $price = Property::max('price');
+        $size = Property::max('size');
+        return compact('price', 'size');
     }
 }

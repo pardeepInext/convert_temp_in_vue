@@ -1,6 +1,5 @@
 import axios from '../axios';
 import Router from '../../router/index';
-import alertify from 'alertifyjs'
 const states = {
     countries: [],
     countryMatch: false,
@@ -10,10 +9,10 @@ const states = {
     submitLoading: false,
     submitSuccess: false,
     properties: {},
-    propertiesData:[],
+    propertiesData: [],
     propertiesLoading: false,
     property: [],
-    propertyLoading: false
+    propertyLoading: false,
 };
 
 const mutations = {
@@ -64,9 +63,10 @@ const actions = {
             .catch((error) => commit('SUBMIT_LOADING', false));
 
     },
-    async fetchproperties({ commit}, data) {
+    async fetchproperties({ commit }, data) {
         commit('PROPERTIES_LOADING', true);
-        axios.get(`api/propery?page=${data.page}`, data)
+        let page = data.hasOwnProperty("page") ? data.page : 1;
+        axios.get(`api/propery?page=${page}`, { params: data })
             .then((res) => {
                 commit('GET_PROPERTIES', res);
                 commit('PROPERTIES_LOADING', false);
@@ -86,7 +86,8 @@ const actions = {
 };
 const getters = {
     getProperties: (state) => state.properties,
-     
+    maxPrice: (state) => state.maxPrice,
+    maxSize: (state) => state.maxSize,
 }
 
 const Property = {

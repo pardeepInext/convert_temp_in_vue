@@ -84,7 +84,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       loanAmount: 0,
       interest: 0,
-      term: "",
+      term: 3,
       emi: 0
     };
   },
@@ -100,6 +100,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     featuresImg: function featuresImg(value) {
       return value.replace(" ", "_");
+    },
+    profileImage: function profileImage(prover_id, proifie_image, img) {
+      return typeof prover_id == "string" ? img : proifie_image;
     }
   }),
   mounted: function mounted() {
@@ -518,80 +521,109 @@ var _hoisted_55 = {
 var _hoisted_56 = {
   "class": "property-sidebar"
 };
-
-var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"single-sidebar\" data-v-304a4138><div class=\"section-title sidebar-title\" data-v-304a4138><h5 data-v-304a4138>Agent</h5></div><div class=\"top-agent\" data-v-304a4138><div class=\"ta-item\" data-v-304a4138><div class=\"ta-pic set-bg\" data-setbg=\"img/property/details/sidebar/ta-1.jpg\" data-v-304a4138></div><div class=\"ta-text\" data-v-304a4138><h6 data-v-304a4138><a href=\"#\" data-v-304a4138>Ashton Kutcher</a></h6><span data-v-304a4138>Team Leader</span><div class=\"ta-num\" data-v-304a4138>123-455-688</div></div></div></div></div>", 1);
-
-var _hoisted_58 = {
+var _hoisted_57 = {
   "class": "single-sidebar"
 };
 
-var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "section-title sidebar-title"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "mortgage calculator")], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "Posted By")], -1
 /* HOISTED */
 );
 
+var _hoisted_59 = {
+  "class": "top-agent"
+};
 var _hoisted_60 = {
-  "class": "filter-input"
+  "class": "ta-item"
 };
 var _hoisted_61 = {
-  "class": "filter-input"
+  "class": "ta-text"
 };
 var _hoisted_62 = {
-  "class": "filter-input"
+  href: "#"
+};
+var _hoisted_63 = {
+  "class": "ta-num"
 };
 
-var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Term(year)", -1
+var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "float-end pe-2"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  type: "button",
+  "class": "btn btn-sm btn-primary"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fas fa-comment-dots"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Chat ")])], -1
 /* HOISTED */
 );
 
-var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
-  value: "3",
-  selected: ""
+var _hoisted_65 = {
+  "class": "single-sidebar"
+};
+
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "section-title sidebar-title"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "EMI calculator")], -1
+/* HOISTED */
+);
+
+var _hoisted_67 = {
+  "class": "filter-input"
+};
+var _hoisted_68 = {
+  "class": "filter-input"
+};
+var _hoisted_69 = {
+  "class": "filter-input"
+};
+
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Term(year)", -1
+/* HOISTED */
+);
+
+var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "3"
 }, "3 Years", -1
 /* HOISTED */
 );
 
-var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "4"
 }, "4 Years", -1
 /* HOISTED */
 );
 
-var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "5"
 }, "5 Years", -1
 /* HOISTED */
 );
 
-var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_74 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "6"
 }, "20 Years", -1
 /* HOISTED */
 );
 
-var _hoisted_68 = {
+var _hoisted_75 = {
   "class": "filter-input"
 };
 
-var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "submit",
   "class": "site-btn"
 }, "Calculate", -1
 /* HOISTED */
 );
 
-var _hoisted_70 = {
-  key: 0
-};
+var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("EMI IS ");
 
-var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Emi is $ ");
-
-var _hoisted_72 = {
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "pt-price"
-};
-
-var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("/month ");
+}, "$", -1
+/* HOISTED */
+);
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
@@ -653,14 +685,26 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     alt: ""
   }, null, 8
   /* PROPS */
-  , ["src"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_56, [_hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_58, [_hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+  , ["src"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_57, [_hoisted_58, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+    "class": "ta-pic set-bg",
+    "data-setbg": "img/property/details/sidebar/ta-1.jpg",
+    style: {
+      backgroundImage: "url('".concat($options.profileImage(_ctx.property.postedBy.provider_id, _ctx.property.postedBy.proifie_image, _ctx.property.postedBy.img), "')")
+    }
+  }, null, 4
+  /* STYLE */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", _hoisted_62, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.property.postedBy.name), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.property.postedBy.email ? _ctx.property.postedBy.email : "No Email available"), 1
+  /* TEXT */
+  ), _hoisted_64])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_65, [_hoisted_66, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
     "class": "calculator-form",
     onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.calculateEMI && $options.calculateEMI.apply($options, arguments);
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Sale Price $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.property.price), 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Sale Price $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.property.price), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Loan Amount " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.loanAmount), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Loan Amount " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.loanAmount), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "range",
@@ -673,16 +717,16 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     })
   }, null, 8
   /* PROPS */
-  , ["max"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loanAmount]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+  , ["max"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loanAmount]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_69, [_hoisted_70, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
     name: "",
     id: "",
     "class": "form-control",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.term = $event;
     })
-  }, [_hoisted_64, _hoisted_65, _hoisted_66, _hoisted_67], 512
+  }, [_hoisted_71, _hoisted_72, _hoisted_73, _hoisted_74], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.term]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Interest Rate in " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.interest) + "%", 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.term]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_75, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Interest Rate in " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.interest) + "%", 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "range",
@@ -694,9 +738,17 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.interest]])]), _hoisted_69, $data.emi > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h4", _hoisted_70, [_hoisted_71, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_72, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.emi), 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.interest]])]), _hoisted_76, $data.emi > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+    key: 0,
+    "class": "section-title sidebar-title",
+    style: {
+      position: _ctx.absolute
+    }
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, [_hoisted_77, _hoisted_78, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.emi), 1
   /* TEXT */
-  ), _hoisted_73])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 32
+  )])], 4
+  /* STYLE */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 32
   /* HYDRATE_EVENTS */
   )])])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 });

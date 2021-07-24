@@ -11,22 +11,28 @@
               <h4>Search Property</h4>
               <div class="input-group mb-3">
                 <input
-                  type="text"
+                  type="search"
                   class="form-control"
-                  placeholder="Type your requirement"
-                  aria-label="Recipient's username"
-                  aria-describedby="button-addon2"
+                  placeholder="Type your location"
                   v-model="search"
+                  @keyup="locationSearch"
+                  list="locations"
+                  autocomplete="off"
                 />
+                <datalist id="locations">
+                     <option v-for="(location,index) in getLocationResult" :key="index" v-html="location" @click="getOptionValue(location)"></option>
+                </datalist>
                 <button
                   class="btn btn-primary"
                   type="button"
                   id="button-addon2"
                   style="background: #00c89e; border: 1px solid #00c89d"
+                  @click="searchProperty(search)"
                 >
                   <i class="bi bi-search"></i>
                   Search
                 </button>
+                {{ getProperties }}
               </div>
             </div>
           </div>
@@ -47,7 +53,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 import HeroSlider from "../components/HeroSlider.vue";
 import PeropertyCount from "../components/PropertyCount.vue";
 import { Loader, LoaderOptions } from "google-maps";
@@ -109,62 +115,22 @@ export default {
       ],
     };
   },
-  metaInfo() {
-    return {
-      script: [
-        {
-          src: `https://maps.googleapis.com/maps/api/js?key=AIzaSyCj7x4x98mJgF9SHxXTREmLcGuAiqHYl_4&libraries=places`,
-          async: true,
-          defer: true,
-          callback: () => this.MapsInit(), // will declare it in methods
-        },
-      ],
-    };
-  },
-  watch: {
-    search(newValue) {
-      if (newValue) {
-        this.service.getPlacePredictions(
-          {
-            input: this.location,
-            types: ["(cities)"],
-          },
-          this.displaySuggestions
-        );
-      }
-    },
-  },
   components: {
     HeroSlider,
     PeropertyCount,
   },
   computed: {
     ...mapState(["asset"]),
+    ...mapGetters("HomePage",['getLocationResult'])
   },
   methods: {
-    MapsInit() {
-      this.service = new window.google.maps.places.AutocompleteService();
-    },
-    displaySuggestions(predictions, status) {
-      if (status !== window.google.maps.places.PlacesServiceStatus.OK) {
-        this.searchResults = [];
-        return;
-      }
-      this.searchResults = predictions.map(
-        (prediction) => prediction.description
-      );
-    },
+      ...mapActions('HomePage',['searchDropDown','searchProperty']),
+      locationSearch(){
+        if(this.search.length > 2) this.searchDropDown(this.search);
+      },
   },
   mounted() {
-    let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute(
-      "src",
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCj7x4x98mJgF9SHxXTREmLcGuAiqHYl_4&callback=initMap",
-      "async",
-      "defer"
-    );
-    document.head.appendChild(recaptchaScript);
-  },
+  }
 };
 </script>
 
