@@ -45,12 +45,11 @@ body{margin-top:20px;}
     color:white;
 }
 
-.btn-info:hover{
+.btn-info:hover,.btn-info:focus{
     background-color: #0bb38f;
     border-color: #00c89e;
     color: #fff;
 }
-
 
 .chat-search-box .input-group .input-group-btn .btn {
     -webkit-border-radius: 0 2px 2px 0;

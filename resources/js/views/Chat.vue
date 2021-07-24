@@ -36,9 +36,9 @@
                 </div>
               </div>
               <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
-                <!-- <div class="selected-user">
-                  <span>To: <span class="name">Emily Russell</span></span>
-                </div> -->
+                <div class="selected-user">
+                  <!-- <span>To: <span class="name">Emily Russell</span></span> -->
+                </div>
                 <div class="chat-container">
                   <ul class="chat-box chatContainerScroll" v-if="messages">
                     <message
@@ -134,7 +134,9 @@ export default {
         this.error = "blank message can't be send";
       }
 
-      this.submitMessage()
+      const formData = new FormData();
+      formData.append('')
+      //this.submitMessage()
        
     },
   },
