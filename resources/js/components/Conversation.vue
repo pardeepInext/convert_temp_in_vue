@@ -20,8 +20,9 @@
       class="name-time ms-1"
       :style="{ color: '#adb2b8' }"
       v-html="message(conversation.latest_message.message)"
+      v-if="conversation.latest_message"
     ></p>
-    <span class="time float-end">{{ conversation.latest_message.time }}</span>
+    <span class="time float-end" v-if="conversation.latest_message">{{ conversation.latest_message.time }}</span>
   </li>
 </template>
 

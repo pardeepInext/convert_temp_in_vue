@@ -1,24 +1,19 @@
 <template>
-  <Header />
-  <router-view v-slot="{ Component }">
-    <transition name="fade" mode="out-in">
-      <component :is="Component" :key="$route.path" />
-    </transition>
-  </router-view>
-  <Footer />
+  <component :is="layout" />
 </template>
 <script>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+import Admin from "./layouts/Admin";
+import Default from "./layouts/Default";
+import { Notify } from "notiflix";
 export default {
   name: "App",
   components: {
-    Header,
-    Footer,
+    Admin,
+    Default,
   },
   data() {
     return {
-     
+      layout: "",
     };
   },
   watch: {
@@ -26,22 +21,18 @@ export default {
       immediate: true,
       handler(to, from) {
         document.title = to.meta.title || "Aler";
+        this.layout = to.meta.layout;
       },
     },
   },
   mounted() {
-    
+    Notify.init({
+      success: {
+        background: "#00C89E",
+      },
+    });
   },
 };
 </script>
-<style lang="css" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
+<style>
 </style>

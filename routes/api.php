@@ -6,6 +6,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ContactUsController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,12 +44,11 @@ Route::get('confirm/{id}', [AuthController::class, 'confirmUser']);
 
 Route::middleware("auth:sanctum")->group(function () {
     Route::get('message', [MessageController::class, 'index']);
-    Route::post('message', [MessageController::class, 'create']);
     Route::delete('message', [MessageController::class, 'destroy']);
     Route::get('conversation', [MessageController::class, 'conversation']);
 });
 
-
+Route::post('message', [MessageController::class, 'create']);
 /*
 |-------------------------------------------------
 |    Blogs Routes
@@ -74,4 +75,18 @@ Route::prefix('propery')->group(function () {
     Route::get('/search', [PropertyController::class, 'search']);
     Route::get('/maxvalue', [PropertyController::class, 'getMaxSliderValue']);
     Route::get('/{id}', [PropertyController::class, 'show']);
+});
+
+/*
+|-------------------------------------------------
+|    Contactus and NewsLatter Routes
+|-------------------------------------------------- 
+*/
+
+Route::prefix('newslatter')->group(function () {
+    Route::post('/subscribe', [ContactUsController::class, 'subscribeNewsletter']);
+});
+
+Route::prefix('contactus')->group(function () {
+    Route::post('/', [ContactUsController::class, 'contactus']);
 });

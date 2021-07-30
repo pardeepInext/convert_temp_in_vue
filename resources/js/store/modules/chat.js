@@ -3,12 +3,18 @@ let token = localStorage.getItem('token') ? localStorage.getItem('token') : "";
 let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
 const state = {
     conversations: {},
-    messages:{},
+    messages: {},
+    fetchMessages: [],
+    isChatLoading: false,
 }
 
 const mutations = {
     CONVERSATION: (state, payload) => state.conversations = payload,
-    MESSAGES:(state,payload) => state.message = payload,
+    MESSAGES: (state, payload) => state.message = payload,
+    IsChatLoading: (state, payload) => state.isChatLoading = payload,
+    FetchMessages(state, payload) {
+        Array.prototype.push.apply(state.fetchMessages, payload);
+    }
 }
 
 const actions = {
@@ -23,23 +29,37 @@ const actions = {
             .then(res => commit('CONVERSATION', res.data))
             .catch(err => console.error(`error in conversation ajax: ${err.response.data.message}`));
     },
-    async fetchChat({ commit },payload)
-    {
-         await axios.get(`api/message`,{
-               headers: { 'Authorization': `Bearer ${token}` },
-               params:{
-                   user_1: payload.user_1,
-                   user_2: payload.user_2
-               }
+    async fetchChat({ commit }, payload) {
+        commit('IsChatLoading', true);
+        await axios.get(`api/message?page=${payload.page}`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+            params: payload
            })
-           .then((res)=> commit('MESSAGES',res.data.messages))
-           .catch((err)=>console.error(`error in chat ajax: ${err.response.data.message}`))
+            .then((res) => {
+                commit('MESSAGES', res.data.messages);
+                commit('IsChatLoading', false);
+                commit('FetchMessages', res.data.messages.data);
+            })
+            .catch((err) => console.error(`error in chat ajax: ${err.response.data.message}`))
+    },
+    async sendMessage({ commit }, payload) {
+        axios.post(`api/message`, payload, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                //'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+
+            })
+            .catch(err => console.log(err));
     }
 }
 
 const getters = {
     conversations: (state) => state.conversations,
-    messages : (state) => state.message,
+    messages: (state) => state.message,
+    fetchMessages: (state) => state.fetchMessages,
 }
 
 const Chat = {

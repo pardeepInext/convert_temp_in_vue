@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-3">
     <!-- Content wrapper start -->
     <div class="content-wrapper">
       <!-- Row start -->
@@ -25,12 +25,7 @@
                       v-for="conversation in conversations.data"
                       :key="conversation"
                       :conversation="conversation"
-                      @click="
-                        fetchChat({
-                          user_1: conversation.user_1,
-                          user_2: conversation.user_2,
-                        })
-                      "
+                      @click="getConversation(conversation.id)"
                     />
                   </ul>
                 </div>
@@ -39,10 +34,10 @@
                 <div class="selected-user">
                   <!-- <span>To: <span class="name">Emily Russell</span></span> -->
                 </div>
-                <div class="chat-container">
+                <div class="chat-container" ref="chatContainer">
                   <ul class="chat-box chatContainerScroll" v-if="messages">
                     <message
-                      v-for="message in messages.data"
+                      v-for="message in fetchMessages.reverse()"
                       :key="message.id"
                       :message="message"
                     />
@@ -51,7 +46,7 @@
                     >Select Conversation</span
                   >
                 </div>
-                <div class="mt-3 mb-3 row">
+                <div class="mt-3 mb-3 row" v-if="messages">
                   <div class="col-md-9">
                     <textarea
                       class="form-control"
@@ -111,6 +106,9 @@ export default {
       currentUserId: JSON.parse(localStorage.getItem("user")).id,
       attachmentName: "",
       error: "",
+      id: "",
+      currentPage: 0,
+      lastPage: 0,
       messageData: {
         message: "",
         attachment: {},
@@ -118,30 +116,58 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Chat", ["conversations", "messages"]),
+    ...mapGetters("Chat", ["conversations", "messages", "fetchMessages"]),
+    conversationId: {
+      get() {
+        return this.id;
+      },
+      set(newId) {
+        return (this.id = newId);
+      },
+    },
   },
   methods: {
-    ...mapActions("Chat", ["fetchConversation", "fetchChat","sendMessage"]),
+    ...mapActions("Chat", ["fetchConversation", "fetchChat", "sendMessage"]),
     getAttachment(e) {
       this.attachmentName = e.target.files[0].name;
       this.messageData.attachment = e.target.files;
     },
+    getConversation(convesationId) {
+      this.conversationId = convesationId;
+      this.fetchChat({ conversation_id: convesationId, page: 1 });
+    },
     submitMessage() {
       this.error = "";
-      if (
-        this.messageData.message == ""
-      ) {
+      if (this.messageData.message == "") {
         this.error = "blank message can't be send";
       }
 
       const formData = new FormData();
-      formData.append('')
-      //this.submitMessage()
-       
+      formData.append("message", this.messageData.message);
+      formData.append("attachment", this.messageData.attachment);
+      formData.append("sender_id", this.currentUserId);
+      formData.append("conversation_id", this.conversationId);
+      this.sendMessage(formData);
+    },
+    loadMoreMessage() {
+      let messages = this.messages;
+      if (messages.current_page != messages.last_page) {
+        console.log(messages.current_page + 1);
+        this.fetchChat({
+          conversation_id: this.conversationId,
+          page: messages.current_page + 1,
+        });
+      }
     },
   },
+
   mounted() {
     this.fetchConversation();
+    let _this = this;
+    /*  add scroll event for load older message */
+    this.$refs.chatContainer.addEventListener("scroll", function () {
+      if (_this.$refs.chatContainer.scrollTop == 0) _this.loadMoreMessage();
+    });
   },
 };
 </script>

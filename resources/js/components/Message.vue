@@ -1,6 +1,6 @@
 <template>
-  <li :class="isSenderCurrentUser ? 'chat-left' : 'chat-right'">
-    <div class="chat-avatar" v-if="isSenderCurrentUser">
+  <li :class="!isSenderCurrentUser ? 'chat-left' : 'chat-right'">
+    <div class="chat-avatar" v-if="!isSenderCurrentUser">
       <img
         :src="
           profileImage(
@@ -13,7 +13,7 @@
       />
       <!-- <div class="chat-name">{{ message.senderinfo.name }}</div> -->
     </div>
-    <div class="chat-hour" v-if="!isSenderCurrentUser">
+    <div class="chat-hour" v-if="isSenderCurrentUser">
       {{ message.time }} <span class="fa fa-check-circle"></span>
     </div>
     <div class="chat-text">
@@ -25,7 +25,7 @@
         :attachment="attachment"
       />
     </div>
-    <div class="chat-hour" v-if="isSenderCurrentUser">
+    <div class="chat-hour" v-if="!isSenderCurrentUser">
       {{ message.time }} <span class="fa fa-check-circle"></span>
     </div>
   </li>
@@ -58,6 +58,9 @@ export default {
        return typeof provider_id == "string" ? img : proifie_image;
     },
   },
+  mounted(){
+    
+  }
 };
 </script>
 

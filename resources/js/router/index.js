@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
+import AdminRoutes from './adminroutes';
 let base = document.querySelector('meta[name="asset"]').content;
 
 const routes = [
@@ -6,7 +7,8 @@ const routes = [
         path: '/',
         name: 'home',
         meta: {
-            title: 'Home'
+            title: 'Home',
+            layout:'default',
         },
         component: () => import('../views/Home')
     },
@@ -15,6 +17,7 @@ const routes = [
         name: 'properties',
         meta: {
             title: 'Properties',
+            layout:'default',
 
         },
         component: () => import('../views/Property')
@@ -24,7 +27,7 @@ const routes = [
         name: 'property',
         meta: {
             title: 'Property',
-
+            layout:'default',
         },
         component: () => import('../views/ProperyDetails')
     },
@@ -33,6 +36,7 @@ const routes = [
         name: 'property-submit',
         meta: {
             title: 'PropertySubmit',
+            layout:'default',
         },
         component: () => import('../views/SubmitProperty'),
     },
@@ -41,6 +45,7 @@ const routes = [
         name: 'about',
         meta: {
             title: 'About',
+            layout:'default',
         },
         component: () => import('../views/About')
     },
@@ -49,12 +54,17 @@ const routes = [
         name: 'blogs',
         meta: {
             title: 'Blogs',
+            layout:'default',
         },
         component: () => import('../views/Blogs')
     },
     {
         path: '/blog/:id',
         name: 'blog',
+        meta: {
+            title: 'Blog',
+            layout:'default',
+        },
         component: () => import('../views/Blog')
     },
     {
@@ -62,6 +72,7 @@ const routes = [
         name: 'contactus',
         meta: {
             title: 'Contact Us',
+            layout:'default',
         },
         component: () => import('../views/ContactUs')
     },
@@ -71,6 +82,7 @@ const routes = [
         meta: {
             title: 'Sign In',
             guard: 'guest',
+            layout:'default',
         },
         component: () => import('../views/Login')
     },
@@ -80,6 +92,7 @@ const routes = [
         meta: {
             title: 'Sign Up',
             guard: 'guest',
+            layout:'default',
         },
         component: () => import('../views/Register')
     },
@@ -89,6 +102,7 @@ const routes = [
         meta: {
             title: 'Forgot Password',
             guard: 'guest',
+            layout:'default',
         },
         component: () => import('../views/ForgotPassword')
 
@@ -98,6 +112,7 @@ const routes = [
         name: 'sendvarificationlink',
         meta: {
             title: 'User',
+            layout:'default',
         },
         component: () => import('../views/404')
 
@@ -107,17 +122,19 @@ const routes = [
         name: 'notfound',
         meta: {
             title: 'Not Found',
+            layout:'default',
         },
         component: () => import('../views/404')
     },
-    {
-        path:'/chat',
-        name:'chat',
-        meta:{
-            title:'Chat'
-        },
-        component: () => import('../views/Chat')
-    }
+    // {
+    //     path: '/chat',
+    //     name: 'chat',
+    //     meta: {
+    //         title: 'Chat',
+    //         layout:'default',
+    //     },
+    //     component: () => import('../views/Chat')
+    // }
 
 ]
 
@@ -125,7 +142,7 @@ const routes = [
 const Router = createRouter({
     base: base,
     history: createWebHistory(),
-    routes,
+    routes: routes.concat(AdminRoutes),
 });
 
 Router.beforeEach((to, from, next) => {

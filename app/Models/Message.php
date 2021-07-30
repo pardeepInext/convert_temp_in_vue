@@ -9,7 +9,7 @@ use App\Models\User;
 class Message extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['message', 'conversation_id', 'is_read'];
+    protected $fillable = ['message', 'conversation_id', 'is_read','sender_id'];
     protected $appends = ['time'];
     function attachment()
     {

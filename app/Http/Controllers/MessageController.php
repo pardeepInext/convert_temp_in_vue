@@ -7,7 +7,8 @@ use App\Models\MessageAttachment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Conversation;
-use App\Http\Resources\ConversationResource;
+use App\Http\Resources\MessageResource;
+use App\Events\MessageSent;
 
 class MessageController extends Controller
 {
@@ -18,19 +19,14 @@ class MessageController extends Controller
      */
     public function index(Request $request, Message $message)
     {
-        $validator = Validator::make($request->all(), [
-            'user_1' => "required",
-            'user_2' => 'required',
-        ]);
+        $validator = Validator::make($request->all(), ['conversation_id' => "required"]);
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
 
-        $ids = [$request->sender_id, $request->reciver_id];
-        $conversation = Conversation::where([['user_1', $request->user_1], ['user_2', $request->user_2]])->first();
-        $messages = $conversation ? $message->withTrashed()->where('conversation_id', '=', $conversation->id)->with('attachment', 'senderinfo')
-            ->orderBy('created_at', 'DESC')->paginate(10) : [];
+        $messages = $message->withTrashed()->where('conversation_id', '=', $request->conversation_id)->with('attachment', 'senderinfo')
+            ->orderBy('created_at', 'DESC')->paginate(10);
         return response()->json([
             'success' => true,
             'messages' => $messages
@@ -45,31 +41,28 @@ class MessageController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_1' => "required",
-            'user_2' => 'required',
+            'sender_id' => "required",
+            'conversation_id' => 'required',
         ]);
-        $ids = [$request->user_1, $request->user_2];
-        $fetchConversation = Conversation::whereIn('user_1', $ids)->whereIn('user_2', $ids)->first();
-        $conversation = $fetchConversation ? $fetchConversation : Conversation::create($request->only('user_1', 'user_2'));
+
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
 
-        $messageCreated = $request->except('attachment', 'user_1', 'user_2');
-        $messageCreated['conversation_id'] = $conversation->id;
-        $messageCreated['sender_id'] = $request->user_1;
-        $message = Message::create($messageCreated);
 
-        if ($request->attachment) {
+        $message = Message::create($request->except('attachment'));
+        if (gettype($request->attachment) != "string") {
             foreach ($request->attachment as $attachment) {
                 $newFile = $request->user_1 . "." . time() . "." . $attachment->getClientOriginalExtension();
                 $attachment->move(public_path("assets/message_attachment"), $newFile);
                 MessageAttachment::create(['message_id' => $message->id, 'attachment' => $newFile, 'attachement_type' => $attachment->getClientMimeType()]);
             }
         }
-
-        return response()->json(['success' => true, 'message' => 'Message is send']);
+      
+        //new MessageResource($message)
+       broadcast(new MessageSent($request->message));
+       return response()->json(['success' => true]);
     }
 
     /**
