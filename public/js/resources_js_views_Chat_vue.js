@@ -153,6 +153,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       set: function set(newId) {
         return this.id = newId;
       }
+    },
+    messages: {
+      get: function get() {
+        return this.fetchMessages.reverse();
+      },
+      set: function set(newMessage) {
+        return this.fetchMessages.push(newMessage);
+      }
     }
   }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)("Chat", ["fetchConversation", "fetchChat", "sendMessage"])), {}, {
@@ -181,6 +189,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append("conversation_id", this.conversationId);
       this.sendMessage(formData);
     },
+    profileImage: function profileImage(provider_id, proifie_image, img) {
+      return typeof provider_id == "string" ? img : proifie_image;
+    },
+    typing: function typing() {
+      var user = JSON.parse(localStorage.getItem("user"));
+      var profile = this.profileImage(user.provider_id, user.proifie_image, user.img);
+      Echo.channel("demo").whisper('typing', {
+        profile: profile
+      });
+    },
     loadMoreMessage: function loadMoreMessage() {
       var messages = this.messages;
 
@@ -202,6 +220,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.$refs.chatContainer.addEventListener("scroll", function () {
       if (_this.$refs.chatContainer.scrollTop == 0) _this.loadMoreMessage();
+    });
+    Echo.channel("demo").listen("MessageSent", function (e) {
+      console.log(_this.messages);
+      _this.messages = e.message;
+      console.log(_this.messages);
+    });
+    Echo.channel("demo").listenForWhisper('typing', function (e) {
+      console.log(e);
     });
   }
 });
@@ -510,7 +536,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     , ["conversation", "onClick"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [_ctx.messages ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("ul", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.fetchMessages.reverse(), function (message) {
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [$options.messages ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("ul", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.messages, function (message) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_message, {
       key: message.id,
       message: message
@@ -521,26 +547,29 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* KEYED_FRAGMENT */
   ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_15, "Select Conversation"))], 512
   /* NEED_PATCH */
-  ), _ctx.messages ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+  ), $options.messages ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
     "class": "form-control",
     rows: "3",
     placeholder: "Type your message here...",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.messageData.message = $event;
+    }),
+    onKeyup: _cache[2] || (_cache[2] = function () {
+      return $options.typing && $options.typing.apply($options, arguments);
     })
-  }, null, 512
-  /* NEED_PATCH */
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.messageData.message]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [$data.attachmentName != '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.attachmentName), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.error != '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submitMessage && $options.submitMessage.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "file",
-    onChange: _cache[2] || (_cache[2] = function () {
+    onChange: _cache[3] || (_cache[3] = function () {
       return $options.getAttachment && $options.getAttachment.apply($options, arguments);
     }),
     ref: "attachmentInput",
@@ -551,7 +580,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-info m-1",
     type: "button",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return _ctx.$refs.attachmentInput.click();
     })
   }, [_hoisted_21]), _hoisted_22], 32

@@ -132,7 +132,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -157,27 +156,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         name: "Balaji Symphony 3",
         type: "rent",
         price: "65"
-      }],
-      propertyCounts: [{
-        name: "Apartment",
-        count: "230",
-        img: "cat-1.jpg"
-      }, {
-        name: "Villa",
-        count: "145",
-        img: "cat-2.jpg"
-      }, {
-        name: "House",
-        count: "245",
-        img: "cat-3.jpg"
-      }, {
-        name: "Restaurent",
-        count: "300",
-        img: "cat-4.jpg"
-      }, {
-        name: "Office",
-        count: "400",
-        img: "cat-5.jpg"
       }]
     };
   },
@@ -185,13 +163,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     HeroSlider: _components_HeroSlider_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     PeropertyCount: _components_PropertyCount_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(["asset"])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)("HomePage", ['getLocationResult'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('HomePage', ['searchDropDown', 'searchProperty'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(["asset"])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)("HomePage", ["getLocationResult", "sliders", "count"])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)("HomePage", ["searchDropDown", "searchProperty", "index"])), {}, {
     locationSearch: function locationSearch() {
       if (this.search.length > 2) this.searchDropDown(this.search);
     }
   }),
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.index();
+  }
 });
 
 /***/ }),
@@ -228,24 +208,45 @@ var _hoisted_4 = {
   "class": "hc-text"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "bi bi-geo-alt",
   style: {
     color: '#00c89e'
   }
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Panvel, Navi Mumbai ")], -1
+}, null, -1
 /* HOISTED */
 );
 
 var _hoisted_6 = {
-  "class": "label"
+  key: 0
+};
+var _hoisted_7 = {
+  "class": "propery-widget"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "/month", -1
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fa fa-object-group"
+}, null, -1
 /* HOISTED */
 );
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"propery-widget\" data-v-c4975f08><ul data-v-c4975f08><li data-v-c4975f08><i class=\"fa fa-object-group\" data-v-c4975f08></i> 2, 283</li><li data-v-c4975f08><i class=\"fa fa-bathtub\" data-v-c4975f08></i> 03</li><li data-v-c4975f08><i class=\"fa fa-bed\" data-v-c4975f08></i> 05</li><li data-v-c4975f08><i class=\"fa fa-automobile\" data-v-c4975f08></i> 01</li></ul></div>", 1);
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fa fa-bathtub"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fa fa-bed"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fa fa-automobile"
+}, null, -1
+/* HOISTED */
+);
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
@@ -256,15 +257,27 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     "class": "property-slide",
     style: {
-      backgroundImage: "url('".concat(_ctx.asset).concat($options.imgPath, "')")
+      backgroundImage: "url('".concat(_ctx.asset, "assets/img/property/").concat($props.slide.images[0].image, "')")
     }
-  }, [$props.placement == 'home' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.name), 1
+  }, [$props.placement == 'home' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.title), 1
   /* TEXT */
-  ), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, "For " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.type), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.address.city) + "," + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.address.state), 1
   /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+    "class": ["label", $props.slide.status == 'rent' ? 'rent-lable' : '']
+  }, "For " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.status), 3
+  /* TEXT, CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("$ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.price), 1
   /* TEXT */
-  ), _hoisted_7])]), _hoisted_8])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 4
+  ), $props.slide.status == 'rent' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_6, "/month")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.size) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.prefix), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.bathrooms), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.bedrooms), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.slide.garages), 1
+  /* TEXT */
+  )])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 4
   /* STYLE */
   )], 2
   /* CLASS */
@@ -339,9 +352,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     style: {
       backgroundImage: "url('".concat(_ctx.asset, "assets/img/categories/").concat($props.peropertyCount.img, "')")
     }
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.peropertyCount.name) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.counter), 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.peropertyCount.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.peropertyCount.count) + " property", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.counter) + " property", 1
   /* TEXT */
   )], 512
   /* NEED_PATCH */
@@ -458,13 +471,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return _ctx.searchProperty($data.search);
     })
-  }, [_hoisted_8, _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.getProperties), 1
-  /* TEXT */
-  )])])])])])], 4
+  }, [_hoisted_8, _hoisted_9])])])])])])], 4
   /* STYLE */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.propertyCounts, function (propertyCount) {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.count, function (propertyCount) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_peroperty_count, {
-      key: propertyCount,
+      key: propertyCount.count,
       peropertyCount: propertyCount
     }, null, 8
     /* PROPS */
@@ -474,7 +485,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ))], 512
   /* NEED_PATCH */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hero_slider, {
-    sliders: $data.slider,
+    sliders: _ctx.sliders,
     placement: 'home'
   }, null, 8
   /* PROPS */
@@ -502,7 +513,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.property-slide[data-v-c4975f08] {\n  height: 780px;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: top center;\n  align-items: center;\n  justify-content: center;\n  height: 780px;\n  display: flex;\n}\n.slider-propery-info[data-v-c4975f08] {\n  background: #ffffff;\n  padding: 40px;\n  overflow: hidden;\n  opacity: 1;\n  position: relative;\n  top: 100px;\n  display: inline-block;\n  transition: all 0.3s ease;\n}\n.label[data-v-c4975f08] {\n  font-size: 12px;\n  display: inline-block;\n  text-transform: uppercase;\n  color: #ffffff;\n  padding: 2px 10px;\n  background: #3068b2;\n  font-weight: 600;\n  margin-right: 10px;\n}\nh4[data-v-c4975f08] {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 5px;\n}\np[data-v-c4975f08] {\n  font-size: 14px;\n  font-family: \"Montserrat\", sans-serif;\n  color: #666666;\n  font-weight: 400;\n  line-height: 24px;\n  margin: 0 0 15px 0;\n}\nh5[data-v-c4975f08] {\n  color: #00c89e;\n  font-weight: 700;\n  display: inline-block;\n}\nh5 span[data-v-c4975f08] {\n  color: #666666;\n  font-weight: 400;\n  font-size: 14px;\n}\n.propery-widget[data-v-c4975f08] {\n  overflow: hidden;\n  width: 185px;\n  position: relative;\n  right: -52px;\n  top: 18px;\n}\n.propery-widget li i[data-v-c4975f08] {\n  font-size: 14px;\n  color: #666666;\n  margin-right: 4px;\n}\n.hc-text[data-v-c4975f08] {\n  float: left;\n  margin-right: 18px;\n}\n.slider-propery-active[data-v-c4975f08] {\n  opacity: 1;\n  top: 0;\n}\n/*  100px  */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.property-slide[data-v-c4975f08] {\n  height: 780px;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: top center;\n  align-items: center;\n  justify-content: center;\n  height: 780px;\n  display: flex;\n}\n.rent-lable[data-v-c4975f08]{\n  background: #d9534f !important;\n}\n.slider-propery-info[data-v-c4975f08] {\n  background: #ffffff;\n  padding: 40px;\n  overflow: hidden;\n  opacity: 1;\n  position: relative;\n  top: 100px;\n  display: inline-block;\n  transition: all 0.3s ease;\n}\n.label[data-v-c4975f08] {\n  font-size: 12px;\n  display: inline-block;\n  text-transform: uppercase;\n  color: #ffffff;\n  padding: 2px 10px;\n  background: #3068b2;\n  font-weight: 600;\n  margin-right: 10px;\n}\nh4[data-v-c4975f08] {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 5px;\n}\np[data-v-c4975f08] {\n  font-size: 14px;\n  font-family: \"Montserrat\", sans-serif;\n  color: #666666;\n  font-weight: 400;\n  line-height: 24px;\n  margin: 0 0 15px 0;\n}\nh5[data-v-c4975f08] {\n  color: #00c89e;\n  font-weight: 700;\n  display: inline-block;\n}\nh5 span[data-v-c4975f08] {\n  color: #666666;\n  font-weight: 400;\n  font-size: 14px;\n}\n.propery-widget[data-v-c4975f08] {\n  overflow: hidden;\n  width: 185px;\n  position: relative;\n  right: -52px;\n  top: 18px;\n}\n.propery-widget li i[data-v-c4975f08] {\n  font-size: 14px;\n  color: #666666;\n  margin-right: 4px;\n}\n.hc-text[data-v-c4975f08] {\n  float: left;\n  margin-right: 18px;\n}\n.slider-propery-active[data-v-c4975f08] {\n  opacity: 1;\n  top: 0;\n}\n/*  100px  */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

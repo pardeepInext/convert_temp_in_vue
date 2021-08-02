@@ -13,6 +13,7 @@ const store = createStore({
         asset: asset,
         token: '',
         user: {},
+        currentUserId: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).id : '',
         socials: [
             { href: "javascript.void(0);", icon: "bi bi-facebook" },
             { href: "javascript.void(0);", icon: "bi bi-youtube", class: 'youtube' },
@@ -66,6 +67,9 @@ const store = createStore({
     actions: {
         scrollToTop: () => window.scrollTo(0, 200),
         titleCase: (txt) => txt,
+        profileImage(provider_id, proifie_image, img) {
+            return typeof provider_id == "string" ? img : proifie_image;
+        }
     },
     modules: {
         Blog,

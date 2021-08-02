@@ -222,6 +222,7 @@ export default {
       },
       propertyFetch: {
         page: 1,
+        userId:'', 
         status: "rent",
         bedroom: "",
         bathroom: "",
@@ -252,6 +253,7 @@ export default {
     Property,
   },
   computed: {
+    ...mapState(['currentUserId']),
     ...mapState(["propertyFeatures", "propertyTypes"]),
     ...mapState("Property", ["propertiesLoading"]),
     ...mapGetters("Property", ["getProperties"]),
@@ -280,10 +282,12 @@ export default {
       Math.round(parseInt(value) / 100) * percent,
   },
   async mounted() {
-    this.fetchproperties(this.propertyFetch);
     let maxData = {};
     let _this = this;
-    //ajax for getting max slider values
+    this.propertyFetch.userId = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).id : '';
+    
+    this.fetchproperties(this.propertyFetch);
+     //ajax for getting max slider values
     await axios
       .get("api/propery/maxvalue/")
       .then((res) => (maxData = res.data))

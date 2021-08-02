@@ -27,14 +27,16 @@ class PropertyController extends Controller
         if (!is_null($request->bedroom)) $property->where('bedrooms', $request->bedroom);
 
         if (!is_null($request->bathroom)) $property->where('bathrooms', $request->bathrooms);
-        
-        if (!is_null($request->garage)) $property->where('garages', $request->garage);
-        
-        if (!is_null($request->price)) $property->whereBetween('price', $request->price);
-        
-        if(!is_null($request->size)) $property->whereBetween('size', $request->size);
 
-        if(!is_null($request->type)) $property->where('type', $request->type);
+        if (!is_null($request->garage)) $property->where('garages', $request->garage);
+
+        if (!is_null($request->price)) $property->whereBetween('price', $request->price);
+
+        if (!is_null($request->size)) $property->whereBetween('size', $request->size);
+
+        if (!is_null($request->type)) $property->where('type', $request->type);
+
+        if ($request->userId) $property->with(['liked' => fn ($qry) => $qry->where('user_id', $request->userId)]);
         return ResoucePropery::collection($property->paginate(3));
     }
 

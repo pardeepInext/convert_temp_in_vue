@@ -61,8 +61,8 @@ class MessageController extends Controller
         }
       
         //new MessageResource($message)
-       broadcast(new MessageSent($request->message));
-       return response()->json(['success' => true]);
+       broadcast(new MessageSent($message->load('attachment', 'senderinfo')));
+      return response()->json(['success' => true]);
     }
 
     /**

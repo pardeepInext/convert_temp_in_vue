@@ -84,7 +84,7 @@
               <router-link class="hw-btn" :to="{ name: 'login' }" v-else
                 >Login</router-link
               >
-              <div class="collapse" id="collapseExample">
+              <div class="collapse" id="collapseExample"   v-if="token || isAuth">
                 <a href="javascript:void(0);" @click="logout(user.id)">Logout</a>
               </div>
             </div>

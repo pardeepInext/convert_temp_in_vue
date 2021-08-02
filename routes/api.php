@@ -7,7 +7,8 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactUsController;
-
+use App\Http\Controllers\APIController;
+use App\Events\MessageSent;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -49,6 +50,7 @@ Route::middleware("auth:sanctum")->group(function () {
 });
 
 Route::post('message', [MessageController::class, 'create']);
+
 /*
 |-------------------------------------------------
 |    Blogs Routes
@@ -84,9 +86,17 @@ Route::prefix('propery')->group(function () {
 */
 
 Route::prefix('newslatter')->group(function () {
-    Route::post('/subscribe', [ContactUsController::class, 'subscribeNewsletter']);
+    Route::post('/subscribe', [APIController::class, 'subscribeNewsletter']);
 });
 
 Route::prefix('contactus')->group(function () {
-    Route::post('/', [ContactUsController::class, 'contactus']);
+    Route::post('/', [APIController::class, 'contactus']);
 });
+
+/*
+|-------------------------------------------------
+|    Contactus and NewsLatter Routes
+|-------------------------------------------------- 
+*/
+
+Route::get('/homepage', [APIController::class, 'homePage']);

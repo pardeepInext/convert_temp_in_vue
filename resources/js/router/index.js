@@ -8,7 +8,7 @@ const routes = [
         name: 'home',
         meta: {
             title: 'Home',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/Home')
     },
@@ -17,7 +17,7 @@ const routes = [
         name: 'properties',
         meta: {
             title: 'Properties',
-            layout:'default',
+            layout: 'default',
 
         },
         component: () => import('../views/Property')
@@ -27,7 +27,7 @@ const routes = [
         name: 'property',
         meta: {
             title: 'Property',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/ProperyDetails')
     },
@@ -36,7 +36,8 @@ const routes = [
         name: 'property-submit',
         meta: {
             title: 'PropertySubmit',
-            layout:'default',
+            layout: 'default',
+            guard: 'authuser'
         },
         component: () => import('../views/SubmitProperty'),
     },
@@ -45,7 +46,7 @@ const routes = [
         name: 'about',
         meta: {
             title: 'About',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/About')
     },
@@ -54,7 +55,7 @@ const routes = [
         name: 'blogs',
         meta: {
             title: 'Blogs',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/Blogs')
     },
@@ -63,7 +64,7 @@ const routes = [
         name: 'blog',
         meta: {
             title: 'Blog',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/Blog')
     },
@@ -72,7 +73,7 @@ const routes = [
         name: 'contactus',
         meta: {
             title: 'Contact Us',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/ContactUs')
     },
@@ -82,7 +83,7 @@ const routes = [
         meta: {
             title: 'Sign In',
             guard: 'guest',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/Login')
     },
@@ -92,7 +93,7 @@ const routes = [
         meta: {
             title: 'Sign Up',
             guard: 'guest',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/Register')
     },
@@ -102,7 +103,7 @@ const routes = [
         meta: {
             title: 'Forgot Password',
             guard: 'guest',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/ForgotPassword')
 
@@ -112,7 +113,7 @@ const routes = [
         name: 'sendvarificationlink',
         meta: {
             title: 'User',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/404')
 
@@ -122,19 +123,19 @@ const routes = [
         name: 'notfound',
         meta: {
             title: 'Not Found',
-            layout:'default',
+            layout: 'default',
         },
         component: () => import('../views/404')
     },
-    // {
-    //     path: '/chat',
-    //     name: 'chat',
-    //     meta: {
-    //         title: 'Chat',
-    //         layout:'default',
-    //     },
-    //     component: () => import('../views/Chat')
-    // }
+    {
+        path: '/chat',
+        name: 'chat',
+        meta: {
+            title: 'Chat',
+            layout: 'default',
+        },
+        component: () => import('../views/Chat')
+    }
 
 ]
 
@@ -149,6 +150,10 @@ Router.beforeEach((to, from, next) => {
     if (localStorage.getItem('token')) {
         if (to.matched.some(route => route.meta.guard === 'guest')) next({ name: 'home' })
         else next();
+    }else{
+        if (to.matched.some(route => route.meta.guard == 'authuser')){
+           next({name:'login'})   
+        } 
     }
     next();
 })

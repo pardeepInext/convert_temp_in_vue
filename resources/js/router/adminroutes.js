@@ -1,7 +1,7 @@
 const AdminRoutes = [
     {
         path: '/dashboard',
-        name: 'chat',
+        name: 'dashboard',
         meta: {
             title: 'Dashboard',
             layout:'admin',

@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\MessageAttachmentResource;
 use App\Http\Resources\UserResource;
+
 class MessageResource extends JsonResource
 {
     /**
@@ -23,7 +24,11 @@ class MessageResource extends JsonResource
             'is_read' => $this->is_read,
             'sender_id' => $this->sender_id,
             'conversation_id' => $this->conversation_id,
-            'sender_info' => new UserResource($this->senderinfo)
+            'sender_info' => new UserResource($this->senderinfo),
+            'created_at' => $this->created_at,
+            'sender_id' => $this->sender_id,
+            'deleted_at' => $this->deleted_at,
+
         ];
     }
 }

@@ -1,24 +1,24 @@
 <template>
   <div :class="['carousel-item', index == 0 ? 'active' : '']" ref="slide">
-    <div class="property-slide" :style="{ backgroundImage: `url('${asset}${imgPath}')` }">
+    <div class="property-slide" :style="{ backgroundImage: `url('${asset}assets/img/property/${slide.images[0].image}')` }">
       <div class="row" v-if="placement == 'home'">
         <div class="col-lg-12">
           <div class="slider-propery-info hc-inner-text">
             <div class="hc-text">
-              <h4>{{ slide.name }}</h4>
+              <h4>{{ slide.title }}</h4>
               <p>
                 <i class="bi bi-geo-alt" :style="{ color: '#00c89e' }"></i>
-                Panvel, Navi Mumbai
+                {{slide.address.city }},{{slide.address.state }} 
               </p>
-              <div class="label">For {{ slide.type }}</div>
-              <h5>$ {{ slide.price }}<span>/month</span></h5>
+              <div class="label" :class="slide.status =='rent'? 'rent-lable': ''">For {{ slide.status }}</div>
+              <h5>$ {{ slide.price }}<span v-if="slide.status =='rent'">/month</span></h5>
             </div>
             <div class="propery-widget">
               <ul>
-                <li><i class="fa fa-object-group"></i> 2, 283</li>
-                <li><i class="fa fa-bathtub"></i> 03</li>
-                <li><i class="fa fa-bed"></i> 05</li>
-                <li><i class="fa fa-automobile"></i> 01</li>
+                <li><i class="fa fa-object-group"></i> {{ slide.size}}{{ slide.prefix }}</li>
+                <li><i class="fa fa-bathtub"></i>{{ slide.bathrooms }}</li>
+                <li><i class="fa fa-bed"></i> {{ slide.bedrooms }}</li>
+                <li><i class="fa fa-automobile"></i> {{ slide.garages }}</li>
               </ul>
             </div>
           </div>
@@ -42,7 +42,7 @@ export default {
   },
   
 };
-</script>
+</script>``
 
 <style scoped>
 .property-slide {
@@ -55,7 +55,9 @@ export default {
   height: 780px;
   display: flex;
 }
-
+.rent-lable{
+  background: #d9534f !important;
+}
 .slider-propery-info {
   background: #ffffff;
   padding: 40px;

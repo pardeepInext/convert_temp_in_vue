@@ -5,6 +5,7 @@
 import Admin from "./layouts/Admin";
 import Default from "./layouts/Default";
 import { Notify } from "notiflix";
+import { mapState } from 'vuex';
 export default {
   name: "App",
   components: {
@@ -23,7 +24,7 @@ export default {
         document.title = to.meta.title || "Aler";
         this.layout = to.meta.layout;
       },
-    },
+    }
   },
   mounted() {
     Notify.init({

@@ -32,6 +32,8 @@ class Propery extends JsonResource
             'images' => $this->images,
             'location' => $this->address,
             'postedBy' => $this->postedBy,
+            'prefix' => $this->prefix,
+            'is_open' => $this->is_open
 
         ];
     }

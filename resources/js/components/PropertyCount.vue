@@ -6,8 +6,8 @@
     }"
   >
     <div class="cs-text" ref="counter">
-      <h5>{{ peropertyCount.name }} {{ counter }}</h5>
-      <span>{{ peropertyCount.count }} property</span>
+      <h5>{{ peropertyCount.name }}</h5>
+      <span>{{ counter }} property</span>
     </div>
   </div>
 </template>

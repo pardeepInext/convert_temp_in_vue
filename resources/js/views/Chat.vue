@@ -37,7 +37,7 @@
                 <div class="chat-container" ref="chatContainer">
                   <ul class="chat-box chatContainerScroll" v-if="messages">
                     <message
-                      v-for="message in fetchMessages.reverse()"
+                      v-for="message in messages"
                       :key="message.id"
                       :message="message"
                     />
@@ -53,6 +53,7 @@
                       rows="3"
                       placeholder="Type your message here..."
                       v-model="messageData.message"
+                      @keyup="typing"
                     ></textarea>
                   </div>
                   <div class="col-md-3">
@@ -125,6 +126,14 @@ export default {
         return (this.id = newId);
       },
     },
+    messages: {
+      get() {
+        return this.fetchMessages.reverse();
+      },
+      set(newMessage) {
+        return this.fetchMessages.push(newMessage);
+      },
+    },
   },
   methods: {
     ...mapActions("Chat", ["fetchConversation", "fetchChat", "sendMessage"]),
@@ -149,6 +158,18 @@ export default {
       formData.append("conversation_id", this.conversationId);
       this.sendMessage(formData);
     },
+    profileImage(provider_id, proifie_image, img) {
+      return typeof provider_id == "string" ? img : proifie_image;
+    },
+    typing() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const profile = this.profileImage(
+        user.provider_id,
+        user.proifie_image,
+        user.img
+      );
+      Echo.channel("demo").whisper('typing',{profile:profile});
+    },
     loadMoreMessage() {
       let messages = this.messages;
       if (messages.current_page != messages.last_page) {
@@ -167,6 +188,16 @@ export default {
     /*  add scroll event for load older message */
     this.$refs.chatContainer.addEventListener("scroll", function () {
       if (_this.$refs.chatContainer.scrollTop == 0) _this.loadMoreMessage();
+    });
+
+    Echo.channel("demo").listen("MessageSent", function (e) {
+      console.log(_this.messages);
+      _this.messages = e.message;
+      console.log(_this.messages);
+    });
+
+    Echo.channel("demo").listenForWhisper('typing', (e) => {
+        console.log(e);
     });
   },
 };

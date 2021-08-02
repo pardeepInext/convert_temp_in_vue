@@ -40,7 +40,7 @@
 import { mapActions, mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("Auth", ["isSocialLogin"]),
+    ...mapState("Auth", ["isSocialLogin","isGoogleLogin","isFacebookLogin"]),
   },
   methods: {
     ...mapActions("Auth", ["socialLogin"]),

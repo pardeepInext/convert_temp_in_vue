@@ -41,4 +41,8 @@ class Property extends Model
     function postedBy(){
         return $this->hasOne(User::class,'id','user_id');
     }
+
+    function liked(){
+        return $this->hasMany(PropertyLike::class,'id','property_id');
+    }
 }

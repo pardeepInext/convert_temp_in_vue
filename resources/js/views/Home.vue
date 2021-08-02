@@ -20,7 +20,12 @@
                   autocomplete="off"
                 />
                 <datalist id="locations">
-                     <option v-for="(location,index) in getLocationResult" :key="index" v-html="location" @click="getOptionValue(location)"></option>
+                  <option
+                    v-for="(location, index) in getLocationResult"
+                    :key="index"
+                    v-html="location"
+                    @click="getOptionValue(location)"
+                  ></option>
                 </datalist>
                 <button
                   class="btn btn-primary"
@@ -32,7 +37,6 @@
                   <i class="bi bi-search"></i>
                   Search
                 </button>
-                {{ getProperties }}
               </div>
             </div>
           </div>
@@ -42,13 +46,13 @@
     <section class="categories-section">
       <div class="cs-item-list" ref="propertycount">
         <peroperty-count
-          v-for="propertyCount in propertyCounts"
-          :key="propertyCount"
+          v-for="propertyCount in count"
+          :key="propertyCount.count"
           :peropertyCount="propertyCount"
         />
       </div>
     </section>
-    <hero-slider :sliders="slider" :placement="'home'" />
+    <hero-slider :sliders="sliders" :placement="'home'" />
   </div>
 </template>
 
@@ -56,7 +60,6 @@
 import { mapActions, mapGetters, mapState } from "vuex";
 import HeroSlider from "../components/HeroSlider.vue";
 import PeropertyCount from "../components/PropertyCount.vue";
-import { Loader, LoaderOptions } from "google-maps";
 export default {
   data() {
     return {
@@ -86,33 +89,6 @@ export default {
           price: "65",
         },
       ],
-      propertyCounts: [
-        {
-          name: "Apartment",
-          count: "230",
-          img: "cat-1.jpg",
-        },
-        {
-          name: "Villa",
-          count: "145",
-          img: "cat-2.jpg",
-        },
-        {
-          name: "House",
-          count: "245",
-          img: "cat-3.jpg",
-        },
-        {
-          name: "Restaurent",
-          count: "300",
-          img: "cat-4.jpg",
-        },
-        {
-          name: "Office",
-          count: "400",
-          img: "cat-5.jpg",
-        },
-      ],
     };
   },
   components: {
@@ -121,16 +97,17 @@ export default {
   },
   computed: {
     ...mapState(["asset"]),
-    ...mapGetters("HomePage",['getLocationResult'])
+    ...mapGetters("HomePage", ["getLocationResult", "sliders", "count"]),
   },
   methods: {
-      ...mapActions('HomePage',['searchDropDown','searchProperty']),
-      locationSearch(){
-        if(this.search.length > 2) this.searchDropDown(this.search);
-      },
+    ...mapActions("HomePage", ["searchDropDown", "searchProperty", "index"]),
+    locationSearch() {
+      if (this.search.length > 2) this.searchDropDown(this.search);
+    },
   },
   mounted() {
-  }
+    this.index();
+  },
 };
 </script>
 
