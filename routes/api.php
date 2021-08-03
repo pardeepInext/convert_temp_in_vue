@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\APIController;
+use App\Http\Controllers\AdminController;
 use App\Events\MessageSent;
 /*
 |--------------------------------------------------------------------------
@@ -100,3 +101,16 @@ Route::prefix('contactus')->group(function () {
 */
 
 Route::get('/homepage', [APIController::class, 'homePage']);
+
+
+/*
+|-------------------------------------------------
+|    Admin routes
+|-------------------------------------------------- 
+*/
+
+Route::prefix('admin')->group(function () {
+    Route::get('/property', [AdminController::class, 'propertyList']);
+    Route::get('/property/{id}', [AdminController::class, 'propertyDetails']);
+    Route::get('/newsLatter',[AdminController::class,'newsLatter']);
+});

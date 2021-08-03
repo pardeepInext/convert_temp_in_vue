@@ -25,6 +25,11 @@ class Property extends Model
         'tour_url',
     ];
 
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d M Y-h:i A', strtotime($value));
+    }
+
     public function address()
     {
         return $this->hasOne(Location::class);

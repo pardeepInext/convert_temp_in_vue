@@ -5,7 +5,7 @@ import Auth from './modules/auth';
 import ProfileEdit from './modules/profile_edit';
 import HomePage from './modules/homepage';
 import Chat from './modules/chat';
-
+import Admin from './modules/Admin';
 let asset = document.querySelector('meta[name="asset"]').content;
 
 const store = createStore({
@@ -77,7 +77,8 @@ const store = createStore({
         Auth,
         ProfileEdit,
         HomePage,
-        Chat
+        Chat,
+        Admin
     }
 });
 

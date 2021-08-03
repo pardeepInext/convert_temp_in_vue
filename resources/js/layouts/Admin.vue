@@ -4,6 +4,7 @@
     <div class="app-wrapper">
       <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
+          <h1 class="app-page-title">{{ title }}</h1>
           <router-view v-slot="{ Component }">
             <transition name="fade" mode="out-in">
               <component :is="Component" :key="$route.path" />
@@ -16,16 +17,30 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Header from "../components/admin/Header";
 export default {
+  data() {
+    return {
+      title: "",
+    };
+  },
   components: {
     Header,
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        this.title = to.meta.title;
+      },
+    },
   },
 };
 </script>
 
 <style scoped>
-@import url("../../css/admin/portal.css");
+@import url("../../css/admin/admin.css");
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
