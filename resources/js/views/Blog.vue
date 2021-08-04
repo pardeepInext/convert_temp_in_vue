@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="blog">
     <div v-if="isBlogFetch" class="d-flex justify-content-center">
       <strong>Loading...</strong>
       <div class="spinner-border" role="status">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="blogsData">
     <breadcrumb :breadcrumb="breadcrumb" />
     <section class="blog-section spad">
       <div class="container">

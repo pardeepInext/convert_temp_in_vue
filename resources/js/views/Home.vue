@@ -1,5 +1,5 @@
 <template>
-  <div @scroll="testScrol">
+  <div @scroll="testScrol" v-if="sliders && count">
     <section
       class="blog-hero-section set-bg"
       :style="{ backgroundImage: `url('${asset}assets/img/blog/bh-bg.jpg')` }"
@@ -54,12 +54,16 @@
     </section>
     <hero-slider :sliders="sliders" :placement="'home'" />
   </div>
+  <div v-else>
+     <skeleton />
+  </div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
 import HeroSlider from "../components/HeroSlider.vue";
 import PeropertyCount from "../components/PropertyCount.vue";
+import Skeleton from '../components/Skeleton';
 export default {
   data() {
     return {
@@ -94,6 +98,7 @@ export default {
   components: {
     HeroSlider,
     PeropertyCount,
+    Skeleton
   },
   computed: {
     ...mapState(["asset"]),
