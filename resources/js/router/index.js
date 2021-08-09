@@ -1,9 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import AdminRoutes from './adminroutes';
 let base = document.querySelector('meta[name="asset"]').content;
-import  Home from '../views/Home';
-import Blogs  from '../views/Blogs'
-
+import Home from '../views/Home';
+import Blogs from '../views/Blogs'
+const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : "";
 const routes = [
     {
         path: '/',
@@ -11,6 +11,7 @@ const routes = [
         meta: {
             title: 'Home',
             layout: 'default',
+            role: '1',
         },
         component: Home,
     },
@@ -20,6 +21,7 @@ const routes = [
         meta: {
             title: 'Properties',
             layout: 'default',
+            role: '1',
 
         },
         component: () => import('../views/Property')
@@ -30,6 +32,7 @@ const routes = [
         meta: {
             title: 'Property',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/ProperyDetails')
     },
@@ -39,7 +42,8 @@ const routes = [
         meta: {
             title: 'PropertySubmit',
             layout: 'default',
-            guard: 'authuser'
+            guard: 'authuser',
+            role: '1',
         },
         component: () => import('../views/SubmitProperty'),
     },
@@ -49,6 +53,7 @@ const routes = [
         meta: {
             title: 'About',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/About')
     },
@@ -58,6 +63,7 @@ const routes = [
         meta: {
             title: 'Blogs',
             layout: 'default',
+            role: '1',
         },
         component: Blogs
     },
@@ -67,6 +73,7 @@ const routes = [
         meta: {
             title: 'Blog',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/Blog')
     },
@@ -76,6 +83,7 @@ const routes = [
         meta: {
             title: 'Contact Us',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/ContactUs')
     },
@@ -86,6 +94,7 @@ const routes = [
             title: 'Sign In',
             guard: 'guest',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/Login')
     },
@@ -96,6 +105,7 @@ const routes = [
             title: 'Sign Up',
             guard: 'guest',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/Register')
     },
@@ -106,6 +116,7 @@ const routes = [
             title: 'Forgot Password',
             guard: 'guest',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/ForgotPassword')
 
@@ -116,6 +127,7 @@ const routes = [
         meta: {
             title: 'User',
             layout: 'default',
+            role: '1',
         },
         component: () => import('../views/404')
 
@@ -150,12 +162,16 @@ const Router = createRouter({
 
 Router.beforeEach((to, from, next) => {
     if (localStorage.getItem('token')) {
-        if (to.matched.some(route => route.meta.guard === 'guest')) next({ name: 'home' })
+        if (to.matched.some(route => route.meta.guard === 'guest')) {
+            currentUser.role_id == 1 ? next({ name: 'home' }) : next({ name: 'dashboard' });
+        }
+        else if (to.matched.some(route => route.meta.role === '3' && currentUser.role_id != 3)) next({ name: 'home' });
         else next();
-    }else{
-        if (to.matched.some(route => route.meta.guard == 'authuser')){
-           next({name:'login'})   
-        } 
+    }
+    else {
+        if (to.matched.some(route => route.meta.guard == 'authuser')) {
+            next({ name: 'login' })
+        }
     }
     next();
 })

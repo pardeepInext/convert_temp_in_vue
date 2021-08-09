@@ -48,7 +48,7 @@ const actions = {
           localStorage.setItem('token', payload.token);
           localStorage.setItem('user', JSON.stringify(payload.user));
           commit('Is_Auth', true)
-          router.push({ name: 'home' })
+          payload.user.role_id == 1 ? router.push({ name: 'home' }) : router.push({ name: 'dashboard' });
      },
      async logout({ commit, dispatch }, id) {
           axios.delete(`api/logout/${id}`)

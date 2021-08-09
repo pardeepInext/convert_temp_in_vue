@@ -5,6 +5,8 @@ const AdminRoutes = [
         meta: {
             title: 'Dashboard',
             layout:'admin',
+            guard: 'authuser',
+            role:'3',
         },
         component: () => import('../views/admin/Index')
     },
@@ -14,6 +16,8 @@ const AdminRoutes = [
         meta: {
             title: 'Property',
             layout:'admin',
+            guard: 'authuser',
+            role:'3',
         },
         component: () => import('../views/admin/Property')
     },
@@ -23,6 +27,8 @@ const AdminRoutes = [
         meta: {
             title: 'Newsletter',
             layout:'admin',
+            guard: 'authuser',
+            role:'3',
         },
         component: () => import('../views/admin/NewsLatter')
     },
@@ -32,6 +38,8 @@ const AdminRoutes = [
         meta: {
             title: 'Users',
             layout:'admin',
+            guard: 'authuser',
+            role:'3',
         },
         component: () => import('../views/admin/User')
     },
@@ -41,6 +49,8 @@ const AdminRoutes = [
         meta: {
             title: 'Contact',
             layout:'admin',
+            guard: 'authuser',
+            role:'3',
         },
         component: () => import('../views/admin/ContactMessage')
     }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\UserResource;
+
 class AuthController extends Controller
 {
 
@@ -64,7 +65,7 @@ class AuthController extends Controller
           }
 
           $user = User::create(['name' => $request->name, 'password' => Hash::make($request->password), 'email' => $request->email]);
-          return response()->json(['success' => false, 'token' => $user->createToken($user->name)->plainTextToken]);
+          return response()->json(['success' => false, 'token' => $user->createToken($user->name)->plainTextToken, 'user' => $user]);
      }
 
      public function logout($id)
@@ -89,7 +90,7 @@ class AuthController extends Controller
           return response()->json($response);
      }
      public function confirmUser($id)
-     {    
+     {
           return new UserResource(User::with('role')->find($id));
      }
 }

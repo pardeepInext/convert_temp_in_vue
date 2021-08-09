@@ -2,7 +2,7 @@
   <div>
     <section
       class="blog-hero-section set-bg"
-      :style="{ backgroundImage: `url('${asset}assets/img/blog/bh-bg.jpg')` }"
+      id="home-bg"
     >
       <div class="container">
         <div class="row">
@@ -52,6 +52,7 @@
         />
       </div>
     </section>
+    <skeleton v-else />
     <hero-slider :sliders="sliders" :placement="'home'" v-if="sliders"/>
   </div>
 </template>
@@ -108,7 +109,11 @@ export default {
   },
   mounted() {
     this.index();
+    console.log("mounted");
   },
+  beforeMount(){
+    console.log("beforemount");
+  }
 };
 </script>
 

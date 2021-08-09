@@ -4515,6 +4515,10 @@ li .richText-btn[data-command=toggleCode] {
     margin-right: 6px;
   }
 }
+
+#home-bg{
+  background-image: url(/images/bh-bg.jpg?82b25b0114a86f43b8ca392c1845d135);
+}
 /* Small Device = 320px */
 @media only screen and (max-width: 479px) {
   .hs-item .hc-inner-text {

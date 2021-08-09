@@ -289,7 +289,7 @@ export default {
     this.fetchproperties(this.propertyFetch);
      //ajax for getting max slider values
     await axios
-      .get(`${this.asset}api/propery/maxvalue/`)
+        .get(`${this.asset}api/propery/maxvalue/`)
       .then((res) => (maxData = res.data))
       .catch((err) => {
         console.log(err);
