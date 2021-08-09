@@ -1,5 +1,5 @@
 <template>
-  <div @scroll="testScrol">
+  <div>
     <section
       class="blog-hero-section set-bg"
       :style="{ backgroundImage: `url('${asset}assets/img/blog/bh-bg.jpg')` }"

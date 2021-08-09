@@ -18,7 +18,7 @@ const mutations = {
 
 const actions = {
     async blogs({ commit }, page = 1) {
-        commit('SET_LOADING', false);
+        commit('SET_LOADING', true);
         await axios.get(`api/blogs?page=${page}`)
             .then(res => {
                 commit('Last_Page',res.data.meta.last_page)

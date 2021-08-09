@@ -2,7 +2,7 @@
   <Header />
    <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
-      <component :is="isLoading? 'skeleton' : Component" :key="$route.path" />
+      <component :is="isLoading? Skeleton : Component" :key="$route.path" @hook:mounted="test" />
     </transition>
   </router-view>
   <Footer />
@@ -32,15 +32,18 @@ export default {
       //    }
       //  }
   },
+  methods:{
+       test(){
+         console.log("hello");
+       }
+  },
   mounted() {
     let _this = this;
     this.$router.beforeEach(function(){
         _this.isLoading = true;
-        console.log("hello");
     });
     this.$router.afterEach(function(){
          _this.isLoading = false;
-         console.log("Bye");
     });
   },
 };

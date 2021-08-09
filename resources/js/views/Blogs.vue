@@ -6,11 +6,17 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="blog-item-list">
+              <div class="d-flex justify-content-center" v-if="isBlogFetch">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
               <blog
-               v-for="(blog, index) in blogsData"
+                v-for="(blog, index) in blogsData"
                 :key="blog.id"
                 :blog="blog"
                 :index="index"
+                v-else
               />
               <div
                 class="blog-pagination property-pagination"
@@ -93,7 +99,7 @@ export default {
   components: {
     Blog,
     SocialMenu,
-    Breadcrumb
+    Breadcrumb,
   },
   computed: {
     ...mapState("Blog", [
