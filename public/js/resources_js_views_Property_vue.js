@@ -104,7 +104,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     Property: _components_Property__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)(['currentUserId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)(["propertyFeatures", "propertyTypes"])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)("Property", ["propertiesLoading"])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)("Property", ["getProperties"])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)("HomePage", ["getSearchProperty"])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)(['currentUserId', 'asset'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)(["propertyFeatures", "propertyTypes"])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)("Property", ["propertiesLoading"])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)("Property", ["getProperties"])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)("HomePage", ["getSearchProperty"])), {}, {
     propertyList: function propertyList() {
       var _this2 = this;
 
@@ -151,7 +151,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
               _context.next = 6;
-              return _store_axios__WEBPACK_IMPORTED_MODULE_4__.default.get("api/propery/maxvalue/").then(function (res) {
+              return _store_axios__WEBPACK_IMPORTED_MODULE_4__.default.get("".concat(_this3.asset, "api/propery/maxvalue/")).then(function (res) {
                 return maxData = res.data;
               })["catch"](function (err) {
                 console.log(err);
