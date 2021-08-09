@@ -1,5 +1,5 @@
 <template>
-  <div>
+ <div>
     <breadcrumb :breadcrumb="breadcrumb" />
     <section class="contact-form-section spad">
       <div class="container">
@@ -59,11 +59,13 @@
 
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
+import Skeleton from '../components/Skeleton';
 import axios from "../store/axios";
 import { Notify } from "notiflix";
 export default {
   components: {
     Breadcrumb,
+    Skeleton
   },
   data() {
     return {

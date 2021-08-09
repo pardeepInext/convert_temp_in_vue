@@ -1,5 +1,5 @@
 <template>
-  <div @scroll="testScrol" v-if="sliders && count">
+  <div @scroll="testScrol">
     <section
       class="blog-hero-section set-bg"
       :style="{ backgroundImage: `url('${asset}assets/img/blog/bh-bg.jpg')` }"
@@ -43,7 +43,7 @@
         </div>
       </div>
     </section>
-    <section class="categories-section">
+    <section class="categories-section" v-if="count">
       <div class="cs-item-list" ref="propertycount">
         <peroperty-count
           v-for="propertyCount in count"
@@ -52,10 +52,7 @@
         />
       </div>
     </section>
-    <hero-slider :sliders="sliders" :placement="'home'" />
-  </div>
-  <div v-else>
-     <skeleton />
+    <hero-slider :sliders="sliders" :placement="'home'" v-if="sliders"/>
   </div>
 </template>
 
@@ -98,7 +95,6 @@ export default {
   components: {
     HeroSlider,
     PeropertyCount,
-    Skeleton
   },
   computed: {
     ...mapState(["asset"]),

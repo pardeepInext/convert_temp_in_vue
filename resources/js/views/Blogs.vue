@@ -1,15 +1,13 @@
 <template>
-  <div v-if="blogsData">
+  <div>
     <breadcrumb :breadcrumb="breadcrumb" />
     <section class="blog-section spad">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
             <div class="blog-item-list">
-              <div v-if="isBlogFetch">...Loading</div>
               <blog
-                v-else
-                v-for="(blog, index) in blogsData"
+               v-for="(blog, index) in blogsData"
                 :key="blog.id"
                 :blog="blog"
                 :index="index"

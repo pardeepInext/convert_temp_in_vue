@@ -1,6 +1,8 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import AdminRoutes from './adminroutes';
 let base = document.querySelector('meta[name="asset"]').content;
+import  Home from '../views/Home';
+import Blogs  from '../views/Blogs'
 
 const routes = [
     {
@@ -10,7 +12,7 @@ const routes = [
             title: 'Home',
             layout: 'default',
         },
-        component: () => import('../views/Home')
+        component: Home,
     },
     {
         path: '/properties',
@@ -57,7 +59,7 @@ const routes = [
             title: 'Blogs',
             layout: 'default',
         },
-        component: () => import('../views/Blogs')
+        component: Blogs
     },
     {
         path: '/blog/:id',
