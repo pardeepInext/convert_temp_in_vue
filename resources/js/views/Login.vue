@@ -25,14 +25,21 @@
           }}</span>
           <div class="form mb-0">
             <input
-              :type="isPasswordShow? 'text':'password'"
+              :type="isPasswordShow ? 'text' : 'password'"
               class="form-control"
               placeholder="Password"
               v-model="loginCred.password"
             />
-            <a href="javascript:void(0)" @click="passwordHideShow">{{ isPasswordShow? 'Hide':'Show' }}</a>
+            <a href="javascript:void(0)" @click="passwordHideShow">{{
+              isPasswordShow ? "Hide" : "Show"
+            }}</a>
           </div>
-          <router-link class="forgot-link float-end my-2" :to="{name:'forgotpassword'}" @click="scrollToTop">ForgotPassword</router-link>
+          <router-link
+            class="forgot-link float-end my-2"
+            :to="{ name: 'forgotpassword' }"
+            @click="scrollToTop"
+            >ForgotPassword</router-link
+          >
           <span class="text-danger fw-bold" v-if="loginError.password">{{
             loginError.password[0]
           }}</span>
@@ -73,7 +80,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import SocialLogin from "../components/SocialLogin.vue";
 export default {
   data() {
@@ -82,7 +89,7 @@ export default {
         email: "",
         password: "",
       },
-      isPasswordShow:false,
+      isPasswordShow: false,
     };
   },
   components: {
@@ -93,10 +100,14 @@ export default {
     ...mapGetters("Auth", ["getLoginErrors", "getIsLogin"]),
   },
   methods: {
-    ...mapActions("Auth", ["login","scrollToTop"]),
-    passwordHideShow(){
-      this.isPasswordShow = !this.isPasswordShow
-    }
+    ...mapActions("Auth", ["login", "scrollToTop"]),
+    ...mapMutations("Auth", ["Login_Error"]),
+    passwordHideShow() {
+      this.isPasswordShow = !this.isPasswordShow;
+    },
+  },
+  mounted() {
+    this.Login_Error({});
   },
 };
 </script>

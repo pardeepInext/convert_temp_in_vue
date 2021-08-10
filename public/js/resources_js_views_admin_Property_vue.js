@@ -399,7 +399,8 @@ var _hoisted_16 = {
 };
 var _hoisted_17 = {
   "class": "table app-table-hover mb-0 text-left",
-  ref: "property"
+  ref: "property",
+  id: "property-table"
 };
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", {

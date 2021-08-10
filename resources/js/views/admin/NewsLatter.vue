@@ -67,8 +67,8 @@
     </div>
     <div class="app-card app-card-orders-table shadow-sm mb-5">
       <div class="app-card-body">
-        <div class="table-responsive">
-          <table class="table app-table-hover mb-0 text-left" ref="property">
+        <div class="table-responsive" id="newslatter-table">
+          <table class="table app-table-hover mb-0 text-left" ref="newslatter">
             <thead>
               <tr>
                 <th class="cell">Email</th>
@@ -156,6 +156,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import XLSX from "xlsx";
 export default {
   data() {
     return {
@@ -181,7 +182,13 @@ export default {
   },
   methods: {
     ...mapActions("Admin", ["fetchNewslatter"]),
-    downloadExcel() {},
+    downloadExcel() {
+       const wb = XLSX.utils.table_to_book(this.$refs.newslatter, {
+        sheet: "sheet1",
+      });
+
+      XLSX.writeFile(wb, "newslatter." + "xlsx");
+    },
     search() {
       this.fetchNewslatter(this.filter);
     },

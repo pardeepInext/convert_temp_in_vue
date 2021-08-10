@@ -6,7 +6,7 @@
         <div class="container-xl">
           <h1 class="app-page-title">{{ title }}</h1>
           <router-view v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
+            <transition name="scale" mode="out-in">
               <component :is="Component" :key="$route.path" />
             </transition>
           </router-view>
@@ -41,14 +41,15 @@ export default {
 
 <style scoped>
 @import url("../../css/admin/admin.css");
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 0.8s ease;
 }
 
-.fade-enter,
-.fade-leave-to {
+.scale-enter-from,
+.scale-leave-to {
   opacity: 0;
+  transform: scale(0.9);
 }
 
 .dashboard-app {

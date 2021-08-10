@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import SocialLogin from '../components/SocialLogin.vue';
 export default {
   data() {
@@ -90,10 +90,14 @@ export default {
   },
   methods: {
     ...mapActions("Auth", ["socialLogin","register"]),
+    ...mapMutations("Auth",["Register_Error"]),
     passwordHideShow(){
       this.isPasswordShow = !this.isPasswordShow
     }
   },
+  mounted(){
+    this.Register_Error({});
+  }
 };
 </script>
 

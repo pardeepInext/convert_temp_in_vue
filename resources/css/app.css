@@ -3,11 +3,19 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 @import "nouislider/dist/nouislider.css";
-@import url('notiflix/dist/notiflix-3.0.1.min.css');
+@import url("notiflix/dist/notiflix-3.0.1.min.css");
 @import "./style.css";
+
+#home-bg {
+    background-image: url("../../public/assets/img/blog/bh-bg.jpg");
+}
 
 a {
     text-decoration: none;
+}
+
+.breadcrumb-section, .blog-hero-section{
+    background:gray;
 }
 
 .btn-primary {
@@ -20,7 +28,8 @@ a {
     border-color: #009e7d;
 }
 
-select:focus,select:active {
+select:focus,
+select:active {
     border-color: #00c89e;
     outline: 0px !important;
     -webkit-appearance: none;

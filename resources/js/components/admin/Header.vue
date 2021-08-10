@@ -246,14 +246,11 @@
                   aria-labelledby="user-dropdown-toggle"
                 >
                   <li>
-                    <a class="dropdown-item" href="account.html">Account</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="javascript:void(0)">Account</a>
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
-                    <a class="dropdown-item" href="login.html">Log Out</a>
+                    <a class="dropdown-item" href="javascript:void(0)" @click="logout(user.id)">Log Out</a>
                   </li>
                 </ul>
               </div>
@@ -282,12 +279,12 @@
           >&times;</a
         >
         <div class="app-branding">
-          <a class="app-logo" href="index.html"
+          <router-link class="app-logo" :to="{name:'home'}"
             ><img
               class="logo-icon me-2"
               :src="`${asset}assets/img/logo.png`"
               alt="logo"
-          /></a>
+          /></router-link>
         </div>
 
         <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
@@ -333,7 +330,7 @@
 
 <script>
 import NavLink from "./NavLink";
-import { mapState } from "vuex";
+import { mapGetters, mapState,mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -372,12 +369,14 @@ export default {
   },
   computed: {
     ...mapState(["asset"]),
+    ...mapGetters(["user"])
   },
   methods: {
     test() {
       this.sideBarToggle = !this.sideBarToggle;
       console.log();
     },
+    ...mapActions("Auth", ["logout"]),
   },
 };
 </script>

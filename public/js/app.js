@@ -21716,13 +21716,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     NavLink: _NavLink__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)(["asset"])),
-  methods: {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)(["asset"])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(["user"])),
+  methods: _objectSpread({
     test: function test() {
       this.sideBarToggle = !this.sideBarToggle;
       console.log();
     }
-  }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("Auth", ["logout"]))
 });
 
 /***/ }),
@@ -21808,7 +21808,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      isLoading: false
+      loading: false
     };
   },
   components: {
@@ -21816,20 +21816,17 @@ __webpack_require__.r(__webpack_exports__);
     Footer: _components_Footer__WEBPACK_IMPORTED_MODULE_2__.default,
     Skeleton: _components_Skeleton__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  computed: {//  isLoading:{
-    //    get(){
-    //      return this.isLoading
-    //    },
-    //    set(newValue){
-    //      return this.isLoading = newValue;
-    //    }
-    //  }
-  },
-  methods: {
-    test: function test() {
-      console.log("hello");
+  computed: {
+    isLoading: {
+      get: function get() {
+        return this.loading;
+      },
+      set: function set(newValue) {
+        return this.loading = newValue;
+      }
     }
   },
+  methods: {},
   mounted: function mounted() {
     var _this = this;
 
@@ -21855,15 +21852,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _components_SocialMenu_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/SocialMenu.vue */ "./resources/js/components/SocialMenu.vue");
-/* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue");
-/* harmony import */ var _components_Blog_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Blog.vue */ "./resources/js/components/Blog.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _components_SocialMenu_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/SocialMenu.vue */ "./resources/js/components/SocialMenu.vue");
+/* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue");
+/* harmony import */ var _store_axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/axios */ "./resources/js/store/axios.js");
+/* harmony import */ var _components_Blog_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Blog.vue */ "./resources/js/components/Blog.vue");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! notiflix */ "./node_modules/notiflix/dist/notiflix-aio-3.0.1.min.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(notiflix__WEBPACK_IMPORTED_MODULE_5__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -21875,16 +21885,62 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       breadcrumb: {
         name: "Blogs",
         img: "breadcrumb-3.jpg"
-      }
+      },
+      newslatterEmail: "",
+      status: false
     };
   },
   components: {
-    Blog: _components_Blog_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    SocialMenu: _components_SocialMenu_vue__WEBPACK_IMPORTED_MODULE_0__.default,
-    Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default
+    Blog: _components_Blog_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+    SocialMenu: _components_SocialMenu_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)("Blog", ["blogsData", "isBlogFetch", "lastPage", "currentPage"])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)(["asset", "socials"])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapActions)(["scrollToTop"])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapActions)("Blog", ["blogs"])),
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapState)("Blog", ["blogsData", "isBlogFetch", "lastPage", "currentPage"])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapState)(["asset", "socials"])), {}, {
+    isNewslatteloading: {
+      get: function get() {
+        return this.status;
+      },
+      set: function set(value) {
+        return this.status = value;
+      }
+    }
+  }),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapActions)(["scrollToTop"])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapActions)("Blog", ["blogs"])), {}, {
+    newsLatter: function newsLatter() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.isNewslatteloading = true;
+                _context.next = 3;
+                return _store_axios__WEBPACK_IMPORTED_MODULE_3__.default.post("api/newslatter/subscribe", {
+                  email: _this.newslatterEmail
+                }).then(function (res) {
+                  if (res.data.success) {
+                    notiflix__WEBPACK_IMPORTED_MODULE_5__.Notify.success(res.data.message);
+                    _this.newslatterEmail = "";
+                  } else {
+                    notiflix__WEBPACK_IMPORTED_MODULE_5__.Notify.failure(res.data.errors.email[0]);
+                  }
+
+                  _this.isNewslatteloading = false;
+                })["catch"](function (err) {
+                  notiflix__WEBPACK_IMPORTED_MODULE_5__.Notify.failure("Something went wrong!please try again.");
+                  _this.isNewslatteloading = false;
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }),
   mounted: function mounted() {
     this.blogs(1);
   }
@@ -21956,10 +22012,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   mounted: function mounted() {
     this.index();
-    console.log("mounted");
-  },
-  beforeMount: function beforeMount() {
-    console.log("beforemount");
   }
 });
 
@@ -22204,51 +22256,76 @@ var _hoisted_8 = {
   "class": "fs-social"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-lg-2 col-sm-6\" data-v-61a7c374><div class=\"fs-widget\" data-v-61a7c374><h5 data-v-61a7c374>Help</h5><ul data-v-61a7c374><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Privacy Policy</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Contact Support</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Knowledgebase</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Careers</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>FAQs</a></li></ul></div></div><div class=\"col-lg-2 col-sm-6\" data-v-61a7c374><div class=\"fs-widget\" data-v-61a7c374><h5 data-v-61a7c374>Links</h5><ul data-v-61a7c374><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Contact</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Create Property</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>My Properties</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Register</a></li><li data-v-61a7c374><a href=\"#\" data-v-61a7c374>Login</a></li></ul></div></div>", 2);
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-lg-2 col-sm-6"
+}, null, -1
+/* HOISTED */
+);
 
-var _hoisted_11 = {
-  "class": "col-lg-4 col-md-6"
+var _hoisted_10 = {
+  "class": "col-lg-2 col-sm-6"
 };
-var _hoisted_12 = {
+var _hoisted_11 = {
   "class": "fs-widget"
 };
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "Newsletter", -1
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "Links", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Deserunt mollit anim id est laborum.", -1
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Contact");
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add property for Sell");
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("My Properties");
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Register");
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
+
+var _hoisted_18 = {
+  "class": "col-lg-4 col-md-6"
+};
+var _hoisted_19 = {
+  "class": "fs-widget"
+};
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "Newsletter", -1
 /* HOISTED */
 );
 
-var _hoisted_15 = {
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Deserunt mollit anim id est laborum.", -1
+/* HOISTED */
+);
+
+var _hoisted_22 = {
   action: "#",
   "class": "subscribe-form"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Subscribe ");
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Subscribe ");
 
-var _hoisted_17 = {
+var _hoisted_24 = {
   key: 0,
   "class": "fas fa-sync fa-spin"
 };
-var _hoisted_18 = {
+var _hoisted_25 = {
   "class": "copyright-text"
 };
-var _hoisted_19 = {
+var _hoisted_26 = {
   "class": "text-white"
 };
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fa fa-heart",
   "aria-hidden": "true"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" by ");
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" by ");
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "javascript:void(0);",
   target: "_blank"
 }, "Pardeep Kumar", -1
@@ -22287,7 +22364,60 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     , ["social"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ))])])]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: {
+      name: 'contactus'
+    }
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_13];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: {
+      name: 'property-submit'
+    }
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_14];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: ""
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_15];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: {
+      name: 'register'
+    }
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_16];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: {
+      name: 'login'
+    }
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_17];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [_hoisted_20, _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     placeholder: "Email",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -22302,11 +22432,11 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       return $options.newsLatter($data.newslatterEmail);
     }),
     disabled: $options.isNewslatteloading
-  }, [_hoisted_16, $options.isNewslatteloading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("i", _hoisted_17)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
+  }, [_hoisted_23, $options.isNewslatteloading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("i", _hoisted_24)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
   /* PROPS */
-  , ["disabled"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Copyright " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.year) + " © All rights reserved | Design & Developed ", 1
+  , ["disabled"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Copyright " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.year) + " © All rights reserved | Design & Developed ", 1
   /* TEXT */
-  ), _hoisted_20, _hoisted_21, _hoisted_22])])])]);
+  ), _hoisted_27, _hoisted_28, _hoisted_29])])])]);
 });
 
 /***/ }),
@@ -22397,48 +22527,35 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_19 = {
-  key: 0,
-  "class": "hw-btn logout",
-  "data-bs-toggle": "collapse",
-  "data-bs-target": "#collapseExample",
-  "aria-expanded": "false",
-  "aria-controls": "collapseExample"
-};
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Profile");
 
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login");
 
-var _hoisted_21 = {
-  key: 2,
-  "class": "collapse",
-  id: "collapseExample"
-};
-
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "bi bi-list"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_23 = {
+var _hoisted_22 = {
   "class": "hs-nav"
 };
-var _hoisted_24 = {
+var _hoisted_23 = {
   "class": "container"
 };
-var _hoisted_25 = {
+var _hoisted_24 = {
   "class": "row"
 };
-var _hoisted_26 = {
+var _hoisted_25 = {
   "class": "col-lg-9"
 };
-var _hoisted_27 = {
+var _hoisted_26 = {
   "class": "nav-menu"
 };
-var _hoisted_28 = {
+var _hoisted_27 = {
   "class": "col-lg-3"
 };
-var _hoisted_29 = {
+var _hoisted_28 = {
   "class": "hn-social"
 };
 
@@ -22528,7 +22645,20 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [_hoisted_18, _ctx.token || _ctx.isAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", _hoisted_19, " Logout ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n                class=\"hw-btn logout\"\n                v-if=\"token || isAuth\"\n                data-bs-toggle=\"collapse\"\n                data-bs-target=\"#collapseExample\"\n                aria-expanded=\"false\"\n                aria-controls=\"collapseExample\"\n              >\n                Logout\n              </button> "), _ctx.token || _ctx.isAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 0,
+    "class": "hw-btn",
+    to: {
+      name: 'profile'
+    }
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_19];
+    }),
+    _: 1
+    /* STABLE */
+
+  })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
     key: 1,
     "class": "hw-btn",
     to: {
@@ -22541,17 +22671,12 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     _: 1
     /* STABLE */
 
-  })), _ctx.token || _ctx.isAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-    href: "javascript:void(0);",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.logout(_ctx.user.id);
-    })
-  }, "Logout")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"collapse\" id=\"collapseExample\"   v-if=\"token || isAuth\">\n                <a href=\"javascript:void(0);\" @click=\"logout(user.id)\">Logout</a>\n              </div> ")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     "class": "canvas-open",
-    onClick: _cache[3] || (_cache[3] = function () {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.responsiveBtn && $options.responsiveBtn.apply($options, arguments);
     })
-  }, [_hoisted_22])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.mainMenus, function (mainMenu) {
+  }, [_hoisted_21])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.mainMenus, function (mainMenu) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_main_menu, {
       key: mainMenu.name,
       menu: mainMenu,
@@ -22561,7 +22686,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     , ["menu"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.socials, function (social) {
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.socials, function (social) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_social_menu, {
       social: social,
       key: social.icon
@@ -23145,36 +23270,47 @@ var _hoisted_24 = {
   role: "button",
   "aria-expanded": "false"
 };
+var _hoisted_25 = {
+  "class": "dropdown-menu",
+  "aria-labelledby": "user-dropdown-toggle"
+};
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<ul class=\"dropdown-menu\" aria-labelledby=\"user-dropdown-toggle\" data-v-819e5290><li data-v-819e5290><a class=\"dropdown-item\" href=\"account.html\" data-v-819e5290>Account</a></li><li data-v-819e5290><a class=\"dropdown-item\" href=\"settings.html\" data-v-819e5290>Settings</a></li><li data-v-819e5290><hr class=\"dropdown-divider\" data-v-819e5290></li><li data-v-819e5290><a class=\"dropdown-item\" href=\"login.html\" data-v-819e5290>Log Out</a></li></ul>", 1);
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  "class": "dropdown-item",
+  href: "javascript:void(0)"
+}, "Account")], -1
+/* HOISTED */
+);
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", {
+  "class": "dropdown-divider"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   id: "sidepanel-drop",
   "class": "sidepanel-drop"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_27 = {
+var _hoisted_29 = {
   "class": "sidepanel-inner d-flex flex-column"
 };
-var _hoisted_28 = {
+var _hoisted_30 = {
   "class": "app-branding"
 };
-var _hoisted_29 = {
-  "class": "app-logo",
-  href: "index.html"
-};
-var _hoisted_30 = {
+var _hoisted_31 = {
   id: "app-nav-main",
   "class": "app-nav app-nav-main flex-grow-1"
 };
-var _hoisted_31 = {
+var _hoisted_32 = {
   "class": "app-menu list-unstyled accordion",
   id: "menu-accordion"
 };
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "app-sidepanel-footer"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", {
   "class": "app-nav app-nav-footer"
@@ -23209,6 +23345,8 @@ var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+
   var _component_nav_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("nav-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
@@ -23229,23 +23367,41 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     alt: "user profile"
   }, null, 8
   /* PROPS */
-  , ["src"])]), _hoisted_25]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//app-user-dropdown")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//app-utilities")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//row")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//app-header-content")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//container-fluid")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  , ["src"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_25, [_hoisted_26, _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    "class": "dropdown-item",
+    href: "javascript:void(0)",
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.logout(_ctx.user.id);
+    })
+  }, "Log Out")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//app-user-dropdown")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//app-utilities")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//row")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//app-header-content")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("//container-fluid")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     id: "app-sidepanel",
     "class": ["app-sidepanel", $data.sideBarToggle ? 'sidepanel-visible' : 'sidepanel-hidden']
-  }, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  }, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     href: "javascript:void(0);",
     id: "sidepanel-close",
     "class": "sidepanel-close d-xl-none",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
       return $data.sideBarToggle = false;
     })
-  }, "×"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-    "class": "logo-icon me-2",
-    src: "".concat(_ctx.asset, "assets/img/logo.png"),
-    alt: "logo"
-  }, null, 8
-  /* PROPS */
-  , ["src"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_31, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.menus, function (menu) {
+  }, "×"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    "class": "app-logo",
+    to: {
+      name: 'home'
+    }
+  }, {
+    "default": _withId(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+        "class": "logo-icon me-2",
+        src: "".concat(_ctx.asset, "assets/img/logo.png"),
+        alt: "logo"
+      }, null, 8
+      /* PROPS */
+      , ["src"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_32, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.menus, function (menu) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_nav_link, {
       key: menu,
       menu: menu
@@ -23254,7 +23410,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     , ["menu"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), _hoisted_32])], 2
+  ))])]), _hoisted_33])], 2
   /* CLASS */
   )]);
 });
@@ -23368,7 +23524,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     "default": _withId(function (_ref) {
       var Component = _ref.Component;
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-        name: "fade",
+        name: "scale",
         mode: "out-in"
       }, {
         "default": _withId(function () {
@@ -23422,12 +23578,10 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         mode: "out-in"
       }, {
         "default": _withId(function () {
-          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($data.isLoading ? _ctx.Skeleton : Component), {
+          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(Component), {
             key: _ctx.$route.path,
-            "onHook:mounted": $options.test
-          }, null, 8
-          /* PROPS */
-          , ["onHook:mounted"]))];
+            id: "content"
+          }))];
         }),
         _: 2
         /* DYNAMIC */
@@ -23481,56 +23635,60 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = {
   key: 0,
-  "class": "d-flex justify-content-center"
-};
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "spinner-border",
-  role: "status"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
-  "class": "visually-hidden"
-}, "Loading...")], -1
-/* HOISTED */
-);
-
-var _hoisted_8 = {
-  key: 2,
   "class": "blog-pagination property-pagination"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "bi bi-arrow-left"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "bi bi-arrow-right"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
+var _hoisted_9 = {
   "class": "col-lg-4"
 };
-var _hoisted_12 = {
+var _hoisted_10 = {
   "class": "blog-sidebar"
 };
-var _hoisted_13 = {
+var _hoisted_11 = {
   "class": "follow-us"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "section-title sidebar-title-b"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", null, "Follow us")], -1
 /* HOISTED */
 );
 
-var _hoisted_15 = {
+var _hoisted_13 = {
   "class": "fu-links"
 };
+var _hoisted_14 = {
+  "class": "subscribe-form"
+};
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"subscribe-form\" data-v-969809fc><div class=\"section-title sidebar-title-b\" data-v-969809fc><h6 data-v-969809fc>Subscribe</h6></div><p data-v-969809fc>Consectetur adipiscing elit, sed do eiusmod ut labore.</p><form action=\"#\" data-v-969809fc><input type=\"text\" placeholder=\"Email\" data-v-969809fc><button type=\"submit\" class=\"site-btn\" data-v-969809fc>Subscribe</button></form></div>", 1);
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "section-title sidebar-title-b"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", null, "Subscribe")], -1
+/* HOISTED */
+);
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Consectetur adipiscing elit, sed do eiusmod ut labore.", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = {
+  key: 0,
+  "class": "fas fa-sync fa-spin"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Subscribe ");
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
@@ -23545,9 +23703,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     breadcrumb: $data.breadcrumb
   }, null, 8
   /* PROPS */
-  , ["breadcrumb"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_ctx.isBlogFetch ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [_hoisted_7])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    key: 1
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.blogsData, function (blog, index) {
+  , ["breadcrumb"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.blogsData, function (blog, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_blog, {
       key: blog.id,
       blog: blog,
@@ -23557,13 +23713,13 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     , ["blog", "index"]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), _ctx.lastPage && _ctx.currentPage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [_ctx.currentPage > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
+  )), _ctx.lastPage && _ctx.currentPage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [_ctx.currentPage > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
     key: 0,
     "class": "icon",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.blogs(_ctx.currentPage - 1), _ctx.scrollToTop();
     })
-  }, [_hoisted_9])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.lastPage, function (page) {
+  }, [_hoisted_7])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.lastPage, function (page) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
       href: "javascript:void(0);",
       "class": page == _ctx.currentPage ? 'active-page' : '',
@@ -23583,7 +23739,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return _ctx.blogs(_ctx.currentPage + 1), _ctx.scrollToTop();
     })
-  }, [_hoisted_10])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.socials, function (social) {
+  }, [_hoisted_8])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.socials, function (social) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_social_menu, {
       "class": social["class"],
       social: social,
@@ -23593,7 +23749,24 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     , ["class", "social"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), _hoisted_16])])])])])]);
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "text",
+    placeholder: "Email",
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.newslatterEmail = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newslatterEmail]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    type: "button",
+    "class": "site-btn",
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.newsLatter($data.newslatterEmail);
+    }),
+    disabled: $options.isNewslatteloading
+  }, [$options.isNewslatteloading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("i", _hoisted_17)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_18], 8
+  /* PROPS */
+  , ["disabled"])])])])])])])])]);
 });
 
 /***/ }),
@@ -23845,6 +24018,18 @@ var AdminRoutes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_views_admin_User_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/admin/User */ "./resources/js/views/admin/User.vue"));
   }
 }, {
+  path: '/add/user',
+  name: 'users-add',
+  meta: {
+    title: 'Add',
+    layout: 'admin',
+    guard: 'authuser',
+    role: '3'
+  },
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_admin_AddUser_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/admin/AddUser */ "./resources/js/views/admin/AddUser.vue"));
+  }
+}, {
   path: '/contactmessage',
   name: 'contactmessage',
   meta: {
@@ -23944,7 +24129,9 @@ var routes = [{
     layout: 'default',
     role: '1'
   },
-  component: _views_Blogs__WEBPACK_IMPORTED_MODULE_2__.default
+  component: function component() {
+    return Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ../views/Blogs */ "./resources/js/views/Blogs.vue"));
+  }
 }, {
   path: '/blog/:id',
   name: 'blog',
@@ -24034,11 +24221,29 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Chat_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Chat */ "./resources/js/views/Chat.vue"));
   }
+}, {
+  path: '/profile/',
+  name: 'profile',
+  meta: {
+    title: 'Profile',
+    layout: 'default',
+    guard: 'authuser',
+    role: '1'
+  },
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_ProfileEdit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/ProfileEdit */ "./resources/js/views/ProfileEdit.vue"));
+  }
 }];
 var Router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter)({
   base: base,
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
-  routes: routes.concat(_adminroutes__WEBPACK_IMPORTED_MODULE_0__.default)
+  routes: routes.concat(_adminroutes__WEBPACK_IMPORTED_MODULE_0__.default),
+  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
+    return {
+      top: 0,
+      behavior: 'smooth'
+    };
+  }
 });
 Router.beforeEach(function (to, from, next) {
   if (localStorage.getItem('token')) {
@@ -24198,6 +24403,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../axios */ "./resources/js/store/axios.js");
 /* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! notiflix */ "./node_modules/notiflix/dist/notiflix-aio-3.0.1.min.js");
 /* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(notiflix__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../router/index */ "./resources/js/router/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -24206,11 +24413,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
+
 var urlPrifix = 'api/admin';
 var state = {
   properties: {},
   propertyDetails: {},
-  newslatter: {}
+  newslatter: {},
+  contactUs: {},
+  user: {},
+  userDetails: {},
+  isUserAdding: false,
+  addingUserError: {}
 };
 var mutations = {
   Properties: function Properties(state, payload) {
@@ -24221,6 +24435,21 @@ var mutations = {
   },
   NewsLatter: function NewsLatter(state, payload) {
     return state.newslatter = payload;
+  },
+  ContactUs: function ContactUs(state, payload) {
+    return state.contactUs = payload;
+  },
+  Users: function Users(state, payload) {
+    return state.user = payload;
+  },
+  UserDetails: function UserDetails(state, payload) {
+    return state.userDetails = payload;
+  },
+  IsUserAdding: function IsUserAdding(state, payload) {
+    return state.isUserAdding = payload;
+  },
+  AddingUserError: function AddingUserError(state, payload) {
+    return state.addingUserError = payload;
   }
 };
 var actions = {
@@ -24235,16 +24464,19 @@ var actions = {
               commit = _ref.commit;
               data = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
               page = data.hasOwnProperty("page") ? data.page : 1;
-              _context.next = 5;
+              notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.pulse('#property-table');
+              _context.next = 6;
               return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("".concat(urlPrifix, "/property?page=").concat(page), {
                 params: data
               }).then(function (res) {
-                return commit('Properties', res.data);
+                commit('Properties', res.data);
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#property-table');
               })["catch"](function (err) {
-                return notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong! please refresh page.");
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong! please refresh page.");
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#property-table');
               });
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -24285,22 +24517,149 @@ var actions = {
             case 0:
               commit = _ref3.commit;
               data = _arguments2.length > 1 && _arguments2[1] !== undefined ? _arguments2[1] : {};
+              notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.pulse('#newslatter-table');
               page = data.hasOwnProperty("page") ? data.page : 1;
-              _context3.next = 5;
+              _context3.next = 6;
               return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("".concat(urlPrifix, "/newsLatter?page=").concat(page), {
                 params: data
               }).then(function (res) {
-                return commit('NewsLatter', res.data);
+                commit('NewsLatter', res.data);
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#newslatter-table');
               })["catch"](function (err) {
-                return notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong in fetching newslatter");
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong in fetching newslatter");
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#newslatter-table');
               });
 
-            case 5:
+            case 6:
             case "end":
               return _context3.stop();
           }
         }
       }, _callee3);
+    }))();
+  },
+  fetchContactUs: function fetchContactUs(_ref4) {
+    var _arguments3 = arguments;
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var commit, data, page;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              commit = _ref4.commit;
+              data = _arguments3.length > 1 && _arguments3[1] !== undefined ? _arguments3[1] : {};
+              notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.pulse('#contactus-table');
+              page = data.hasOwnProperty("page") ? data.page : 1;
+              _context4.next = 6;
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("".concat(urlPrifix, "/contactus?page=").concat(page), {
+                params: data
+              }).then(function (res) {
+                commit('ContactUs', res.data);
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#contactus-table');
+              })["catch"](function (err) {
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong in fetching contactus");
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#contactus-table');
+              });
+
+            case 6:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
+  },
+  fetchUser: function fetchUser(_ref5) {
+    var _arguments4 = arguments;
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      var commit, data, page;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              commit = _ref5.commit;
+              data = _arguments4.length > 1 && _arguments4[1] !== undefined ? _arguments4[1] : {};
+              notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.dots('#users-table');
+              commit('Users', {});
+              page = data.hasOwnProperty("page") ? data.page : 1;
+              _context5.next = 7;
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("".concat(urlPrifix, "/users?page=").concat(page), {
+                params: data
+              }).then(function (res) {
+                commit('Users', res.data);
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#users-table');
+              })["catch"](function (err) {
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong in fetching user");
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#users-table');
+              });
+
+            case 7:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }))();
+  },
+  fetchUserDetails: function fetchUserDetails(_ref6, id) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              commit = _ref6.commit;
+              notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.hourglass('#userdetails');
+              new bootstrap__WEBPACK_IMPORTED_MODULE_3__.Modal(document.getElementById('userModal')).show();
+              _context6.next = 5;
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("".concat(urlPrifix, "/user/").concat(id)).then(function (res) {
+                commit("UserDetails", res.data);
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#userdetails');
+              })["catch"](function (err) {
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong in fetching userdetail ".concat(err.message));
+                notiflix__WEBPACK_IMPORTED_MODULE_2__.Block.remove('#userdetails');
+              });
+
+            case 5:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }))();
+  },
+  addUser: function addUser(_ref7, data) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              commit = _ref7.commit;
+              commit("IsUserAdding", true);
+              commit("AddingUserError", {});
+              _context7.next = 5;
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.post("".concat(urlPrifix, "/users"), data).then(function (res) {
+                if (res.data.success) {
+                  notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.success("User is added successfully");
+                  _router_index__WEBPACK_IMPORTED_MODULE_4__.default.push({
+                    name: 'users'
+                  });
+                } else {
+                  commit("AddingUserError", res.data.errors);
+                }
+
+                commit("IsUserAdding", false);
+              })["catch"](function (err) {
+                return notiflix__WEBPACK_IMPORTED_MODULE_2__.Notify.failure("Something went wrong in fetching userdetail ".concat(err.message));
+              });
+
+            case 5:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
     }))();
   }
 };
@@ -24313,6 +24672,21 @@ var getters = {
   },
   newslatter: function newslatter(state) {
     return state.newslatter;
+  },
+  contactUs: function contactUs(state) {
+    return state.contactUs;
+  },
+  user: function user(state) {
+    return state.user;
+  },
+  userDetails: function userDetails(state) {
+    return state.userDetails;
+  },
+  isUserAdding: function isUserAdding(state) {
+    return state.isUserAdding;
+  },
+  addingUserError: function addingUserError(state) {
+    return state.addingUserError;
   }
 };
 var Admin = {
@@ -24344,11 +24718,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gapi_script__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gapi-script */ "./node_modules/gapi-script/index.js");
 /* harmony import */ var facebook_login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! facebook-login */ "./node_modules/facebook-login/index.js");
 /* harmony import */ var facebook_login__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(facebook_login__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! notiflix */ "./node_modules/notiflix/dist/notiflix-aio-3.0.1.min.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(notiflix__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 
@@ -24465,11 +24845,12 @@ var actions = {
     localStorage.setItem('token', payload.token);
     localStorage.setItem('user', JSON.stringify(payload.user));
     commit('Is_Auth', true);
-    payload.user.role_id == 1 ? _router_index__WEBPACK_IMPORTED_MODULE_2__.default.push({
+    var push = payload.user.role_id == 1 ? {
       name: 'home'
-    }) : _router_index__WEBPACK_IMPORTED_MODULE_2__.default.push({
+    } : {
       name: 'dashboard'
-    });
+    };
+    _router_index__WEBPACK_IMPORTED_MODULE_2__.default.push(push);
   },
   logout: function logout(_ref5, id) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -24479,15 +24860,17 @@ var actions = {
           switch (_context4.prev = _context4.next) {
             case 0:
               commit = _ref5.commit, dispatch = _ref5.dispatch;
-              _axios__WEBPACK_IMPORTED_MODULE_1__.default.delete("api/logout/".concat(id)).then(function (res) {
-                return res.success ? dispatch('afterLogout') : '';
-              }).then(function (res) {
+              notiflix__WEBPACK_IMPORTED_MODULE_5__.Loading.dots("Processing logout...");
+              _context4.next = 4;
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.delete("api/logout/".concat(id)) //.then(res => res.success ? dispatch('afterLogout') : '')
+              . //.then(res => res.success ? dispatch('afterLogout') : '')
+              then(function (res) {
                 return dispatch('afterLogout');
               })["catch"](function (err) {
                 return console.log(err);
               });
 
-            case 2:
+            case 4:
             case "end":
               return _context4.stop();
           }
@@ -24507,6 +24890,7 @@ var actions = {
     }
 
     commit('Is_Auth', false);
+    notiflix__WEBPACK_IMPORTED_MODULE_5__.Loading.remove();
     _router_index__WEBPACK_IMPORTED_MODULE_2__.default.push({
       name: 'login'
     });
@@ -24645,11 +25029,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../axios */ "./resources/js/store/axios.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! notiflix */ "./node_modules/notiflix/dist/notiflix-aio-3.0.1.min.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(notiflix__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 var states = {
@@ -24688,7 +25075,8 @@ var actions = {
               commit = _ref.commit;
               page = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 1;
               commit('SET_LOADING', true);
-              _context.next = 5;
+              notiflix__WEBPACK_IMPORTED_MODULE_2___default().Block.pulse('.blog-item-list');
+              _context.next = 6;
               return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("api/blogs?page=".concat(page)).then(function (res) {
                 commit('Last_Page', res.data.meta.last_page);
                 commit('Current_Page', res.data.meta.current_page);
@@ -24698,7 +25086,10 @@ var actions = {
                 return console.log(err);
               });
 
-            case 5:
+            case 6:
+              notiflix__WEBPACK_IMPORTED_MODULE_2___default().Block.remove('.blog-item-list');
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -24715,7 +25106,8 @@ var actions = {
             case 0:
               commit = _ref2.commit;
               commit('SET_LOADING', true);
-              _context2.next = 4;
+              notiflix__WEBPACK_IMPORTED_MODULE_2___default().Block.hourglass('#blog');
+              _context2.next = 5;
               return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("api/blog/".concat(id)).then(function (res) {
                 commit('SET_BLOG', res.data.data);
                 commit('SET_LOADING', false);
@@ -24723,7 +25115,10 @@ var actions = {
                 return console.log(err);
               });
 
-            case 4:
+            case 5:
+              notiflix__WEBPACK_IMPORTED_MODULE_2___default().Block.remove('#blog');
+
+            case 6:
             case "end":
               return _context2.stop();
           }
@@ -24756,6 +25151,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../axios */ "./resources/js/store/axios.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! notiflix */ "./node_modules/notiflix/dist/notiflix-aio-3.0.1.min.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(notiflix__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -24765,8 +25162,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var token = localStorage.getItem('token') ? localStorage.getItem('token') : "";
 var user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
+
 var state = {
   conversations: {},
+  isConversationLoading: false,
   messages: {},
   fetchMessages: [],
   isChatLoading: false
@@ -24774,6 +25173,9 @@ var state = {
 var mutations = {
   CONVERSATION: function CONVERSATION(state, payload) {
     return state.conversations = payload;
+  },
+  IsConversationLoading: function IsConversationLoading(state, payload) {
+    return state.isConversationLoading = payload;
   },
   MESSAGES: function MESSAGES(state, payload) {
     return state.message = payload;
@@ -24794,6 +25196,7 @@ var actions = {
           switch (_context.prev = _context.next) {
             case 0:
               commit = _ref.commit;
+              commit("IsConversationLoading", true);
               id = token != "" ? user.id : 0;
               _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("api/conversation", {
                 headers: {
@@ -24803,12 +25206,13 @@ var actions = {
                   current_user: id
                 }
               }).then(function (res) {
-                return commit('CONVERSATION', res.data);
+                commit("IsConversationLoading", false);
+                commit('CONVERSATION', res.data);
               })["catch"](function (err) {
                 return console.error("error in conversation ajax: ".concat(err.response.data.message));
               });
 
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -24825,7 +25229,8 @@ var actions = {
             case 0:
               commit = _ref2.commit;
               commit('IsChatLoading', true);
-              _context2.next = 4;
+              notiflix__WEBPACK_IMPORTED_MODULE_2___default().Block.hourglass(".chat-container");
+              _context2.next = 5;
               return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("api/message?page=".concat(payload.page), {
                 headers: {
                   'Authorization': "Bearer ".concat(token)
@@ -24835,11 +25240,12 @@ var actions = {
                 commit('MESSAGES', res.data.messages);
                 commit('IsChatLoading', false);
                 commit('FetchMessages', res.data.messages.data);
+                notiflix__WEBPACK_IMPORTED_MODULE_2___default().Block.remove(".chat-container");
               })["catch"](function (err) {
                 return console.error("error in chat ajax: ".concat(err.response.data.message));
               });
 
-            case 4:
+            case 5:
             case "end":
               return _context2.stop();
           }
@@ -24877,8 +25283,14 @@ var getters = {
   conversations: function conversations(state) {
     return state.conversations;
   },
+  isConversationLoading: function isConversationLoading(state) {
+    return state.isConversationLoading;
+  },
   messages: function messages(state) {
     return state.message;
+  },
+  isChatLoading: function isChatLoading(state) {
+    return state.isChatLoading;
   },
   fetchMessages: function fetchMessages(state) {
     return state.fetchMessages;
@@ -25018,7 +25430,6 @@ var actions = {
                   value: value
                 }
               }).then(function (res) {
-                // commit('Search_Property', res);
                 _router_index__WEBPACK_IMPORTED_MODULE_2__.default.push({
                   name: 'properties'
                 });
@@ -25187,11 +25598,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../axios */ "./resources/js/store/axios.js");
 /* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../router/index */ "./resources/js/router/index.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! notiflix */ "./node_modules/notiflix/dist/notiflix-aio-3.0.1.min.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(notiflix__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -25356,9 +25770,11 @@ var actions = {
           switch (_context5.prev = _context5.next) {
             case 0:
               commit = _ref5.commit;
+              notiflix__WEBPACK_IMPORTED_MODULE_3___default().Block.dots('#property-list');
               commit('PROPERTIES_LOADING', true);
               page = data.hasOwnProperty("page") ? data.page : 1;
-              _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("api/propery?page=".concat(page), {
+              _context5.next = 6;
+              return _axios__WEBPACK_IMPORTED_MODULE_1__.default.get("api/propery?page=".concat(page), {
                 params: data
               }).then(function (res) {
                 commit('GET_PROPERTIES', res);
@@ -25367,7 +25783,10 @@ var actions = {
                 return console.log(err);
               });
 
-            case 4:
+            case 6:
+              notiflix__WEBPACK_IMPORTED_MODULE_3___default().Block.remove('#property-list');
+
+            case 7:
             case "end":
               return _context5.stop();
           }
@@ -30677,7 +31096,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_css_admin_admin_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-c0c833ca],\n.fade-leave-active[data-v-c0c833ca] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-c0c833ca],\n.fade-leave-to[data-v-c0c833ca] {\n  opacity: 0;\n}\n.dashboard-app[data-v-c0c833ca] {\n  min-height: 100vh;\n  height: 100%;\n  width: 100%;\n  background: #f5f6fe;\n  padding-top: 56px;\n  overflow-x: hidden;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.scale-enter-active[data-v-c0c833ca],\n.scale-leave-active[data-v-c0c833ca] {\n  transition: all 0.8s ease;\n}\n.scale-enter-from[data-v-c0c833ca],\n.scale-leave-to[data-v-c0c833ca] {\n  opacity: 0;\n  transform: scale(0.9);\n}\n.dashboard-app[data-v-c0c833ca] {\n  min-height: 100vh;\n  height: 100%;\n  width: 100%;\n  background: #f5f6fe;\n  padding-top: 56px;\n  overflow-x: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30704,7 +31123,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_css_app_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-6a25d30d],\n.fade-leave-active[data-v-6a25d30d] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-6a25d30d],\n.fade-leave-to[data-v-6a25d30d] {\n  opacity: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-6a25d30d],\n.fade-leave-active[data-v-6a25d30d] {\n  transition: opacity 0.9s;\n}\n.fade-enter[data-v-6a25d30d],\n.fade-leave-to[data-v-6a25d30d] {\n  opacity: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30812,7 +31231,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_nouislider_dist_nouislider_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../node_modules/nouislider/dist/nouislider.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/nouislider/dist/nouislider.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_notiflix_dist_notiflix_3_0_1_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../node_modules/notiflix/dist/notiflix-3.0.1.min.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/notiflix/dist/notiflix-3.0.1.min.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./style.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./resources/css/style.css");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _public_assets_img_blog_bh_bg_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../public/assets/img/blog/bh-bg.jpg */ "./public/assets/img/blog/bh-bg.jpg");
 // Imports
+
+
 
 
 
@@ -30826,8 +31250,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://cdnjs.cloudflare.c
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_nouislider_dist_nouislider_css__WEBPACK_IMPORTED_MODULE_2__.default);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_notiflix_dist_notiflix_3_0_1_min_css__WEBPACK_IMPORTED_MODULE_3__.default);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_style_css__WEBPACK_IMPORTED_MODULE_4__.default);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_5___default()(_public_assets_img_blog_bh_bg_jpg__WEBPACK_IMPORTED_MODULE_6__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "a {\n    text-decoration: none;\n}\n\n.btn-primary {\n    background-color: #00c89e;\n    border-color: #00c89e;\n}\n\n.btn-primary:hover {\n    background-color: #009e7d;\n    border-color: #009e7d;\n}\n\nselect:focus,select:active {\n    border-color: #00c89e;\n    outline: 0px !important;\n    -webkit-appearance: none;\n    box-shadow: none !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#home-bg {\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n\na {\n    text-decoration: none;\n}\n\n.breadcrumb-section, .blog-hero-section{\n    background:gray;\n}\n\n.btn-primary {\n    background-color: #00c89e;\n    border-color: #00c89e;\n}\n\n.btn-primary:hover {\n    background-color: #009e7d;\n    border-color: #009e7d;\n}\n\nselect:focus,\nselect:active {\n    border-color: #00c89e;\n    outline: 0px !important;\n    -webkit-appearance: none;\n    box-shadow: none !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30847,17 +31272,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _public_assets_img_blog_bh_bg_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../public/assets/img/blog/bh-bg.jpg */ "./public/assets/img/blog/bh-bg.jpg");
 // Imports
 
-
-
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_public_assets_img_blog_bh_bg_jpg__WEBPACK_IMPORTED_MODULE_2__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n/******************************************************************\nTheme Name: Aler\nDescription: \nAuthor: \nAuthor URI: \nVersion: 1.0\nCreated: \n******************************************************************/\n/*------------------------------------------------------------------\n[Table of contents]\n\n1.  Template default CSS\n\t1.1\tVariables\n\t1.2\tMixins\n\t1.3\tFlexbox\n\t1.4\tReset\n2.  Helper Css\n3.  Header Section\n4.  Hero Section\n5.  Service Section\n6.  Feature Property Section\n7.  Team Section\n8.  Testimonial Section\n9.  Contact\n10.  Footer Style\n\n-------------------------------------------------------------------*/\n/*----------------------------------------*/\n/* Template default CSS\n/*----------------------------------------*/\nhtml,\nbody {\n  height: 100%;\n  font-family: \"Montserrat\", sans-serif;\n  -webkit-font-smoothing: antialiased;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0;\n  color: #111111;\n  font-weight: 400;\n  font-family: \"Montserrat\", sans-serif;\n}\n\nh1 {\n  font-size: 70px;\n}\n\nh2 {\n  font-size: 36px;\n}\n\nh3 {\n  font-size: 30px;\n}\n\nh4 {\n  font-size: 24px;\n}\n\nh5 {\n  font-size: 18px;\n}\n\nh6 {\n  font-size: 16px;\n}\n\np {\n  font-size: 14px;\n  font-family: \"Montserrat\", sans-serif;\n  color: #666666;\n  font-weight: 400;\n  line-height: 24px;\n  margin: 0 0 15px 0;\n}\n\nimg {\n  max-width: 100%;\n}\n\ninput:focus,\nselect:focus,\nbutton:focus,\ntextarea:focus {\n  outline: none;\n}\n\na:hover,\na:focus {\n  text-decoration: none;\n  outline: none;\n  color: #fff;\n}\n\nul,\nol {\n  padding: 0;\n  margin: 0;\n}\n\n/*---------------------\n  Helper CSS\n-----------------------*/\n.section-title {\n  margin-bottom: 40px;\n}\n.section-title.sidebar-title {\n  margin-bottom: 36px;\n}\n.section-title.sidebar-title h5 {\n  font-family: \"Lato\", sans-serif;\n}\n.section-title.sidebar-title h5:after {\n  height: 36px;\n  top: -8px;\n}\n.section-title.sidebar-title-b {\n  margin-bottom: 30px;\n  font-family: \"Lato\", sans-serif;\n}\n.section-title.sidebar-title-b h6:after {\n  height: 20px;\n  top: 0;\n}\n.section-title h4,\n.section-title h5,\n.section-title h6 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  position: relative;\n  padding-left: 20px;\n}\n.section-title h4:after,\n.section-title h5:after,\n.section-title h6:after {\n  position: absolute;\n  left: 0;\n  top: -9px;\n  width: 5px;\n  height: 46px;\n  background: #00C89E;\n  content: \"\";\n}\n\n.set-bg {\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: top center;\n}\n\n.spad {\n  padding-top: 100px;\n  padding-bottom: 100px;\n}\n\n.spad-2 {\n  padding-top: 50px;\n  padding-bottom: 70px;\n}\n\n.text-white h1,\n.text-white h2,\n.text-white h3,\n.text-white h4,\n.text-white h5,\n.text-white h6,\n.text-white p,\n.text-white span,\n.text-white li,\n.text-white a {\n  color: #fff;\n}\n\n/* buttons */\n.primary-btn {\n  font-size: 14px;\n  color: #ffffff;\n  font-weight: 600;\n  text-transform: uppercase;\n  background: #00C89E;\n  padding: 10px 20px;\n  display: inline-block;\n}\n\n.site-btn {\n  font-size: 14px;\n  color: #ffffff;\n  background: #00C89E;\n  border: none;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  display: inline-block;\n  padding: 14px 30px;\n}\n\n/* Preloder */\n#preloder {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  z-index: 999999;\n  background: #000;\n}\n\n.loader {\n  width: 40px;\n  height: 40px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -13px;\n  margin-left: -13px;\n  border-radius: 60px;\n  animation: loader 0.8s linear infinite;\n  -webkit-animation: loader 0.8s linear infinite;\n}\n\n@keyframes loader {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n  50% {\n    -webkit-transform: rotate(180deg);\n    transform: rotate(180deg);\n    border: 4px solid #673ab7;\n    border-left-color: transparent;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n}\n@-webkit-keyframes loader {\n  0% {\n    -webkit-transform: rotate(0deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n  50% {\n    -webkit-transform: rotate(180deg);\n    border: 4px solid #673ab7;\n    border-left-color: transparent;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n}\n/*---------------------\n  Header\n-----------------------*/\n.hs-top {\n  border-bottom: 1px solid #ebebeb;\n}\n.hs-top .logo {\n  padding: 22px 0;\n}\n.hs-top .logo a {\n  display: inline-block;\n}\n.hs-top .ht-widget {\n  text-align: right;\n  padding: 20px 0;\n}\n.hs-top .ht-widget ul {\n  display: inline-block;\n}\n.hs-top .ht-widget ul li {\n  list-style: none;\n  font-size: 14px;\n  color: #444444;\n  display: inline-block;\n  margin-right: 45px;\n  font-weight: 500;\n}\n.hs-top .ht-widget ul li i {\n  display: inline-block;\n  font-size: 16px;\n  color: #00c8a0;\n  height: 46px;\n  width: 46px;\n  background: #f5f5f5;\n  line-height: 46px;\n  text-align: center;\n  margin-right: 10px;\n}\n.hs-top .ht-widget ul li span {\n  margin-left: 20px;\n  display: inline-block;\n  position: relative;\n}\n.hs-top .ht-widget ul li span:after {\n  position: absolute;\n  left: -13px;\n  top: -2px;\n  content: \"|\";\n}\n.hs-top .ht-widget .hw-btn {\n  font-size: 14px;\n  color: #ffffff;\n  font-weight: 700;\n  letter-spacing: 0.5px;\n  background: #00C89E;\n  padding: 14px 30px;\n  text-transform: uppercase;\n  display: inline-block;\n}\n\n.hs-nav .nav-menu ul li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 40px;\n  position: relative;\n}\n.hs-nav .nav-menu ul li .dropdown {\n  position: absolute;\n  left: -30px;\n  top: 80px;\n  width: 270px;\n  background: #ffffff;\n  z-index: 9;\n  padding: 26px 0 14px;\n  box-shadow: 1px 3px 15px rgba(11, 27, 32, 0.1);\n  opacity: 0;\n  visibility: hidden;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.hs-nav .nav-menu ul li .dropdown li {\n  margin-right: 0;\n  display: block;\n}\n.hs-nav .nav-menu ul li .dropdown li a {\n  color: #666666;\n  padding: 0;\n  text-transform: capitalize;\n  padding-bottom: 10px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n  padding-left: 30px;\n}\n.hs-nav .nav-menu ul li .dropdown li a:hover {\n  color: #111111;\n}\n.hs-nav .nav-menu ul li .dropdown li a:after {\n  left: 0;\n  top: 2px;\n  width: 5px;\n  height: 16px;\n  background: #00C89E;\n  content: \"\";\n}\n.hs-nav .nav-menu ul li:hover > a:after {\n  opacity: 1;\n}\n.hs-nav .nav-menu ul li:hover .dropdown {\n  opacity: 1;\n  visibility: visible;\n  top: 60px;\n}\n.hs-nav .nav-menu ul li.active > a:after {\n  opacity: 1;\n}\n.hs-nav .nav-menu ul li:last-child {\n  margin-right: 0;\n}\n.hs-nav .nav-menu ul li a {\n  color: #111111;\n  font-size: 14px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 20px 0;\n  display: block;\n  position: relative;\n}\n.hs-nav .nav-menu ul li a:after {\n  position: absolute;\n  left: 0;\n  top: 42px;\n  width: 100%;\n  height: 2px;\n  background: #00C89E;\n  content: \"\";\n  opacity: 0;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.hs-nav .hn-social {\n  text-align: right;\n  padding: 19px 0 18px;\n}\n.hs-nav .hn-social a {\n  font-size: 15px;\n  color: #111111;\n  display: inline-block;\n  margin-left: 20px;\n}\n\n.offcanvas-menu-wrapper {\n  display: none;\n}\n\n.canvas-open {\n  display: none;\n}\n\n/*---------------------\n  Hero\n-----------------------*/\n.hero-section {\n  overflow: hidden;\n  background: #ffffff;\n  padding-bottom: 10px;\n}\n\n.hs-slider.owl-carousel .owl-stage-outer {\n  overflow: visible;\n}\n.hs-slider.owl-carousel .owl-item.active .hs-item .hc-inner-text {\n  opacity: 1;\n  top: 0;\n}\n.hs-slider.owl-carousel .owl-nav button {\n  height: 50px;\n  width: 50px;\n  background: rgba(0, 0, 0, 0.5);\n  border-radius: 50%;\n  line-height: 58px;\n  text-align: center;\n  font-size: 30px;\n  color: #ffffff;\n  position: absolute;\n  left: -80px;\n  top: 50%;\n  transform: translateY(-25px);\n}\n.hs-slider.owl-carousel .owl-nav button.owl-next {\n  left: auto;\n  right: -80px;\n}\n\n.hs-item {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 780px;\n}\n.hs-item .hc-inner-text {\n  background: #ffffff;\n  padding: 40px;\n  overflow: hidden;\n  opacity: 0;\n  position: relative;\n  top: 100px;\n  display: inline-block;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n}\n.hs-item .hc-inner-text .hc-text {\n  float: left;\n  margin-right: 18px;\n}\n.hs-item .hc-inner-text .hc-text h4 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 5px;\n}\n.hs-item .hc-inner-text .hc-text p {\n  color: #666666;\n}\n.hs-item .hc-inner-text .hc-text p span {\n  color: #00C89E;\n}\n.hs-item .hc-inner-text .hc-text .label {\n  font-size: 12px;\n  display: inline-block;\n  text-transform: uppercase;\n  color: #ffffff;\n  padding: 2px 10px;\n  background: #3068b2;\n  font-weight: 600;\n  margin-right: 10px;\n}\n.hs-item .hc-inner-text .hc-text h5 {\n  color: #00C89E;\n  font-weight: 700;\n  display: inline-block;\n}\n.hs-item .hc-inner-text .hc-text h5 span {\n  color: #666666;\n  font-weight: 400;\n  font-size: 14px;\n}\n.hs-item .hc-inner-text .hc-widget {\n  overflow: hidden;\n  width: 185px;\n  position: relative;\n  right: -52px;\n  top: 18px;\n}\n.hs-item .hc-inner-text .hc-widget li {\n  font-size: 15px;\n  color: #111111;\n  font-weight: 500;\n  list-style: none;\n  width: 50%;\n  float: left;\n  margin-bottom: 20px;\n}\n.hs-item .hc-inner-text .hc-widget li i {\n  font-size: 14px;\n  color: #666666;\n  margin-right: 4px;\n}\n\n/*---------------------\n  Search Form\n-----------------------*/\n.search-section {\n  background: #f7f7f7;\n}\n\n.change-btn {\n  text-align: right;\n}\n.change-btn .cb-item {\n  display: inline-block;\n}\n.change-btn .cb-item label {\n  font-size: 14px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 12px 32px;\n  margin-bottom: 0;\n  margin-left: -4px;\n  cursor: pointer;\n  border: 1px solid #00C89E;\n  color: #111111;\n}\n.change-btn .cb-item label.active {\n  background: #00C89E;\n  color: #ffffff;\n}\n.change-btn .cb-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n\n.search-form-content {\n  overflow: hidden;\n  margin-bottom: 26px;\n}\n.search-form-content .filter-form {\n  margin-right: -20px;\n}\n.search-form-content .filter-form .sm-width {\n  width: calc(33.33% - 20px);\n}\n.search-form-content .filter-form .nice-select {\n  clear: none;\n  margin-right: 20px;\n  height: 46px;\n  background: #ffffff;\n  border-radius: 0;\n  border: 1px solid #e1e1e1;\n  line-height: 43px;\n  margin-bottom: 20px;\n}\n.search-form-content .filter-form .nice-select:after {\n  border-bottom: 1px solid #666666;\n  border-right: 1px solid #666666;\n  height: 6px;\n  right: 16px;\n  margin-top: -6px;\n  width: 6px;\n  top: 54%;\n}\n.search-form-content .filter-form .nice-select span {\n  font-size: 13px;\n  color: #666666;\n  font-weight: 500;\n}\n.search-form-content .filter-form .nice-select.open .list {\n  opacity: 1;\n  pointer-events: auto;\n  -webkit-transform: scale(1) translateY(0);\n  -ms-transform: scale(1) translateY(0);\n  transform: scale(1) translateY(0);\n  width: 100%;\n  border-radius: 0;\n  margin-top: 0;\n}\n.search-form-content .filter-form .price-range-wrap {\n  float: left;\n  margin-right: 20px;\n}\n.search-form-content .filter-form .price-range-wrap .price-text {\n  margin-bottom: 9px;\n}\n.search-form-content .filter-form .price-range-wrap .price-text label {\n  display: inline-block;\n  font-size: 13px;\n  font-weight: 500;\n  color: #666666;\n  margin-bottom: 0;\n  text-transform: uppercase;\n}\n.search-form-content .filter-form .price-range-wrap .price-text input {\n  display: inline-block;\n  width: 165px;\n  font-size: 13px;\n  font-weight: 500;\n  color: #666666;\n  border: none;\n  background: transparent;\n}\n.search-form-content .filter-form .room-size-range-wrap {\n  float: left;\n  margin-right: 20px;\n}\n.search-form-content .filter-form .room-size-range-wrap .price-text {\n  margin-bottom: 9px;\n}\n.search-form-content .filter-form .room-size-range-wrap .price-text label {\n  display: inline-block;\n  font-size: 13px;\n  color: #666666;\n  font-weight: 500;\n  margin-bottom: 0;\n}\n.search-form-content .filter-form .room-size-range-wrap .price-text input {\n  display: inline-block;\n  width: 165px;\n  font-size: 13px;\n  color: #666666;\n  font-weight: 500;\n  border: none;\n  outline: none;\n  background: transparent;\n}\n.search-form-content .filter-form .search-btn {\n  font-size: 14px;\n  height: 46px;\n  background: #00C89E;\n  color: #ffffff;\n  border: none;\n  cursor: pointer;\n  text-transform: uppercase;\n  font-weight: 600;\n}\n\n.ui-widget.ui-widget-content {\n  background: #e1e1e1;\n  height: 7px;\n  border: none;\n}\n\n.ui-slider .ui-slider-range {\n  background: #00C89E;\n}\n\n.ui-slider-horizontal .ui-slider-handle {\n  width: 13px;\n  height: 13px;\n  background: #00C89E;\n  border-radius: 50%;\n  border: none;\n  margin-left: 0;\n  top: -3px;\n}\n\n.more-option .card {\n  border: none;\n  border-radius: 0;\n  background: transparent;\n}\n.more-option .card .card-heading {\n  padding-left: 34px;\n}\n.more-option .card .card-heading a {\n  font-size: 16px;\n  color: #111111;\n  font-weight: 600;\n  cursor: pointer;\n}\n.more-option .card .card-body {\n  padding: 0;\n  padding-top: 30px;\n}\n.more-option .card .card-body .mo-list .ml-column {\n  width: 25%;\n  float: left;\n}\n.more-option .card .card-body .mo-list .ml-column label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  display: block;\n  margin-bottom: 20px;\n}\n.more-option .card .card-body .mo-list .ml-column label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.more-option .card .card-body .mo-list .ml-column label input {\n  position: absolute;\n  visibility: hidden;\n}\n.more-option .card .card-body .mo-list .ml-column label input:checked ~ span {\n  background: #666666;\n}\n\n/* .more-option .card-heading a:after,\n.more-option .card-heading > a:after {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 20px;\n  width: 20px;\n  background: #00C89E;\n  line-height: 20px;\n  text-align: center;\n}\n\n.more-option .card-heading a:after,\n.more-option .card-heading > a.active[aria-expanded=false]:after {\n  content: \"L\";\n  font-size: 16px;\n  font-family: \"ElegantIcons\";\n  color: #ffffff;\n  background: #00C89E;\n} */\n\n/* .more-option .card-heading a[aria-expanded=true]:after,\n.more-option .card-heading > a.active:after {\n  content: \"K\";\n  font-size: 16px;\n  font-family: \"ElegantIcons\";\n  color: #ffffff;\n  background: #00C89E;\n} */\n\n/*-------------------------\n  Property Section\n--------------------------*/\n.property-section.latest-property-section {\n  padding-bottom: 60px;\n}\n.property-section.profile-page {\n  padding-top: 50px;\n}\n\n.property-controls {\n  text-align: right;\n}\n.property-controls ul li {\n  list-style: none;\n  display: inline-block;\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  margin-right: 35px;\n  position: relative;\n  cursor: pointer;\n}\n.property-controls ul li:after {\n  position: absolute;\n  right: -22px;\n  top: -1px;\n  content: \"|\";\n  color: #b1b0b0;\n}\n.property-controls ul li:last-child {\n  margin-right: 0;\n}\n.property-controls ul li:last-child:after {\n  display: none;\n}\n\n.property-item {\n  margin-bottom: 40px;\n}\n.property-item .pi-pic {\n  height: 240px;\n  position: relative;\n  margin-bottom: 25px;\n}\n.property-item .pi-pic .label {\n  font-size: 12px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 3px 10px 2px;\n  display: inline-block;\n  background: #0166D0;\n  color: #ffffff;\n  position: absolute;\n  left: 20px;\n  top: 20px;\n}\n.property-item .pi-pic .label.c-red {\n  background: #D41800;\n}\n.property-item .pi-pic .label.c-magenta {\n  background: #103230;\n}\n.property-item .pi-text {\n  position: relative;\n}\n.property-item .pi-text .heart-icon {\n  position: absolute;\n  right: 0;\n  top: 0;\n  content: \"\";\n  font-family: \"ElegantIcons\";\n  font-size: 18px;\n  color: #00C89E;\n}\n.property-item .pi-text .pt-price {\n  font-size: 18px;\n  font-weight: 700;\n  color: #00C89E;\n  margin-bottom: 10px;\n}\n.property-item .pi-text .pt-price span {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 400;\n}\n.property-item .pi-text h5 {\n  margin-bottom: 6px;\n}\n.property-item .pi-text h5 a {\n  font-size: 20px;\n  font-weight: 700;\n  color: #111111;\n  font-family: \"Montserrat\", sans-serif;\n}\n.property-item .pi-text p {\n  font-weight: 500;\n}\n.property-item .pi-text p span {\n  color: #00C89E;\n}\n.property-item .pi-text ul {\n  padding-bottom: 20px;\n  border-bottom: 1px solid #e1e1e1;\n}\n.property-item .pi-text ul li {\n  font-size: 15px;\n  color: #111111;\n  font-weight: 600;\n  list-style: none;\n  display: inline-block;\n  margin-right: 45px;\n}\n.property-item .pi-text ul li:last-child {\n  margin-right: 0;\n}\n.property-item .pi-text ul li i {\n  font-size: 14px;\n  color: #666666;\n  margin-right: 5px;\n}\n.property-item .pi-text .pi-agent .pa-item {\n  overflow: hidden;\n  padding-top: 10px;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-info {\n  float: left;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-info img {\n  height: 30px;\n  width: 30px;\n  border-radius: 50%;\n  display: inline-block;\n  margin-right: 10px;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-info h6 {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 600;\n  letter-spacing: 0.5px;\n  display: inline-block;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-text {\n  font-size: 14px;\n  color: #00C89E;\n  font-weight: 600;\n  float: right;\n  line-height: 30px;\n}\n\n.loadmore-btn {\n  text-align: center;\n  padding-top: 10px;\n}\n.loadmore-btn a {\n  display: inline-block;\n  font-size: 14px;\n  color: #ffffff;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  padding: 12px 30px;\n  background: #103230;\n}\n\n.property-pagination {\n  text-align: center;\n  padding-top: 10px;\n}\n.property-pagination.blog-pagination {\n  text-align: left;\n  padding-top: 0;\n}\n.property-pagination.blog-pagination a {\n  color: #666666;\n}\n.property-pagination a {\n  display: inline-block;\n  height: 46px;\n  width: 46px;\n  background: #f2f2f2;\n  color: #111111;\n  font-size: 20px;\n  font-weight: 600;\n  line-height: 46px;\n  text-align: center;\n  border-radius: 50%;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n  margin-right: 6px;\n}\n.property-pagination a:last-child {\n  margin-right: 0;\n}\n.property-pagination a:hover {\n  background: #00C89E;\n  color: #ffffff;\n}\n.property-pagination a.icon span {\n  position: relative;\n  top: 5px;\n}\n.property-pagination a span {\n  font-size: 27px;\n}\n\n/*---------------------\n  Chooseus Section\n-----------------------*/\n.chooseus-section {\n  padding-bottom: 55px;\n}\n\n.chooseus-text {\n  margin-bottom: 40px;\n}\n.chooseus-text .section-title {\n  margin-bottom: 24px;\n}\n.chooseus-text .section-title h4 {\n  color: #ffffff;\n}\n.chooseus-text p {\n  color: #ffffff;\n  opacity: 0.7;\n}\n\n.chooseus-features {\n  overflow: hidden;\n}\n.chooseus-features .cf-item {\n  width: calc(50% - 40px);\n  float: left;\n  margin-right: 40px;\n  margin-bottom: 35px;\n  overflow: hidden;\n}\n.chooseus-features .cf-item .cf-pic {\n  width: 80px;\n  height: 80px;\n  background: #ffffff;\n  border-radius: 50%;\n  line-height: 80px;\n  text-align: center;\n  float: left;\n  margin-right: 20px;\n}\n.chooseus-features .cf-item .cf-text {\n  overflow: hidden;\n}\n.chooseus-features .cf-item .cf-text h5 {\n  color: #ffffff;\n  font-weight: 700;\n  margin-bottom: 10px;\n}\n.chooseus-features .cf-item .cf-text p {\n  margin-bottom: 0;\n  color: #ffffff;\n  opacity: 0.7;\n}\n\n/*---------------------\n  Feature Property\n-----------------------*/\n.feature-property-left {\n  background: #103230;\n  padding: 50px 50px 40px 50px;\n  height: 520px;\n}\n.feature-property-left .section-title {\n  margin-bottom: 35px;\n}\n.feature-property-left .section-title h4 {\n  color: #ffffff;\n}\n.feature-property-left ul {\n  margin-bottom: 45px;\n}\n.feature-property-left ul li {\n  font-size: 14px;\n  list-style: none;\n  color: #c4c4c4;\n  padding-bottom: 12px;\n  border-bottom: 1px solid #284745;\n  margin-bottom: 15px;\n  cursor: pointer;\n}\n.feature-property-left ul li:last-child {\n  margin-bottom: 0;\n  padding-bottom: 0;\n  border-bottom: none;\n}\n.feature-property-left ul li:hover {\n  color: #ffffff;\n  font-weight: 500;\n}\n.feature-property-left a {\n  display: block;\n  font-size: 14px;\n  font-weight: 700;\n  color: #00C89E;\n  background: #ffffff;\n  padding: 15px 0;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  text-align: center;\n}\n\n.fp-slider.owl-carousel .owl-nav button {\n  height: 40px;\n  width: 40px;\n  background: rgba(0, 0, 0, 0.5);\n  border-radius: 50%;\n  line-height: 45px;\n  text-align: center;\n  font-size: 24px;\n  color: #ffffff;\n  position: absolute;\n  left: 20px;\n  top: 50%;\n  transform: translateY(-20px);\n}\n.fp-slider.owl-carousel .owl-nav button.owl-next {\n  left: auto;\n  right: 20px;\n}\n.fp-slider .fp-item {\n  height: 520px;\n  position: relative;\n}\n.fp-slider .fp-item .fp-text {\n  position: absolute;\n  left: 0;\n  bottom: 30px;\n  width: 100%;\n  padding-left: 40px;\n}\n.fp-slider .fp-item .fp-text .title {\n  color: #ffffff;\n  font-weight: 700;\n  margin-bottom: 5px;\n  letter-spacing: 0.5px;\n}\n.fp-slider .fp-item .fp-text p {\n  color: #ffffff;\n  opacity: 0.7;\n}\n.fp-slider .fp-item .fp-text p span {\n  margin-right: 4px;\n}\n.fp-slider .fp-item .fp-text .label {\n  font-size: 12px;\n  display: inline-block;\n  text-transform: uppercase;\n  color: #ffffff;\n  padding: 2px 10px;\n  background: #32AA00;\n  font-weight: 600;\n  margin-right: 10px;\n}\n.fp-slider .fp-item .fp-text h5 {\n  color: #ffffff;\n  font-weight: 600;\n  display: inline-block;\n}\n.fp-slider .fp-item .fp-text h5 span {\n  color: #888888;\n  font-weight: 400;\n  font-size: 14px;\n}\n.fp-slider .fp-item .fp-text ul {\n  width: 210px;\n  position: absolute;\n  right: -25px;\n  top: 25px;\n}\n.fp-slider .fp-item .fp-text ul:after {\n  position: absolute;\n  left: -42px;\n  top: -22px;\n  height: 88px;\n  width: 1px;\n  background: #ffffff;\n  opacity: 0.2;\n  content: \"\";\n}\n.fp-slider .fp-item .fp-text ul li {\n  font-size: 15px;\n  color: #ffffff;\n  font-weight: 600;\n  list-style: none;\n  width: 50%;\n  float: left;\n  margin-bottom: 20px;\n}\n.fp-slider .fp-item .fp-text ul li i {\n  font-size: 14px;\n  color: #ffffff;\n  margin-right: 4px;\n  opacity: 0.5;\n}\n\n/*---------------------\n  Team Section\n-----------------------*/\n.team-section {\n  background: #f5f5f5;\n}\n.team-section .section-title {\n  margin-bottom: 50px;\n}\n.team-section .team-btn {\n  text-align: right;\n}\n.team-section .team-btn a {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  display: inline-block;\n  background: #ffffff;\n  padding: 12px 30px;\n}\n.team-section .team-btn a i {\n  color: #00C89E;\n  margin-right: 6px;\n}\n\n.ts-item {\n  background: #ffffff;\n  text-align: center;\n  padding: 35px 25px 30px 25px;\n  height: 330px;\n  overflow: hidden;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.ts-item:hover {\n  background: #00C89E;\n}\n.ts-item:hover .ts-text img {\n  height: 100px;\n  width: 100px;\n}\n.ts-item:hover .ts-text h5 {\n  color: #ffffff;\n}\n.ts-item:hover .ts-text span {\n  margin-bottom: 14px;\n  color: #ffffff;\n}\n.ts-item .ts-text img {\n  height: 190px;\n  width: 190px;\n  border-radius: 50%;\n  -webkit-transition: all 0.4s;\n  transition: all 0.4s;\n}\n.ts-item .ts-text h5 {\n  color: #111111;\n  font-weight: 700;\n  letter-spacing: 0.5px;\n  margin-bottom: 6px;\n  margin-top: 25px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.ts-item .ts-text span {\n  font-size: 14px;\n  color: #00C89E;\n  display: block;\n  font-weight: 600;\n  margin-bottom: 40px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.ts-item .ts-text p {\n  color: #ffffff;\n  margin-bottom: 8px;\n}\n.ts-item .ts-text .ts-social a {\n  font-size: 15px;\n  display: inline-block;\n  color: #ffffff;\n  margin-right: 12px;\n}\n.ts-item .ts-text .ts-social a:last-child {\n  margin-right: 0;\n}\n\n/*---------------------\n  Categories Section\n-----------------------*/\n.categories-section {\n  overflow: hidden;\n  padding-top: 10px;\n}\n\n.cs-item-list {\n  margin-right: -10px;\n}\n.cs-item-list .cs-item {\n  height: 376px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(20% - 10px);\n  float: left;\n  margin-right: 10px;\n}\n.cs-item-list .cs-item .cs-text {\n  width: 190px;\n  background: #ffffff;\n  text-align: center;\n  padding: 16px 0 15px;\n}\n.cs-item-list .cs-item .cs-text h5 {\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 6px;\n}\n.cs-item-list .cs-item .cs-text span {\n  font-size: 12px;\n  color: #00C89E;\n  font-weight: 600;\n  display: block;\n}\n\n/*---------------------\n  Testimonial Section\n-----------------------*/\n.testimonial-section .section-title {\n  margin-bottom: 25px;\n  padding-left: 15px;\n}\n\n.testimonial-slider {\n  margin-left: 0;\n}\n.testimonial-slider.owl-carousel .owl-stage-outer {\n  padding-top: 15px;\n}\n.testimonial-slider.owl-carousel .col-lg-6 {\n  max-width: 100%;\n}\n.testimonial-slider.owl-carousel .owl-nav {\n  position: absolute;\n  right: 15px;\n  top: -62px;\n}\n.testimonial-slider.owl-carousel .owl-nav button {\n  height: 46px;\n  width: 46px;\n  background: #f2f2f2;\n  border-radius: 50%;\n  line-height: 53px;\n  text-align: center;\n  font-size: 27px;\n  color: #111111;\n  margin-left: 10px;\n}\n.testimonial-slider .testimonial-item .ti-text {\n  background: #ffffff;\n  box-shadow: 0px 3px 15px rgba(91, 91, 91, 0.15);\n  padding: 30px 25px 30px 40px;\n  margin-bottom: 30px;\n  position: relative;\n}\n.testimonial-slider .testimonial-item .ti-text:after {\n  position: absolute;\n  left: 84px;\n  bottom: -7px;\n  height: 14px;\n  width: 14px;\n  background: #ffffff;\n  content: \"\";\n  transform: rotate(45deg);\n  box-shadow: 0px 3px 15px rgba(91, 91, 91, 0.15);\n}\n.testimonial-slider .testimonial-item .ti-text p {\n  color: #444444;\n  line-height: 25px;\n  margin-bottom: 0;\n  font-weight: 500;\n}\n.testimonial-slider .testimonial-item .ti-author {\n  padding-left: 40px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-pic {\n  float: left;\n  margin-right: 20px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-pic img {\n  height: 100px;\n  width: 100px;\n  border-radius: 50%;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text {\n  padding-top: 15px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text h5 {\n  color: #111111;\n  font-weight: 700;\n  letter-spacing: 0.5px;\n  margin-bottom: 4px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text span {\n  font-size: 14px;\n  color: #00C89E;\n  display: block;\n  margin-bottom: 5px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text .ta-rating i {\n  display: inline-block;\n  font-size: 10px;\n  color: #ffb129;\n  margin-right: -3px;\n}\n\n/*---------------------\n  Logo Carousel\n-----------------------*/\n.logo-carousel .lc-slider {\n  border-top: 1px solid #ebebeb;\n  padding: 50px 0;\n}\n.logo-carousel .lc-slider .lc-item {\n  display: table;\n  height: 97px;\n}\n.logo-carousel .lc-slider .lc-item .lc-item-inner {\n  display: table-cell;\n  vertical-align: middle;\n}\n\n/*---------------------\n  Contact Section\n-----------------------*/\n.contact-section {\n  position: relative;\n  background: #f7f7f7;\n  height: 450px;\n}\n\n.contact-info {\n  padding-top: 100px;\n}\n.contact-info .ci-item {\n  overflow: hidden;\n  margin-bottom: 40px;\n}\n.contact-info .ci-item .ci-icon {\n  height: 60px;\n  width: 60px;\n  border-radius: 50%;\n  background: #00C89E;\n  font-size: 24px;\n  color: #ffffff;\n  line-height: 60px;\n  text-align: center;\n  float: left;\n  margin-right: 20px;\n}\n.contact-info .ci-item .ci-text {\n  overflow: hidden;\n  padding-top: 5px;\n}\n.contact-info .ci-item .ci-text h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 8px;\n}\n.contact-info .ci-item .ci-text p {\n  color: #111111;\n  opacity: 0.7;\n  margin-bottom: 0;\n}\n.contact-info .ci-item .ci-text ul {\n  padding-top: 4px;\n}\n.contact-info .ci-item .ci-text ul li {\n  list-style: none;\n  display: inline-block;\n  color: #111111;\n  opacity: 0.7;\n  font-size: 14px;\n  margin-right: 20px;\n  position: relative;\n}\n.contact-info .ci-item .ci-text ul li:after {\n  position: absolute;\n  right: -14px;\n  top: -2px;\n  content: \"|\";\n}\n.contact-info .ci-item .ci-text ul li:last-child {\n  margin-right: 0;\n}\n.contact-info .ci-item .ci-text ul li:last-child:after {\n  display: none;\n}\n\n.cs-map {\n  height: 450px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 50%;\n}\n.cs-map iframe {\n  width: 100%;\n}\n\n/*---------------------\n  Footer\n-----------------------*/\n.footer-section {\n  background: #103230;\n  padding-top: 70px;\n}\n\n.fs-about {\n  margin-bottom: 30px;\n}\n.fs-about .fs-logo {\n  margin-bottom: 20px;\n}\n.fs-about .fs-logo a {\n  display: inline-block;\n}\n.fs-about p {\n  color: #ffffff;\n  line-height: 27px;\n  opacity: 0.7;\n  margin-bottom: 25px;\n}\n.fs-about .fs-social a {\n  display: inline-block;\n  font-size: 15px;\n  color: #ffffff;\n  height: 40px;\n  width: 40px;\n  background: rgba(225, 225, 225, 0.1);\n  line-height: 40px;\n  text-align: center;\n  border-radius: 50%;\n  margin-right: 4px;\n}\n.fs-about .fs-social a:last-child {\n  margin-right: 0;\n}\n\n.fs-widget {\n  margin-bottom: 30px;\n}\n.fs-widget h5 {\n  color: #ffffff;\n  text-transform: uppercase;\n  font-weight: 600;\n  margin-bottom: 26px;\n}\n.fs-widget ul li {\n  list-style: none;\n}\n.fs-widget ul li a {\n  font-size: 14px;\n  color: #ffffff;\n  opacity: 0.6;\n  line-height: 30px;\n}\n.fs-widget p {\n  color: #ffffff;\n  opacity: 0.6;\n}\n.fs-widget .subscribe-form input {\n  width: 100%;\n  height: 52px;\n  border: 1px solid #536A68;\n  font-size: 14px;\n  padding-left: 30px;\n  color: #ffffff;\n  opacity: 0.7;\n  background: transparent;\n  margin-bottom: 20px;\n}\n.fs-widget .subscribe-form input::placeholder {\n  color: #ffffff;\n  opacity: 0.7;\n}\n\n.copyright-text {\n  font-size: 14px;\n  letter-spacing: 0.5px;\n  color: #ffffff;\n  opacity: 0.6;\n  text-align: center;\n  border-top: 1px solid #284745;\n  padding: 25px 0;\n  margin-top: 40px;\n}\n\n/*--------------------------------- Other Pages Styles -----------------------------*/\n/*---------------------\n  Breadcrumb\n-----------------------*/\n.breadcrumb-text {\n  display: inline-block;\n  background: #ffffff;\n  padding: 35px 40px;\n}\n.breadcrumb-text h4 {\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 10px;\n}\n.breadcrumb-text .bt-option a {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 500;\n  margin-right: 20px;\n  position: relative;\n}\n.breadcrumb-text .bt-option a:after {\n  /* position: absolute;\n  right: -18px;\n  top: -1px; */\n  /* content: \"5\"; */\n  /* font-family: \"ElegantIcons\"; */\n}\n.breadcrumb-text .bt-option a i {\n  margin-right: 4px;\n}\n.breadcrumb-text .bt-option span {\n  font-size: 14px;\n  color: #888888;\n  font-weight: 500;\n}\n\n/*---------------------\n  Property Details\n-----------------------*/\n.property-details-section {\n  padding-bottom: 25px;\n}\n\n.property-pic-slider {\n  margin-right: -10px;\n  overflow: hidden;\n  margin-bottom: 60px;\n}\n.property-pic-slider.owl-carousel .owl-nav button {\n  height: 50px;\n  width: 50px;\n  background: #000000;\n  border-radius: 50%;\n  line-height: 58px;\n  text-align: center;\n  font-size: 30px;\n  color: #ffffff;\n  position: absolute;\n  left: 20px;\n  top: 50%;\n  transform: translateY(-30px);\n}\n.property-pic-slider.owl-carousel .owl-nav button.owl-next {\n  left: auto;\n  right: 20px;\n}\n.property-pic-slider .ps-item .container-fluid {\n  padding-right: 5px;\n}\n.property-pic-slider .ps-item .ps-item-inner {\n  height: 317px;\n  margin-bottom: 10px;\n  margin-right: 10px;\n}\n.property-pic-slider .ps-item .ps-item-inner.large-item {\n  height: 645px;\n}\n\n.pd-text .pd-title {\n  position: relative;\n  margin-bottom: 65px;\n}\n.pd-text .pd-title .heart-icon {\n  position: absolute;\n  right: 0;\n  top: 0;\n  content: \"\";\n  font-family: \"ElegantIcons\";\n  font-size: 18px;\n  color: #00C89E;\n}\n.pd-text .pd-title .label {\n  font-size: 12px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 3px 10px 2px;\n  display: inline-block;\n  background: #0166D0;\n  color: #ffffff;\n  margin-right: 10px;\n}\n.pd-text .pd-title .pt-price {\n  font-size: 18px;\n  font-weight: 700;\n  color: #00C89E;\n  margin-bottom: 10px;\n  display: inline-block;\n}\n.pd-text .pd-title .pt-price span {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 400;\n}\n.pd-text .pd-title h3 {\n  margin-bottom: 6px;\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  margin-bottom: 5px;\n}\n.pd-text .pd-title p {\n  font-weight: 500;\n}\n.pd-text .pd-title p span {\n  color: #00C89E;\n}\n.pd-text .pd-social {\n  text-align: right;\n  padding-top: 40px;\n  margin-bottom: 30px;\n}\n.pd-text .pd-social a {\n  display: inline-block;\n  font-size: 14px;\n  color: #111111;\n  height: 36px;\n  width: 36px;\n  background: #f2f2f2;\n  line-height: 36px;\n  text-align: center;\n  border-radius: 50%;\n  margin-right: 10px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.pd-text .pd-social a:hover {\n  background: #00C89E;\n  color: #ffffff;\n}\n.pd-text .pd-social a:last-child {\n  margin-right: 0;\n}\n.pd-text .pd-board {\n  margin-bottom: 65px;\n}\n.pd-text .pd-board .tab-board .nav-tabs {\n  background: #113220;\n  border-bottom: none;\n}\n.pd-text .pd-board .tab-board .nav-tabs .nav-item {\n  margin-bottom: 0;\n}\n.pd-text .pd-board .tab-board .nav-tabs .nav-item a {\n  font-size: 16px;\n  color: #ffffff;\n  display: inline-block;\n  padding: 14px 30px;\n  border: none;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n  font-family: \"Lato\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 700;\n}\n.pd-text .pd-board .tab-board .nav-tabs .nav-item a.active {\n  color: #ffffff;\n  background: #00C89E;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details {\n  border: 1px solid #e1e1e1;\n  overflow: hidden;\n  border-top: none;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul {\n  width: 50%;\n  float: left;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul.left-table li:nth-child(even) {\n  background: #f7f7f7;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul.right-table li:nth-child(odd) {\n  background: #f7f7f7;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul li {\n  font-size: 14px;\n  list-style: none;\n  font-weight: 500;\n  padding: 15px 0;\n  padding-left: 30px;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul li .type-name {\n  color: #111111;\n  width: 148px;\n  display: inline-block;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul li .type-value {\n  color: #00C89E;\n  display: inline-block;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-desc {\n  border: 1px solid #e1e1e1;\n  overflow: hidden;\n  border-top: none;\n  padding: 20px;\n}\n.pd-text .pd-widget {\n  margin-bottom: 65px;\n}\n.pd-text .pd-widget h4 {\n  color: #252525;\n  text-transform: uppercase;\n  font-weight: 700;\n  margin-bottom: 35px;\n}\n.pd-text .pd-widget .map {\n  height: 350px;\n}\n.pd-text .pd-widget .map iframe {\n  width: 100%;\n}\n.pd-text .pd-widget .map-location {\n  background: #f5f5f5;\n  padding: 35px 0 10px 40px;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item {\n  margin-bottom: 25px;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item h6 {\n  color: #111111;\n  text-transform: uppercase;\n  font-weight: 700;\n  margin-bottom: 6px;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item h6 span {\n  color: #00C89E;\n  text-transform: lowercase;\n  margin-left: 6px;\n  font-size: 14px;\n  font-weight: 400;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item p {\n  color: #888888;\n}\n.pd-text .pd-widget .pd-agent {\n  background: #f5f5f5;\n  overflow: hidden;\n  padding: 40px;\n}\n.pd-text .pd-widget .pd-agent .agent-pic {\n  float: left;\n  margin-right: 30px;\n}\n.pd-text .pd-widget .pd-agent .agent-pic img {\n  height: 200px;\n  width: 200px;\n  border-radius: 50%;\n}\n.pd-text .pd-widget .pd-agent .agent-text {\n  overflow: hidden;\n  padding-top: 10px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title {\n  margin-bottom: 20px;\n  position: relative;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title h6 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 6px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title span {\n  display: block;\n  font-size: 12px;\n  color: #00C89E;\n  font-weight: 500;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title .primary-btn {\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n.pd-text .pd-widget .pd-agent .agent-text p {\n  color: #111111;\n  font-weight: 500;\n  margin-bottom: 24px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-number {\n  font-size: 14px;\n  color: #00C89E;\n  font-weight: 600;\n  display: inline-block;\n  padding: 10px 16px;\n  background: #ffffff;\n  margin-right: 6px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-social {\n  display: inline-block;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-social a {\n  font-size: 14px;\n  color: #111111;\n  background: #ffffff;\n  height: 40px;\n  width: 40px;\n  line-height: 40px;\n  text-align: center;\n  display: inline-block;\n  margin-right: 6px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-social a:last-child {\n  margin-right: 0;\n}\n.pd-text .pd-widget .pd-review .pr-item {\n  margin-bottom: 34px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar {\n  overflow: hidden;\n  margin-bottom: 20px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-pic {\n  float: left;\n  margin-right: 20px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-pic img {\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text {\n  overflow: hidden;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text h6 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 5px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text span {\n  font-size: 12px;\n  color: #666666;\n  display: block;\n  margin-right: 4px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text .pr-rating i {\n  font-size: 10px;\n  color: #f7a441;\n  margin-right: -4px;\n}\n\n.review-form,\n.leave-comment-form,\n.cc-form {\n  overflow: hidden;\n  position: relative;\n}\n.review-form .group-input,\n.leave-comment-form .group-input,\n.cc-form .group-input {\n  margin-right: -20px;\n}\n.review-form .group-input input,\n.leave-comment-form .group-input input,\n.cc-form .group-input input {\n  width: calc(33.33% - 20px);\n  float: left;\n  height: 46px;\n  font-size: 12px;\n  color: #888888;\n  padding-left: 20px;\n  border: 1px solid #e1e1e1;\n  margin-right: 20px;\n  margin-bottom: 20px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.review-form .group-input input::placeholder,\n.leave-comment-form .group-input input::placeholder,\n.cc-form .group-input input::placeholder {\n  color: #888888;\n}\n.review-form .group-input input:focus,\n.leave-comment-form .group-input input:focus,\n.cc-form .group-input input:focus {\n  border-color: #00C89E;\n}\n.review-form textarea,\n.leave-comment-form textarea,\n.cc-form textarea {\n  width: 100%;\n  height: 110px;\n  font-size: 12px;\n  color: #888888;\n  padding-left: 20px;\n  border: 1px solid #e1e1e1;\n  padding-top: 12px;\n  resize: none;\n  margin-bottom: 14px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.review-form textarea::placeholder,\n.leave-comment-form textarea::placeholder,\n.cc-form textarea::placeholder {\n  color: #888888;\n}\n.review-form textarea:focus,\n.leave-comment-form textarea:focus,\n.cc-form textarea:focus {\n  border-color: #00C89E;\n}\n.review-form .rating,\n.leave-comment-form .rating,\n.cc-form .rating {\n  position: absolute;\n  right: 5px;\n  bottom: 0;\n}\n.review-form .rating span,\n.leave-comment-form .rating span,\n.cc-form .rating span {\n  font-size: 14px;\n  color: #636363;\n  font-weight: 500;\n}\n.review-form .rating i,\n.leave-comment-form .rating i,\n.cc-form .rating i {\n  font-size: 12px;\n  color: #f7a441;\n  margin-right: -4px;\n}\n\n.property-sidebar .single-sidebar {\n  margin-bottom: 68px;\n}\n.property-sidebar .single-sidebar.slider-op {\n  margin-bottom: 60px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item {\n  overflow: hidden;\n  margin-bottom: 30px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-pic {\n  height: 130px;\n  width: 130px;\n  float: left;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text {\n  overflow: hidden;\n  border: 1px solid #ebebeb;\n  border-left: none;\n  height: 130px;\n  padding-top: 26px;\n  padding-left: 20px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text h6 {\n  margin-bottom: 8px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text h6 a {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text span {\n  font-size: 14px;\n  color: #888888;\n  display: block;\n  margin-bottom: 8px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text .ta-num {\n  font-size: 14px;\n  color: #00C89E;\n  font-weight: 500;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots {\n  padding-top: 6px;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots button {\n  height: 2px;\n  width: 20px;\n  background: #d7d7d7;\n  margin-right: 10px;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots button.active {\n  height: 3px;\n  background: #00C89E;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots button:last-child {\n  margin-right: 0;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item {\n  height: 350px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item .sf-text {\n  background: #ffffff;\n  text-align: center;\n  padding: 16px 30px 15px;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item .sf-text h5 {\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 6px;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item .sf-text span {\n  font-size: 12px;\n  color: #00C89E;\n  font-weight: 500;\n  display: block;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input {\n  margin-bottom: 15px;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input p {\n  color: #111111;\n  margin-bottom: 8px;\n  font-weight: 500;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input input {\n  height: 46px;\n  background: transparent;\n  border: 1px solid #ededed;\n  width: 100%;\n  padding-left: 20px;\n  color: #666666;\n  opacity: 0.6;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input input::placeholder {\n  color: #666666;\n  opacity: 0.6;\n}\n.property-sidebar .single-sidebar .calculator-form .site-btn {\n  width: 100%;\n  margin-top: 15px;\n}\n\n/*---------------------\n  Product Compasion\n-----------------------*/\n.pc-table table {\n  text-align: center;\n  width: 100%;\n  padding-right: 30px;\n}\n.pc-table table thead tr th {\n  background: #f7f7f7;\n  padding: 22px 0 24px;\n}\n.pc-table table thead tr th.type {\n  font-size: 18px;\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n}\n.pc-table table thead tr th.compare-item {\n  padding-right: 30px;\n}\n.pc-table table thead tr th.compare-item.middle-item {\n  padding-right: 60px;\n}\n.pc-table table thead tr th.compare-item .title {\n  font-size: 20px;\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 22px;\n}\n.pc-table table thead tr th.compare-item img {\n  margin-bottom: 22px;\n  min-width: 100%;\n}\n.pc-table table thead tr th.compare-item h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 6px;\n}\n.pc-table table thead tr th.compare-item p {\n  color: #666666;\n  margin-bottom: 0;\n}\n.pc-table table thead tr th.compare-item p span {\n  color: #00C89E;\n  margin-right: 5px;\n}\n.pc-table table tbody tr:nth-child(even) {\n  background: #f7f7f7;\n}\n.pc-table table tbody tr td {\n  font-size: 14px;\n  color: #636363;\n  font-weight: 500;\n  padding: 20px 0;\n}\n.pc-table table tbody tr td.p-type {\n  color: #111111;\n  font-weight: 600;\n  width: 335px;\n}\n.pc-table table tbody tr td.icon-check span {\n  color: #00C89E;\n}\n.pc-table table tbody tr td.icon-close span {\n  color: #f31700;\n}\n\n/*---------------------\n  Property Submit\n-----------------------*/\n.property-submit-form form h4 {\n  color: #252525;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 35px;\n}\n.property-submit-form form input {\n  height: 46px;\n  width: 100%;\n  background: transparent;\n  color: #666666;\n  padding-left: 20px;\n  font-size: 14px;\n  border: none;\n  border: 1px solid #e1e1e1;\n}\n.property-submit-form form input::placeholder {\n  color: #666666;\n}\n.property-submit-form form .pf-title {\n  margin-bottom: 75px;\n}\n.property-submit-form form .pf-title input {\n  padding-left: 30px;\n}\n.property-submit-form form .pf-summernote {\n  margin-bottom: 70px;\n}\n.property-submit-form form .pf-summernote .nav {\n  border-bottom: none;\n}\n.property-submit-form form .pf-summernote .nav li a {\n  font-size: 14px;\n  color: #666666;\n  border-bottom: none;\n  border: 1px solid #e1e1e1;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n  padding: 10px 60px;\n}\n.property-submit-form form .pf-summernote .nav li a.active {\n  background: #252525;\n  border-color: #252525;\n  color: #ffffff;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group {\n  border: 1px solid #e1e1e1;\n  padding-left: 30px;\n  position: relative;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group .btn-item {\n  background: transparent;\n  border: none;\n  font-size: 16px;\n  color: #666666;\n  padding-left: 0;\n  padding-right: 15px;\n  padding-top: 7px;\n  padding-bottom: 6px;\n  display: inline-block;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group .btn-item.media-insert {\n  background: #00C89E;\n  color: #ffffff;\n  padding-left: 34px;\n  padding-right: 26px;\n  position: absolute;\n  right: -1px;\n  top: -2px;\n  height: 40px;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group .btn-item.media-insert i {\n  margin-right: 5px;\n}\n.property-submit-form form .pf-summernote .text-editor textarea {\n  height: 305px;\n  border: 1px solid #e1e1e1;\n  border-top: none;\n  width: 100%;\n  resize: none;\n}\n.property-submit-form form .pf-location {\n  margin-bottom: 45px;\n}\n.property-submit-form form .pf-location .location-inputs {\n  margin-right: -20px;\n  overflow: hidden;\n}\n.property-submit-form form .pf-location .location-inputs input {\n  width: calc(33.33% - 20px);\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-map {\n  margin-bottom: 75px;\n}\n.property-submit-form form .pf-map .map-inputs input {\n  width: 100%;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-map button {\n  width: 100%;\n  text-transform: initial;\n}\n.property-submit-form form .pf-map .g-map {\n  height: 245px;\n}\n.property-submit-form form .pf-map .g-map iframe {\n  width: 100%;\n}\n.property-submit-form form .pf-type {\n  margin-bottom: 60px;\n}\n.property-submit-form form .pf-type .type-item {\n  overflow: hidden;\n}\n.property-submit-form form .pf-type .type-item label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  float: left;\n  margin-bottom: 10px;\n  margin-right: 130px;\n}\n.property-submit-form form .pf-type .type-item label:last-child {\n  margin-right: 0;\n}\n.property-submit-form form .pf-type .type-item label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.property-submit-form form .pf-type .type-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n.property-submit-form form .pf-type .type-item label input:checked ~ span {\n  background: #666666;\n}\n.property-submit-form form .pf-status {\n  margin-bottom: 60px;\n}\n.property-submit-form form .pf-status .status-item label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  display: inline-block;\n  margin-bottom: 10px;\n  margin-right: 130px;\n}\n.property-submit-form form .pf-status .status-item label:last-child {\n  margin-right: 0;\n}\n.property-submit-form form .pf-status .status-item label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.property-submit-form form .pf-status .status-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n.property-submit-form form .pf-status .status-item label input:checked ~ span {\n  background: #666666;\n}\n.property-submit-form form .pf-feature-price {\n  margin-bottom: 55px;\n}\n.property-submit-form form .pf-feature-price .fp-inputs {\n  margin-right: -20px;\n  overflow: hidden;\n}\n.property-submit-form form .pf-feature-price .fp-inputs input {\n  width: calc(33.33% - 20px);\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-feature {\n  margin-bottom: 50px;\n}\n.property-submit-form form .pf-feature .features-list {\n  overflow: hidden;\n}\n.property-submit-form form .pf-feature .features-list .feature-item {\n  width: 25%;\n  float: left;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  display: block;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label:last-child {\n  margin-right: 0;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.property-submit-form form .pf-feature .features-list .feature-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label input:checked ~ span {\n  background: #666666;\n}\n.property-submit-form form .pf-feature-image {\n  margin-bottom: 75px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content {\n  background: #f5f5f5;\n  position: relative;\n}\n.property-submit-form form .pf-feature-image .feature-image-content .image-uploader {\n  min-height: 13rem;\n}\n.property-submit-form form .pf-feature-image .feature-image-content .image-uploader .uploaded .uploaded-image .delete-image i {\n  font-size: 15px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content .upload-input-class {\n  opacity: 0;\n  visibility: hidden;\n  position: absolute;\n  left: 0;\n  z-index: -999;\n}\n.property-submit-form form .pf-feature-image .feature-image-content p {\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content p i {\n  margin-right: 5px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content div {\n  font-size: 14px;\n  color: #666666;\n  margin-bottom: 25px;\n}\n.property-submit-form form .pf-property-details .property-details-inputs {\n  margin-right: -20px;\n  overflow: hidden;\n}\n.property-submit-form form .pf-property-details .property-details-inputs input {\n  width: calc(33.33% - 20px);\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-property-details button {\n  width: 100%;\n}\n\n.richText {\n  background: transparent;\n}\n\n.richText .richText-help {\n  display: none;\n}\n\n.richText .richText-toolbar:last-child {\n  background-color: #FAFAFA;\n}\n\n.richText .richText-editor {\n  overflow-y: auto;\n}\n\n.richText .richText-editor:focus {\n  border-left: none;\n}\n\n.richText .richText-toolbar ul li a {\n  border: none;\n}\n\nli .richText-btn[data-command=toggleCode] {\n  opacity: 0;\n  visibility: hidden;\n}\n\n/*---------------------\n  Agent Section\n-----------------------*/\n.agent-section {\n  padding-bottom: 60px;\n}\n\n.agent-search-form {\n  position: relative;\n  margin-bottom: 20px;\n  padding-left: 15px;\n}\n.agent-search-form form input {\n  width: 100%;\n  height: 46px;\n  border: 1px solid #d7d7d7;\n  font-size: 14px;\n  color: #666666;\n  padding-left: 20px;\n  background: transparent;\n  font-weight: 500;\n}\n.agent-search-form form input::placeholder {\n  color: #666666;\n}\n.agent-search-form form button {\n  font-size: 13px;\n  color: #ffffff;\n  background: #00C89E;\n  border: none;\n  height: 100%;\n  width: 46px;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.as-slider .row {\n  margin-right: 0px;\n  margin-left: 0px;\n}\n.as-slider.owl-carousel .owl-stage-outer {\n  padding-top: 20px;\n}\n.as-slider.owl-carousel .owl-nav {\n  position: absolute;\n  right: 15px;\n  top: -66px;\n}\n.as-slider.owl-carousel .owl-nav button {\n  height: 46px;\n  width: 46px;\n  background: #f2f2f2;\n  border-radius: 50%;\n  line-height: 54px;\n  text-align: center;\n  font-size: 27px;\n  color: #111111;\n  margin-left: 10px;\n}\n\n.as-item {\n  text-align: center;\n  background: #ffffff;\n  padding: 35px 35px 30px 35px;\n  box-shadow: 0px 3px 15px rgba(91, 91, 91, 0.15);\n  margin-bottom: 40px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.as-item:hover {\n  background: #00C89E;\n}\n.as-item:hover .as-pic .rating-point {\n  color: #00C89E;\n  background: #ffffff;\n}\n.as-item:hover .as-text .at-title {\n  border-color: #33d3b3;\n}\n.as-item:hover .as-text .at-title h6 {\n  color: #ffffff;\n}\n.as-item:hover .as-text ul li {\n  color: #ffffff;\n}\n.as-item:hover .as-text .primary-btn {\n  background: #ffffff;\n}\n.as-item .as-pic {\n  width: 151px;\n  height: 151px;\n  position: relative;\n  margin: 0 auto;\n  margin-bottom: 25px;\n}\n.as-item .as-pic img {\n  border-radius: 50%;\n}\n.as-item .as-pic .rating-point {\n  font-size: 16px;\n  font-weight: 600;\n  color: #ffffff;\n  background: #00C89E;\n  height: 50px;\n  width: 50px;\n  border-radius: 50%;\n  line-height: 50px;\n  text-align: center;\n  position: absolute;\n  left: -10px;\n  top: 0;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.as-item .as-text .at-title {\n  border-bottom: 1px solid #e1e1e1;\n  padding-bottom: 15px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.as-item .as-text .at-title h6 {\n  color: #111111;\n  text-transform: uppercase;\n  font-weight: 700;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.as-item .as-text .at-title .rating-star i {\n  font-size: 10px;\n  color: #ffb129;\n  margin-right: -4px;\n}\n.as-item .as-text ul {\n  text-align: left;\n  padding-top: 20px;\n  margin-bottom: 16px;\n}\n.as-item .as-text ul li {\n  list-style: none;\n  font-size: 14px;\n  color: #111111;\n  font-weight: 500;\n  line-height: 36px;\n  overflow: hidden;\n  -webkit-transition: all 22s;\n  transition: all 0.2s;\n}\n.as-item .as-text ul li span {\n  font-weight: 600;\n  float: right;\n}\n.as-item .as-text .primary-btn {\n  background: #f2f2f2;\n  color: #00C89E;\n  display: block;\n  padding: 14px 20px;\n  text-align: center;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n\n/*-----------------------\n  Profile Agent Content\n------------------------*/\n.profile-section {\n  padding-bottom: 0;\n}\n\n.profile-agent-content {\n  padding: 30px 50px 30px 30px;\n  border: 1px solid #e1e1e1;\n}\n.profile-agent-content .profile-agent-info {\n  position: relative;\n}\n.profile-agent-content .profile-agent-info:after {\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 1px;\n  height: 120px;\n  background: #ebebeb;\n  content: \"\";\n}\n.profile-agent-content .profile-agent-info .pi-pic {\n  width: 120px;\n  height: 120px;\n  position: relative;\n  float: left;\n  margin-right: 30px;\n}\n.profile-agent-content .profile-agent-info .pi-pic img {\n  border-radius: 50%;\n}\n.profile-agent-content .profile-agent-info .pi-pic .rating-point {\n  font-size: 14px;\n  font-weight: 600;\n  color: #ffffff;\n  background: #00C89E;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  line-height: 40px;\n  text-align: center;\n  position: absolute;\n  left: 0;\n  top: 0;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.profile-agent-content .profile-agent-info .pi-text {\n  overflow: hidden;\n  padding-top: 20px;\n}\n.profile-agent-content .profile-agent-info .pi-text h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 4px;\n}\n.profile-agent-content .profile-agent-info .pi-text span {\n  font-size: 12px;\n  color: #2897bb;\n  font-weight: 500;\n}\n.profile-agent-content .profile-agent-info .pi-text p {\n  margin-bottom: 0;\n  color: #111111;\n  margin-top: 8px;\n}\n.profile-agent-content .profile-agent-widget {\n  padding-right: 50px;\n  position: relative;\n}\n.profile-agent-content .profile-agent-widget:after {\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 1px;\n  height: 120px;\n  background: #ebebeb;\n  content: \"\";\n}\n.profile-agent-content .profile-agent-widget ul {\n  padding-top: 5px;\n}\n.profile-agent-content .profile-agent-widget ul li {\n  list-style: none;\n  font-size: 14px;\n  color: #111111;\n  font-weight: 500;\n  line-height: 36px;\n  overflow: hidden;\n  -webkit-transition: all 22s;\n  transition: all 0.2s;\n}\n.profile-agent-content .profile-agent-widget ul li span {\n  font-weight: 600;\n  float: right;\n}\n.profile-agent-content .profile-agent-newslatter {\n  padding-top: 10px;\n}\n.profile-agent-content .profile-agent-newslatter h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 25px;\n}\n.profile-agent-content .profile-agent-newslatter form {\n  position: relative;\n}\n.profile-agent-content .profile-agent-newslatter form input {\n  height: 50px;\n  padding-left: 20px;\n  font-size: 14px;\n  color: #111111;\n  background: #f5f5f5;\n  border: none;\n  width: 100%;\n  font-weight: 500;\n}\n.profile-agent-content .profile-agent-newslatter form input::placeholder {\n  color: #111111;\n}\n.profile-agent-content .profile-agent-newslatter form button {\n  height: 50px;\n  width: 50px;\n  background: #00C89E;\n  color: #ffffff;\n  font-size: 18px;\n  border: none;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n/*---------------------\n  About\n-----------------------*/\n.about-section {\n  padding-bottom: 60px;\n}\n\n.about-text .at-title {\n  margin-bottom: 20px;\n}\n.about-text .at-title h3 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 15px;\n}\n.about-text .at-title p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.about-text .at-feature .af-item {\n  margin-bottom: 32px;\n}\n.about-text .at-feature .af-item .af-icon {\n  float: left;\n  margin-right: 30px;\n}\n.about-text .at-feature .af-item .af-text {\n  overflow: hidden;\n}\n.about-text .at-feature .af-item .af-text h6 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 8px;\n}\n.about-text .at-feature .af-item .af-text p {\n  color: #111111;\n  opacity: 0.7;\n  margin-bottom: 0;\n}\n\n.about-pic {\n  height: 423px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.about-pic .play-btn {\n  font-size: 42px;\n  color: #ffffff;\n}\n\n/*---------------------\n  Blog\n-----------------------*/\n.blog-item {\n  overflow: hidden;\n  padding-bottom: 30px;\n  border-bottom: 1px solid #e1e1e1;\n  margin-bottom: 30px;\n}\n.blog-item:last-child {\n  padding-bottom: 0;\n  border-bottom: none;\n  margin-bottom: 50px;\n}\n.blog-item.large-blog {\n  padding-bottom: 25px;\n}\n.blog-item.large-blog .bi-pic {\n  float: none;\n  margin-bottom: 25px;\n  margin-right: 0;\n}\n.blog-item.large-blog .bi-pic img {\n  min-width: 100%;\n}\n.blog-item.large-blog .bi-pic .bi-text {\n  overflow: visible;\n}\n.blog-item .bi-pic {\n  float: left;\n  margin-right: 30px;\n}\n.blog-item .bi-text {\n  overflow: hidden;\n}\n.blog-item .bi-text h4 {\n  margin-bottom: 6px;\n}\n.blog-item .bi-text h4 a {\n  line-height: 31px;\n  font-weight: 700;\n  color: #111111;\n}\n.blog-item .bi-text h5 {\n  margin-bottom: 6px;\n}\n.blog-item .bi-text h5 a {\n  font-size: 20px;\n  line-height: 31px;\n  font-weight: 700;\n  color: #111111;\n}\n.blog-item .bi-text ul {\n  margin-bottom: 16px;\n}\n.blog-item .bi-text ul li {\n  list-style: none;\n  display: inline-block;\n  position: relative;\n  font-size: 12px;\n  color: #999999;\n  font-weight: 500;\n  margin-right: 32px;\n}\n.blog-item .bi-text ul li:last-child {\n  margin-right: 0;\n}\n.blog-item .bi-text ul li:last-child:after {\n  display: none;\n}\n.blog-item .bi-text ul li span {\n  color: #111111;\n  font-weight: 600;\n}\n.blog-item .bi-text ul li:after {\n  position: absolute;\n  right: -23px;\n  top: 6px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.blog-item .bi-text .read-more {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 600;\n}\n.blog-item .bi-text .read-more span {\n  font-size: 16px;\n  position: relative;\n  top: 4px;\n  right: -2px;\n  font-weight: 600;\n}\n\n.blog-sidebar .follow-us {\n  margin-bottom: 60px;\n}\n.blog-sidebar .follow-us .fu-links a {\n  font-size: 14px;\n  color: #ffffff;\n  height: 46px;\n  width: 46px;\n  background: #3263AF;\n  line-height: 46px;\n  text-align: center;\n  border-radius: 50%;\n  display: inline-block;\n  margin-right: 10px;\n}\n.blog-sidebar .follow-us .fu-links a:last-child {\n  margin-right: 0;\n}\n.blog-sidebar .follow-us .fu-links a.twitter {\n  background: #40C4FF;\n}\n.blog-sidebar .follow-us .fu-links a.youtube {\n  background: #FF0000;\n}\n.blog-sidebar .follow-us .fu-links a.instagram {\n  background: linear-gradient(45deg, #af00e1, #ff9e35);\n}\n.blog-sidebar .feature-post {\n  margin-bottom: 60px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item {\n  overflow: hidden;\n  margin-bottom: 30px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-pic {\n  float: left;\n  margin-right: 20px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text h6 {\n  margin-bottom: 4px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text h6 a {\n  color: #111111;\n  font-weight: 700;\n  font-family: \"Lato\", sans-serif;\n  line-height: 21px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text span {\n  font-size: 12px;\n  color: #999999;\n  position: relative;\n  padding-left: 22px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text span:after {\n  position: absolute;\n  left: 0;\n  top: 5px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.blog-sidebar .subscribe-form {\n  background: #f5f5f5;\n  padding: 30px;\n}\n.blog-sidebar .subscribe-form .section-title {\n  margin-bottom: 25px;\n}\n.blog-sidebar .subscribe-form form input {\n  font-size: 14px;\n  color: #999999;\n  font-weight: 500;\n  width: 100%;\n  height: 50px;\n  border: 1px solid #cccccc;\n  padding-left: 20px;\n  background: transparent;\n  margin-bottom: 20px;\n}\n.blog-sidebar .subscribe-form form input::placeholder {\n  color: #999999;\n}\n\n/*---------------------\n  Blog Details\n-----------------------*/\n.blog-details-section {\n  padding-top: 80px;\n  padding-bottom: 60px;\n}\n\n.blog-details-content .bc-top {\n  margin-bottom: 24px;\n}\n.blog-details-content .bc-top p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-details {\n  margin-bottom: 15px;\n  overflow: hidden;\n}\n.blog-details-content .bc-details .bc-pic {\n  float: left;\n  margin-right: 30px;\n}\n.blog-details-content .bc-details .bc-text {\n  overflow: hidden;\n}\n.blog-details-content .bc-details .bc-text p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-desc {\n  margin-bottom: 30px;\n}\n.blog-details-content .bc-desc p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-quote {\n  overflow: hidden;\n  margin-bottom: 6px;\n}\n.blog-details-content .bc-quote .bq-icon {\n  width: 75px;\n  height: 75px;\n  border: 1px solid #e1e1e1;\n  border-radius: 50%;\n  line-height: 75px;\n  text-align: center;\n  font-size: 30px;\n  color: #00C89E;\n  float: left;\n  margin-right: 20px;\n}\n.blog-details-content .bc-quote .bq-text {\n  overflow: hidden;\n}\n.blog-details-content .bc-quote .bq-text p {\n  color: #111111;\n  font-size: 16px;\n  font-weight: 600;\n  font-style: italic;\n  line-height: 30px;\n}\n.blog-details-content .bc-desc-last {\n  margin-bottom: 33px;\n}\n.blog-details-content .bc-desc-last p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-tags {\n  margin-bottom: 50px;\n}\n.blog-details-content .bc-tags a {\n  font-size: 13px;\n  color: #666666;\n  display: inline-block;\n  border: 1px solid #e1e1e1;\n  padding: 8px 15px;\n  margin-right: 6px;\n  margin-bottom: 10px;\n}\n.blog-details-content .bc-related-post {\n  background: #f5f5f5;\n  padding: 15px 20px 12px;\n  margin-bottom: 65px;\n}\n.blog-details-content .bc-related-post .previous-post,\n.blog-details-content .bc-related-post .next-post {\n  font-size: 14px;\n  text-transform: uppercase;\n  font-weight: 700;\n  color: #111111;\n}\n.blog-details-content .bc-related-post .previous-post i,\n.blog-details-content .bc-related-post .next-post i {\n  margin-right: 5px;\n  font-weight: 700;\n}\n.blog-details-content .bc-related-post .next-post {\n  float: right;\n}\n.blog-details-content .bc-related-post .next-post i {\n  margin-left: 5px;\n  margin-right: 0;\n}\n.blog-details-content .bc-widget {\n  margin-bottom: 30px;\n}\n.blog-details-content .bc-widget h4 {\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 35px;\n  font-weight: 700;\n}\n.blog-details-content .bc-widget .related-post .related-item {\n  margin-bottom: 30px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-pic {\n  margin-bottom: 15px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-pic img {\n  min-width: 100%;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-text h6 {\n  color: #111111;\n  font-size: 15px;\n  font-weight: 600;\n  line-height: 20px;\n  margin-bottom: 4px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-text span {\n  font-size: 12px;\n  color: #999999;\n  position: relative;\n  padding-left: 22px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-text span:after {\n  position: absolute;\n  left: 0;\n  top: 5px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.blog-details-content .bc-widget .comment-option {\n  margin-bottom: 55px;\n}\n.blog-details-content .bc-widget .comment-option .co-item {\n  overflow: hidden;\n  margin-bottom: 20px;\n}\n.blog-details-content .bc-widget .comment-option .co-item.reply-item {\n  padding-left: 115px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-pic {\n  float: left;\n  margin-right: 25px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-pic img {\n  height: 90px;\n  width: 90px;\n  border-radius: 50%;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text {\n  overflow: hidden;\n  position: relative;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 13px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text p {\n  font-size: 15px;\n  line-height: 26px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul {\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul li {\n  list-style: none;\n  font-size: 12px;\n  color: #888888;\n  margin-right: 25px;\n  display: inline-block;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul li:last-child {\n  margin-right: 0;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul li i {\n  font-size: 14px;\n  color: #00C89E;\n  margin-right: 5px;\n}\n\n/*---------------------\n  Blog Hero\n-----------------------*/\n.blog-hero-section {\n  height: 640px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n}\n\n.bh-text {\n  display: inline-block;\n  background: #ffffff;\n  text-align: center;\n  padding: 35px 65px 32px 65px;\n}\n.bh-text h4 {\n  margin-bottom: 6px;\n  line-height: 31px;\n  font-weight: 700;\n  color: #111111;\n}\n.bh-text ul li {\n  list-style: none;\n  display: inline-block;\n  position: relative;\n  font-size: 12px;\n  color: #999999;\n  font-weight: 500;\n  margin-right: 32px;\n}\n.bh-text ul li:last-child {\n  margin-right: 0;\n}\n.bh-text ul li:last-child:after {\n  display: none;\n}\n.bh-text ul li span {\n  color: #111111;\n  font-weight: 600;\n}\n.bh-text ul li:after {\n  position: absolute;\n  right: -23px;\n  top: 6px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n\n/*---------------------\n  Contact Form\n-----------------------*/\n.cf-content {\n  text-align: center;\n}\n.cf-content .cc-title {\n  margin-bottom: 35px;\n}\n.cf-content .cc-title h4 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 8px;\n}\n.cf-content .cc-form input {\n  margin-bottom: 24px;\n}\n.cf-content .cc-form textarea {\n  margin-bottom: 10px;\n}\n\n/*--------------------------------- Responsive Media Quaries -----------------------------*/\n@media only screen and (min-width: 1600px) and (max-width: 1920px) {\n  .hs-slider.owl-carousel .owl-nav button {\n    left: -220px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: -220px;\n  }\n}\n@media only screen and (min-width: 1200px) and (max-width: 1350px) {\n  .hs-slider.owl-carousel .owl-nav button {\n    left: 0px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: 0px;\n  }\n}\n@media only screen and (min-width: 1200px) {\n  .container {\n    max-width: 1170px;\n  }\n}\n/* Medium Device = 1200px */\n@media only screen and (min-width: 992px) and (max-width: 1199px) {\n  .hs-top .ht-widget .hw-btn {\n    font-size: 11px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button {\n    left: 0;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: 0;\n  }\n\n  .property-item .pi-text ul li {\n    margin-right: 25px;\n  }\n\n  .feature-property-left {\n    padding: 40px 30px 30px 30px;\n  }\n\n  .cs-item-list .cs-item .cs-text {\n    width: 160px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-title .primary-btn {\n    position: relative;\n    top: 10px;\n  }\n\n  .property-submit-form form .pf-map button {\n    font-size: 12px;\n  }\n\n  .property-submit-form form .pf-type .type-item label {\n    margin-right: 70px;\n  }\n\n  .profile-agent-content {\n    padding: 30px 20px 30px 20px;\n  }\n\n  .ts-item {\n    padding: 25px 25px 30px 25px;\n  }\n}\n/* Tablet Device = 768px */\n@media only screen and (min-width: 768px) and (max-width: 991px) {\n  .hs-slider.owl-carousel .owl-nav button {\n    left: -30px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: -30px;\n  }\n\n  .change-btn {\n    text-align: left;\n    margin-bottom: 20px;\n  }\n\n  .property-controls {\n    text-align: left;\n    margin-bottom: 20px;\n  }\n\n  .chooseus-features .cf-item {\n    width: 100%;\n  }\n\n  .chooseus-features .cf-item .cf-text {\n    overflow: hidden;\n    padding-top: 20px;\n  }\n\n  .team-section .team-btn a {\n    padding: 12px 26px;\n  }\n\n  .ts-item .ts-text img {\n    height: 160px;\n    width: 160px;\n  }\n\n  .ts-item {\n    margin-bottom: 20px;\n  }\n\n  .cs-item-list .cs-item {\n    width: calc(33.33% - 10px);\n    margin-bottom: 10px;\n  }\n\n  .contact-section {\n    height: auto;\n  }\n\n  .cs-map {\n    height: 450px;\n    position: relative;\n    width: 100%;\n  }\n\n  .pd-text .pd-social {\n    text-align: left;\n    padding-top: 0;\n  }\n\n  .pd-text .pd-title {\n    margin-bottom: 30px;\n  }\n\n  .property-submit-form form .pf-summernote .text-editor .button-group .btn-item {\n    padding-right: 10px;\n  }\n\n  .property-submit-form form .pf-map .g-map {\n    margin-top: 30px;\n  }\n\n  .property-submit-form form .pf-type .type-item label {\n    margin-right: 30px;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .agent-search-form {\n    margin-bottom: 70px;\n  }\n\n  .as-slider.owl-carousel .owl-nav {\n    top: -50px;\n  }\n\n  .profile-agent-content .profile-agent-info {\n    margin-bottom: 20px;\n    overflow: hidden;\n  }\n  .profile-agent-content .profile-agent-info:after {\n    display: none;\n  }\n\n  .profile-agent-content .profile-agent-widget {\n    margin-bottom: 15px;\n  }\n  .profile-agent-content .profile-agent-widget:after {\n    display: none;\n  }\n\n  .blog-sidebar {\n    padding-top: 50px;\n  }\n\n  .review-form .group-input input,\n.leave-comment-form .group-input input,\n.cc-form .group-input input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .review-form .group-input,\n.leave-comment-form .group-input,\n.cc-form .group-input {\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .feature-property-left {\n    height: auto;\n  }\n\n  .hs-top .ht-widget {\n    border-bottom: none;\n    display: none;\n  }\n\n  .nav-menu {\n    display: none;\n  }\n\n  .hs-nav .hn-social {\n    display: none;\n  }\n\n  .hs-top .container {\n    position: relative;\n  }\n\n  .offcanvas-menu-overlay {\n    position: fixed;\n    height: 100%;\n    width: 100%;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 99;\n    left: 0;\n    top: 0;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n    visibility: hidden;\n  }\n  .offcanvas-menu-overlay.active {\n    visibility: visible;\n  }\n\n  .canvas-open {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 37px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 0;\n    top: 26px;\n    display: block;\n  }\n  .canvas-open span {\n    font-weight: 600;\n  }\n\n  .offcanvas-menu-wrapper {\n    width: 300px;\n    position: fixed;\n    height: 100%;\n    background: #ffffff;\n    overflow-y: scroll;\n    padding: 70px 30px 30px 30px;\n    z-index: 99;\n    left: -300px;\n    top: 0;\n    opacity: 0;\n    display: block;\n    visibility: hidden;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n  }\n  .offcanvas-menu-wrapper.show-offcanvas-menu-wrapper {\n    left: 0;\n    opacity: 1;\n    visibility: visible;\n  }\n  .offcanvas-menu-wrapper .canvas-close {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 35px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 30px;\n    top: 30px;\n  }\n  .offcanvas-menu-wrapper .canvas-close span {\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .logo {\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .logo a {\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-widget {\n    margin-bottom: 30px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul {\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li {\n    list-style: none;\n    font-size: 14px;\n    color: #444444;\n    font-weight: 500;\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li i {\n    display: inline-block;\n    font-size: 16px;\n    color: #00c8a0;\n    height: 46px;\n    width: 46px;\n    background: #f5f5f5;\n    line-height: 46px;\n    text-align: center;\n    margin-right: 10px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span {\n    margin-left: 20px;\n    display: inline-block;\n    position: relative;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span:after {\n    position: absolute;\n    left: -13px;\n    top: -2px;\n    content: \"|\";\n  }\n  .offcanvas-menu-wrapper .om-widget .hw-btn {\n    font-size: 14px;\n    color: #ffffff;\n    font-weight: 700;\n    letter-spacing: 0.5px;\n    background: #00C89E;\n    padding: 14px 30px;\n    text-transform: uppercase;\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-menu {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_btn {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav {\n    display: block !important;\n  }\n  .offcanvas-menu-wrapper .slicknav_menu {\n    background: transparent;\n    padding: 0;\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav ul {\n    margin: 0;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav .slicknav_row,\n.offcanvas-menu-wrapper .slicknav_nav a {\n    padding: 10px 0;\n    margin: 0;\n    color: #111111;\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav a:hover {\n    -webkit-border-radius: 0;\n    border-radius: 0;\n    background: transparent;\n    color: #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li {\n    border-bottom: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li .dropdown {\n    border-top: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .om-social a {\n    font-size: 16px;\n    color: #111111;\n    height: 35px;\n    width: 35px;\n    line-height: 35px;\n    text-align: center;\n    border: 1px solid #111111;\n    border-radius: 50%;\n    display: inline-block;\n    margin-right: 6px;\n  }\n}\n/* Wide Mobile = 480px */\n@media only screen and (max-width: 767px) {\n  .ts-item {\n    margin-bottom: 20px;\n  }\n\n  .cs-item-list .cs-item {\n    margin-bottom: 10px;\n  }\n\n  .hs-item {\n    height: auto;\n    padding: 113px 15px;\n  }\n\n  .pd-text .pd-social {\n    text-align: left;\n    padding-top: 0;\n  }\n\n  .pd-text .pd-title {\n    margin-bottom: 30px;\n  }\n\n  .property-submit-form form .pf-map .g-map {\n    margin-top: 30px;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .agent-search-form {\n    margin-bottom: 70px;\n  }\n\n  .as-slider.owl-carousel .owl-nav {\n    top: -50px;\n  }\n\n  .profile-agent-content .profile-agent-info {\n    margin-bottom: 20px;\n    overflow: hidden;\n  }\n\n  .profile-agent-content .profile-agent-widget {\n    margin-bottom: 15px;\n  }\n  .profile-agent-content .profile-agent-widget:after {\n    display: none;\n  }\n\n  .profile-agent-content .profile-agent-info:after {\n    display: none;\n  }\n\n  .blog-sidebar {\n    padding-top: 50px;\n  }\n\n  .review-form .group-input input,\n.leave-comment-form .group-input input,\n.cc-form .group-input input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .review-form .group-input,\n.leave-comment-form .group-input,\n.cc-form .group-input {\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .hs-item .hc-inner-text .hc-text {\n    float: none;\n    margin-right: 0;\n  }\n\n  .hs-item .hc-inner-text .hc-widget {\n    overflow: hidden;\n    width: auto;\n    position: relative;\n    right: 0;\n    top: 18px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button {\n    left: 0;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: 0;\n  }\n\n  .search-form-content .filter-form {\n    margin-right: 0;\n  }\n\n  .search-form-content .filter-form .sm-width {\n    width: 100%;\n    margin-bottom: 20px;\n    margin-right: 0 !important;\n  }\n\n  .change-btn {\n    text-align: left;\n    margin-bottom: 20px;\n  }\n\n  .property-controls {\n    text-align: left;\n  }\n\n  .property-controls ul li {\n    margin-right: 24px;\n    margin-bottom: 20px;\n  }\n\n  .property-controls ul li:after {\n    right: -17px;\n  }\n\n  .chooseus-features .cf-item {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .fp-slider .fp-item .fp-text ul {\n    position: relative;\n    right: 0;\n  }\n\n  .team-section .team-btn {\n    text-align: left;\n    margin-bottom: 25px;\n  }\n\n  .cs-item-list .cs-item {\n    width: calc(50% - 10px);\n  }\n\n  .testimonial-section .section-title {\n    margin-bottom: 80px;\n  }\n\n  .testimonial-slider.owl-carousel .owl-nav {\n    top: -50px;\n  }\n\n  .contact-section {\n    height: auto;\n  }\n\n  .cs-map {\n    height: 450px;\n    position: relative;\n    width: 100%;\n  }\n\n  .pd-text .pd-board .tab-board .tab-content .tab-details ul {\n    width: 100%;\n    float: left;\n  }\n  .pd-text .pd-board .tab-board .tab-content .tab-details ul.left-table {\n    margin-bottom: 10px;\n  }\n\n  .pd-text .pd-board .tab-board .nav-tabs .nav-item a {\n    padding: 14px 26px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-pic {\n    float: none;\n    margin-right: 0;\n    margin-bottom: 20px;\n  }\n\n  .pc-table {\n    overflow-x: auto;\n  }\n\n  .contact-info {\n    padding-top: 60px;\n  }\n\n  .blog-item .bi-pic {\n    float: none;\n    margin-right: 0;\n    margin-bottom: 20px;\n  }\n\n  .bh-text ul li {\n    margin-right: 26px;\n  }\n\n  .bh-text ul li:after {\n    right: -19px;\n  }\n\n  .blog-details-section .p-0 {\n    padding: 0 15px !important;\n  }\n\n  .blog-details-content .bc-details .bc-pic {\n    float: none;\n    margin-right: 0;\n    margin-bottom: 20px;\n  }\n  .blog-details-content .bc-details .bc-pic img {\n    min-width: 100%;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item .ci-text ul {\n    position: relative;\n  }\n\n  .feature-property-left {\n    height: auto;\n  }\n\n  .property-submit-form form .pf-type .type-item label {\n    margin-right: 20px;\n  }\n\n  .property-submit-form form .pf-feature .features-list .feature-item {\n    width: 100%;\n    float: none;\n  }\n\n  .more-option .card .card-body .mo-list .ml-column {\n    width: 100%;\n    float: none;\n  }\n\n  .property-submit-form form .pf-summernote .text-editor .button-group .btn-item.media-insert {\n    position: relative;\n    right: 0;\n    top: 0;\n    height: auto;\n  }\n\n  .hs-top .ht-widget {\n    border-bottom: none;\n    display: none;\n  }\n\n  .nav-menu {\n    display: none;\n  }\n\n  .hs-nav .hn-social {\n    display: none;\n  }\n\n  .hs-top .container {\n    position: relative;\n  }\n\n  .offcanvas-menu-overlay {\n    position: fixed;\n    height: 100%;\n    width: 100%;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 99;\n    left: 0;\n    top: 0;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n    visibility: hidden;\n  }\n  .offcanvas-menu-overlay.active {\n    visibility: visible;\n  }\n\n  .canvas-open {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 37px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 0;\n    top: 26px;\n    display: block;\n  }\n  .canvas-open span {\n    font-weight: 600;\n  }\n\n  .offcanvas-menu-wrapper {\n    width: 300px;\n    position: fixed;\n    height: 100%;\n    background: #ffffff;\n    overflow-y: scroll;\n    padding: 70px 30px 30px 30px;\n    z-index: 99;\n    left: -300px;\n    top: 0;\n    opacity: 0;\n    display: block;\n    visibility: hidden;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n  }\n  .offcanvas-menu-wrapper.show-offcanvas-menu-wrapper {\n    left: 0;\n    opacity: 1;\n    visibility: visible;\n  }\n  .offcanvas-menu-wrapper .canvas-close {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 35px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 30px;\n    top: 30px;\n  }\n  .offcanvas-menu-wrapper .canvas-close span {\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .logo {\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .logo a {\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-widget {\n    margin-bottom: 30px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul {\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li {\n    list-style: none;\n    font-size: 14px;\n    color: #444444;\n    font-weight: 500;\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li i {\n    display: inline-block;\n    font-size: 16px;\n    color: #00c8a0;\n    height: 46px;\n    width: 46px;\n    background: #f5f5f5;\n    line-height: 46px;\n    text-align: center;\n    margin-right: 10px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span {\n    margin-left: 20px;\n    display: inline-block;\n    position: relative;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span:after {\n    position: absolute;\n    left: -13px;\n    top: -2px;\n    content: \"|\";\n  }\n  .offcanvas-menu-wrapper .om-widget .hw-btn {\n    font-size: 14px;\n    color: #ffffff;\n    font-weight: 700;\n    letter-spacing: 0.5px;\n    background: #00C89E;\n    padding: 14px 30px;\n    text-transform: uppercase;\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-menu {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_btn {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav {\n    display: block !important;\n  }\n  .offcanvas-menu-wrapper .slicknav_menu {\n    background: transparent;\n    padding: 0;\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav ul {\n    margin: 0;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav .slicknav_row,\n.offcanvas-menu-wrapper .slicknav_nav a {\n    padding: 10px 0;\n    margin: 0;\n    color: #111111;\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav a:hover {\n    -webkit-border-radius: 0;\n    border-radius: 0;\n    background: transparent;\n    color: #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li {\n    border-bottom: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li .dropdown {\n    border-top: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .om-social a {\n    font-size: 16px;\n    color: #111111;\n    height: 35px;\n    width: 35px;\n    line-height: 35px;\n    text-align: center;\n    border: 1px solid #111111;\n    border-radius: 50%;\n    display: inline-block;\n    margin-right: 6px;\n  }\n}\n\n#home-bg{\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n/* Small Device = 320px */\n@media only screen and (max-width: 479px) {\n  .hs-item .hc-inner-text {\n    padding: 25px 14px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav {\n    display: none;\n  }\n\n  .ts-item {\n    padding: 25px 25px 30px 25px;\n  }\n\n  .pd-text .pd-board .tab-board .tab-content .tab-details ul li {\n    padding-left: 15px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-title .primary-btn {\n    position: relative;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-title span {\n    margin-bottom: 15px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-option .at-social {\n    margin-top: 10px;\n  }\n\n  .review-form .rating,\n.leave-comment-form .rating,\n.cc-form .rating {\n    position: relative;\n    right: 0;\n    margin-bottom: 20px;\n  }\n\n  .property-sidebar .single-sidebar .top-agent .ta-item .ta-text {\n    padding-top: 20px;\n  }\n\n  .property-submit-form form .pf-summernote .nav li a {\n    padding: 10px 50px;\n  }\n\n  .profile-agent-content .profile-agent-info .pi-pic {\n    float: none;\n    margin-right: 0;\n  }\n\n  .profile-agent-content .profile-agent-widget ul li span {\n    display: block;\n    float: none;\n  }\n\n  .cs-item-list .cs-item {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .profile-agent-content {\n    padding: 30px 30px 30px 30px;\n  }\n\n  .property-item .pi-text ul li {\n    margin-right: 20px;\n  }\n\n  .breadcrumb-text {\n    padding: 35px 35px;\n  }\n\n  .bh-text {\n    padding: 35px 50px 32px 50px;\n  }\n\n  .bh-text ul li {\n    display: block;\n    text-align: center;\n    margin-right: 0;\n    margin-bottom: 10px;\n  }\n\n  .bh-text ul li:after {\n    display: none;\n  }\n\n  .blog-details-content .bc-related-post .next-post {\n    float: none;\n    display: block;\n    text-align: right;\n    margin-top: 10px;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item.reply-item {\n    padding-left: 0;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item .ci-text ul li {\n    margin-right: 5px;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item .ci-pic {\n    float: none;\n    margin-bottom: 20px;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item.reply-item {\n    padding-left: 10%;\n  }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n/******************************************************************\nTheme Name: Aler\nDescription: \nAuthor: \nAuthor URI: \nVersion: 1.0\nCreated: \n******************************************************************/\n/*------------------------------------------------------------------\n[Table of contents]\n\n1.  Template default CSS\n\t1.1\tVariables\n\t1.2\tMixins\n\t1.3\tFlexbox\n\t1.4\tReset\n2.  Helper Css\n3.  Header Section\n4.  Hero Section\n5.  Service Section\n6.  Feature Property Section\n7.  Team Section\n8.  Testimonial Section\n9.  Contact\n10.  Footer Style\n\n-------------------------------------------------------------------*/\n/*----------------------------------------*/\n/* Template default CSS\n/*----------------------------------------*/\nhtml,\nbody {\n  height: 100%;\n  font-family: \"Montserrat\", sans-serif;\n  -webkit-font-smoothing: antialiased;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0;\n  color: #111111;\n  font-weight: 400;\n  font-family: \"Montserrat\", sans-serif;\n}\n\nh1 {\n  font-size: 70px;\n}\n\nh2 {\n  font-size: 36px;\n}\n\nh3 {\n  font-size: 30px;\n}\n\nh4 {\n  font-size: 24px;\n}\n\nh5 {\n  font-size: 18px;\n}\n\nh6 {\n  font-size: 16px;\n}\n\np {\n  font-size: 14px;\n  font-family: \"Montserrat\", sans-serif;\n  color: #666666;\n  font-weight: 400;\n  line-height: 24px;\n  margin: 0 0 15px 0;\n}\n\nimg {\n  max-width: 100%;\n}\n\ninput:focus,\nselect:focus,\nbutton:focus,\ntextarea:focus {\n  outline: none;\n}\n\na:hover,\na:focus {\n  text-decoration: none;\n  outline: none;\n  color: #fff;\n}\n\nul,\nol {\n  padding: 0;\n  margin: 0;\n}\n\n/*---------------------\n  Helper CSS\n-----------------------*/\n.section-title {\n  margin-bottom: 40px;\n}\n.section-title.sidebar-title {\n  margin-bottom: 36px;\n}\n.section-title.sidebar-title h5 {\n  font-family: \"Lato\", sans-serif;\n}\n.section-title.sidebar-title h5:after {\n  height: 36px;\n  top: -8px;\n}\n.section-title.sidebar-title-b {\n  margin-bottom: 30px;\n  font-family: \"Lato\", sans-serif;\n}\n.section-title.sidebar-title-b h6:after {\n  height: 20px;\n  top: 0;\n}\n.section-title h4,\n.section-title h5,\n.section-title h6 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  position: relative;\n  padding-left: 20px;\n}\n.section-title h4:after,\n.section-title h5:after,\n.section-title h6:after {\n  position: absolute;\n  left: 0;\n  top: -9px;\n  width: 5px;\n  height: 46px;\n  background: #00C89E;\n  content: \"\";\n}\n\n.set-bg {\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: top center;\n}\n\n.spad {\n  padding-top: 100px;\n  padding-bottom: 100px;\n}\n\n.spad-2 {\n  padding-top: 50px;\n  padding-bottom: 70px;\n}\n\n.text-white h1,\n.text-white h2,\n.text-white h3,\n.text-white h4,\n.text-white h5,\n.text-white h6,\n.text-white p,\n.text-white span,\n.text-white li,\n.text-white a {\n  color: #fff;\n}\n\n/* buttons */\n.primary-btn {\n  font-size: 14px;\n  color: #ffffff;\n  font-weight: 600;\n  text-transform: uppercase;\n  background: #00C89E;\n  padding: 10px 20px;\n  display: inline-block;\n}\n\n.site-btn {\n  font-size: 14px;\n  color: #ffffff;\n  background: #00C89E;\n  border: none;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  display: inline-block;\n  padding: 14px 30px;\n}\n\n/* Preloder */\n#preloder {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  z-index: 999999;\n  background: #000;\n}\n\n.loader {\n  width: 40px;\n  height: 40px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -13px;\n  margin-left: -13px;\n  border-radius: 60px;\n  animation: loader 0.8s linear infinite;\n  -webkit-animation: loader 0.8s linear infinite;\n}\n\n@keyframes loader {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n  50% {\n    -webkit-transform: rotate(180deg);\n    transform: rotate(180deg);\n    border: 4px solid #673ab7;\n    border-left-color: transparent;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n}\n@-webkit-keyframes loader {\n  0% {\n    -webkit-transform: rotate(0deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n  50% {\n    -webkit-transform: rotate(180deg);\n    border: 4px solid #673ab7;\n    border-left-color: transparent;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    border: 4px solid #f44336;\n    border-left-color: transparent;\n  }\n}\n/*---------------------\n  Header\n-----------------------*/\n.hs-top {\n  border-bottom: 1px solid #ebebeb;\n}\n.hs-top .logo {\n  padding: 22px 0;\n}\n.hs-top .logo a {\n  display: inline-block;\n}\n.hs-top .ht-widget {\n  text-align: right;\n  padding: 20px 0;\n}\n.hs-top .ht-widget ul {\n  display: inline-block;\n}\n.hs-top .ht-widget ul li {\n  list-style: none;\n  font-size: 14px;\n  color: #444444;\n  display: inline-block;\n  margin-right: 45px;\n  font-weight: 500;\n}\n.hs-top .ht-widget ul li i {\n  display: inline-block;\n  font-size: 16px;\n  color: #00c8a0;\n  height: 46px;\n  width: 46px;\n  background: #f5f5f5;\n  line-height: 46px;\n  text-align: center;\n  margin-right: 10px;\n}\n.hs-top .ht-widget ul li span {\n  margin-left: 20px;\n  display: inline-block;\n  position: relative;\n}\n.hs-top .ht-widget ul li span:after {\n  position: absolute;\n  left: -13px;\n  top: -2px;\n  content: \"|\";\n}\n.hs-top .ht-widget .hw-btn {\n  font-size: 14px;\n  color: #ffffff;\n  font-weight: 700;\n  letter-spacing: 0.5px;\n  background: #00C89E;\n  padding: 14px 30px;\n  text-transform: uppercase;\n  display: inline-block;\n}\n\n.hs-nav .nav-menu ul li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 40px;\n  position: relative;\n}\n.hs-nav .nav-menu ul li .dropdown {\n  position: absolute;\n  left: -30px;\n  top: 80px;\n  width: 270px;\n  background: #ffffff;\n  z-index: 9;\n  padding: 26px 0 14px;\n  box-shadow: 1px 3px 15px rgba(11, 27, 32, 0.1);\n  opacity: 0;\n  visibility: hidden;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.hs-nav .nav-menu ul li .dropdown li {\n  margin-right: 0;\n  display: block;\n}\n.hs-nav .nav-menu ul li .dropdown li a {\n  color: #666666;\n  padding: 0;\n  text-transform: capitalize;\n  padding-bottom: 10px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n  padding-left: 30px;\n}\n.hs-nav .nav-menu ul li .dropdown li a:hover {\n  color: #111111;\n}\n.hs-nav .nav-menu ul li .dropdown li a:after {\n  left: 0;\n  top: 2px;\n  width: 5px;\n  height: 16px;\n  background: #00C89E;\n  content: \"\";\n}\n.hs-nav .nav-menu ul li:hover > a:after {\n  opacity: 1;\n}\n.hs-nav .nav-menu ul li:hover .dropdown {\n  opacity: 1;\n  visibility: visible;\n  top: 60px;\n}\n.hs-nav .nav-menu ul li.active > a:after {\n  opacity: 1;\n}\n.hs-nav .nav-menu ul li:last-child {\n  margin-right: 0;\n}\n.hs-nav .nav-menu ul li a {\n  color: #111111;\n  font-size: 14px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 20px 0;\n  display: block;\n  position: relative;\n}\n.hs-nav .nav-menu ul li a:after {\n  position: absolute;\n  left: 0;\n  top: 42px;\n  width: 100%;\n  height: 2px;\n  background: #00C89E;\n  content: \"\";\n  opacity: 0;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.hs-nav .hn-social {\n  text-align: right;\n  padding: 19px 0 18px;\n}\n.hs-nav .hn-social a {\n  font-size: 15px;\n  color: #111111;\n  display: inline-block;\n  margin-left: 20px;\n}\n\n.offcanvas-menu-wrapper {\n  display: none;\n}\n\n.canvas-open {\n  display: none;\n}\n\n/*---------------------\n  Hero\n-----------------------*/\n.hero-section {\n  overflow: hidden;\n  background: #ffffff;\n  padding-bottom: 10px;\n}\n\n.hs-slider.owl-carousel .owl-stage-outer {\n  overflow: visible;\n}\n.hs-slider.owl-carousel .owl-item.active .hs-item .hc-inner-text {\n  opacity: 1;\n  top: 0;\n}\n.hs-slider.owl-carousel .owl-nav button {\n  height: 50px;\n  width: 50px;\n  background: rgba(0, 0, 0, 0.5);\n  border-radius: 50%;\n  line-height: 58px;\n  text-align: center;\n  font-size: 30px;\n  color: #ffffff;\n  position: absolute;\n  left: -80px;\n  top: 50%;\n  transform: translateY(-25px);\n}\n.hs-slider.owl-carousel .owl-nav button.owl-next {\n  left: auto;\n  right: -80px;\n}\n\n.hs-item {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 780px;\n}\n.hs-item .hc-inner-text {\n  background: #ffffff;\n  padding: 40px;\n  overflow: hidden;\n  opacity: 0;\n  position: relative;\n  top: 100px;\n  display: inline-block;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n}\n.hs-item .hc-inner-text .hc-text {\n  float: left;\n  margin-right: 18px;\n}\n.hs-item .hc-inner-text .hc-text h4 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 5px;\n}\n.hs-item .hc-inner-text .hc-text p {\n  color: #666666;\n}\n.hs-item .hc-inner-text .hc-text p span {\n  color: #00C89E;\n}\n.hs-item .hc-inner-text .hc-text .label {\n  font-size: 12px;\n  display: inline-block;\n  text-transform: uppercase;\n  color: #ffffff;\n  padding: 2px 10px;\n  background: #3068b2;\n  font-weight: 600;\n  margin-right: 10px;\n}\n.hs-item .hc-inner-text .hc-text h5 {\n  color: #00C89E;\n  font-weight: 700;\n  display: inline-block;\n}\n.hs-item .hc-inner-text .hc-text h5 span {\n  color: #666666;\n  font-weight: 400;\n  font-size: 14px;\n}\n.hs-item .hc-inner-text .hc-widget {\n  overflow: hidden;\n  width: 185px;\n  position: relative;\n  right: -52px;\n  top: 18px;\n}\n.hs-item .hc-inner-text .hc-widget li {\n  font-size: 15px;\n  color: #111111;\n  font-weight: 500;\n  list-style: none;\n  width: 50%;\n  float: left;\n  margin-bottom: 20px;\n}\n.hs-item .hc-inner-text .hc-widget li i {\n  font-size: 14px;\n  color: #666666;\n  margin-right: 4px;\n}\n\n/*---------------------\n  Search Form\n-----------------------*/\n.search-section {\n  background: #f7f7f7;\n}\n\n.change-btn {\n  text-align: right;\n}\n.change-btn .cb-item {\n  display: inline-block;\n}\n.change-btn .cb-item label {\n  font-size: 14px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 12px 32px;\n  margin-bottom: 0;\n  margin-left: -4px;\n  cursor: pointer;\n  border: 1px solid #00C89E;\n  color: #111111;\n}\n.change-btn .cb-item label.active {\n  background: #00C89E;\n  color: #ffffff;\n}\n.change-btn .cb-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n\n.search-form-content {\n  overflow: hidden;\n  margin-bottom: 26px;\n}\n.search-form-content .filter-form {\n  margin-right: -20px;\n}\n.search-form-content .filter-form .sm-width {\n  width: calc(33.33% - 20px);\n}\n.search-form-content .filter-form .nice-select {\n  clear: none;\n  margin-right: 20px;\n  height: 46px;\n  background: #ffffff;\n  border-radius: 0;\n  border: 1px solid #e1e1e1;\n  line-height: 43px;\n  margin-bottom: 20px;\n}\n.search-form-content .filter-form .nice-select:after {\n  border-bottom: 1px solid #666666;\n  border-right: 1px solid #666666;\n  height: 6px;\n  right: 16px;\n  margin-top: -6px;\n  width: 6px;\n  top: 54%;\n}\n.search-form-content .filter-form .nice-select span {\n  font-size: 13px;\n  color: #666666;\n  font-weight: 500;\n}\n.search-form-content .filter-form .nice-select.open .list {\n  opacity: 1;\n  pointer-events: auto;\n  -webkit-transform: scale(1) translateY(0);\n  -ms-transform: scale(1) translateY(0);\n  transform: scale(1) translateY(0);\n  width: 100%;\n  border-radius: 0;\n  margin-top: 0;\n}\n.search-form-content .filter-form .price-range-wrap {\n  float: left;\n  margin-right: 20px;\n}\n.search-form-content .filter-form .price-range-wrap .price-text {\n  margin-bottom: 9px;\n}\n.search-form-content .filter-form .price-range-wrap .price-text label {\n  display: inline-block;\n  font-size: 13px;\n  font-weight: 500;\n  color: #666666;\n  margin-bottom: 0;\n  text-transform: uppercase;\n}\n.search-form-content .filter-form .price-range-wrap .price-text input {\n  display: inline-block;\n  width: 165px;\n  font-size: 13px;\n  font-weight: 500;\n  color: #666666;\n  border: none;\n  background: transparent;\n}\n.search-form-content .filter-form .room-size-range-wrap {\n  float: left;\n  margin-right: 20px;\n}\n.search-form-content .filter-form .room-size-range-wrap .price-text {\n  margin-bottom: 9px;\n}\n.search-form-content .filter-form .room-size-range-wrap .price-text label {\n  display: inline-block;\n  font-size: 13px;\n  color: #666666;\n  font-weight: 500;\n  margin-bottom: 0;\n}\n.search-form-content .filter-form .room-size-range-wrap .price-text input {\n  display: inline-block;\n  width: 165px;\n  font-size: 13px;\n  color: #666666;\n  font-weight: 500;\n  border: none;\n  outline: none;\n  background: transparent;\n}\n.search-form-content .filter-form .search-btn {\n  font-size: 14px;\n  height: 46px;\n  background: #00C89E;\n  color: #ffffff;\n  border: none;\n  cursor: pointer;\n  text-transform: uppercase;\n  font-weight: 600;\n}\n\n.ui-widget.ui-widget-content {\n  background: #e1e1e1;\n  height: 7px;\n  border: none;\n}\n\n.ui-slider .ui-slider-range {\n  background: #00C89E;\n}\n\n.ui-slider-horizontal .ui-slider-handle {\n  width: 13px;\n  height: 13px;\n  background: #00C89E;\n  border-radius: 50%;\n  border: none;\n  margin-left: 0;\n  top: -3px;\n}\n\n.more-option .card {\n  border: none;\n  border-radius: 0;\n  background: transparent;\n}\n.more-option .card .card-heading {\n  padding-left: 34px;\n}\n.more-option .card .card-heading a {\n  font-size: 16px;\n  color: #111111;\n  font-weight: 600;\n  cursor: pointer;\n}\n.more-option .card .card-body {\n  padding: 0;\n  padding-top: 30px;\n}\n.more-option .card .card-body .mo-list .ml-column {\n  width: 25%;\n  float: left;\n}\n.more-option .card .card-body .mo-list .ml-column label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  display: block;\n  margin-bottom: 20px;\n}\n.more-option .card .card-body .mo-list .ml-column label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.more-option .card .card-body .mo-list .ml-column label input {\n  position: absolute;\n  visibility: hidden;\n}\n.more-option .card .card-body .mo-list .ml-column label input:checked ~ span {\n  background: #666666;\n}\n\n/* .more-option .card-heading a:after,\n.more-option .card-heading > a:after {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 20px;\n  width: 20px;\n  background: #00C89E;\n  line-height: 20px;\n  text-align: center;\n}\n\n.more-option .card-heading a:after,\n.more-option .card-heading > a.active[aria-expanded=false]:after {\n  content: \"L\";\n  font-size: 16px;\n  font-family: \"ElegantIcons\";\n  color: #ffffff;\n  background: #00C89E;\n} */\n\n/* .more-option .card-heading a[aria-expanded=true]:after,\n.more-option .card-heading > a.active:after {\n  content: \"K\";\n  font-size: 16px;\n  font-family: \"ElegantIcons\";\n  color: #ffffff;\n  background: #00C89E;\n} */\n\n/*-------------------------\n  Property Section\n--------------------------*/\n.property-section.latest-property-section {\n  padding-bottom: 60px;\n}\n.property-section.profile-page {\n  padding-top: 50px;\n}\n\n.property-controls {\n  text-align: right;\n}\n.property-controls ul li {\n  list-style: none;\n  display: inline-block;\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  margin-right: 35px;\n  position: relative;\n  cursor: pointer;\n}\n.property-controls ul li:after {\n  position: absolute;\n  right: -22px;\n  top: -1px;\n  content: \"|\";\n  color: #b1b0b0;\n}\n.property-controls ul li:last-child {\n  margin-right: 0;\n}\n.property-controls ul li:last-child:after {\n  display: none;\n}\n\n.property-item {\n  margin-bottom: 40px;\n}\n.property-item .pi-pic {\n  height: 240px;\n  position: relative;\n  margin-bottom: 25px;\n}\n.property-item .pi-pic .label {\n  font-size: 12px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 3px 10px 2px;\n  display: inline-block;\n  background: #0166D0;\n  color: #ffffff;\n  position: absolute;\n  left: 20px;\n  top: 20px;\n}\n.property-item .pi-pic .label.c-red {\n  background: #D41800;\n}\n.property-item .pi-pic .label.c-magenta {\n  background: #103230;\n}\n.property-item .pi-text {\n  position: relative;\n}\n.property-item .pi-text .heart-icon {\n  position: absolute;\n  right: 0;\n  top: 0;\n  content: \"\";\n  font-family: \"ElegantIcons\";\n  font-size: 18px;\n  color: #00C89E;\n}\n.property-item .pi-text .pt-price {\n  font-size: 18px;\n  font-weight: 700;\n  color: #00C89E;\n  margin-bottom: 10px;\n}\n.property-item .pi-text .pt-price span {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 400;\n}\n.property-item .pi-text h5 {\n  margin-bottom: 6px;\n}\n.property-item .pi-text h5 a {\n  font-size: 20px;\n  font-weight: 700;\n  color: #111111;\n  font-family: \"Montserrat\", sans-serif;\n}\n.property-item .pi-text p {\n  font-weight: 500;\n}\n.property-item .pi-text p span {\n  color: #00C89E;\n}\n.property-item .pi-text ul {\n  padding-bottom: 20px;\n  border-bottom: 1px solid #e1e1e1;\n}\n.property-item .pi-text ul li {\n  font-size: 15px;\n  color: #111111;\n  font-weight: 600;\n  list-style: none;\n  display: inline-block;\n  margin-right: 45px;\n}\n.property-item .pi-text ul li:last-child {\n  margin-right: 0;\n}\n.property-item .pi-text ul li i {\n  font-size: 14px;\n  color: #666666;\n  margin-right: 5px;\n}\n.property-item .pi-text .pi-agent .pa-item {\n  overflow: hidden;\n  padding-top: 10px;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-info {\n  float: left;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-info img {\n  height: 30px;\n  width: 30px;\n  border-radius: 50%;\n  display: inline-block;\n  margin-right: 10px;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-info h6 {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 600;\n  letter-spacing: 0.5px;\n  display: inline-block;\n}\n.property-item .pi-text .pi-agent .pa-item .pa-text {\n  font-size: 14px;\n  color: #00C89E;\n  font-weight: 600;\n  float: right;\n  line-height: 30px;\n}\n\n.loadmore-btn {\n  text-align: center;\n  padding-top: 10px;\n}\n.loadmore-btn a {\n  display: inline-block;\n  font-size: 14px;\n  color: #ffffff;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  padding: 12px 30px;\n  background: #103230;\n}\n\n.property-pagination {\n  text-align: center;\n  padding-top: 10px;\n}\n.property-pagination.blog-pagination {\n  text-align: left;\n  padding-top: 0;\n}\n.property-pagination.blog-pagination a {\n  color: #666666;\n}\n.property-pagination a {\n  display: inline-block;\n  height: 46px;\n  width: 46px;\n  background: #f2f2f2;\n  color: #111111;\n  font-size: 20px;\n  font-weight: 600;\n  line-height: 46px;\n  text-align: center;\n  border-radius: 50%;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n  margin-right: 6px;\n}\n.property-pagination a:last-child {\n  margin-right: 0;\n}\n.property-pagination a:hover {\n  background: #00C89E;\n  color: #ffffff;\n}\n.property-pagination a.icon span {\n  position: relative;\n  top: 5px;\n}\n.property-pagination a span {\n  font-size: 27px;\n}\n\n/*---------------------\n  Chooseus Section\n-----------------------*/\n.chooseus-section {\n  padding-bottom: 55px;\n}\n\n.chooseus-text {\n  margin-bottom: 40px;\n}\n.chooseus-text .section-title {\n  margin-bottom: 24px;\n}\n.chooseus-text .section-title h4 {\n  color: #ffffff;\n}\n.chooseus-text p {\n  color: #ffffff;\n  opacity: 0.7;\n}\n\n.chooseus-features {\n  overflow: hidden;\n}\n.chooseus-features .cf-item {\n  width: calc(50% - 40px);\n  float: left;\n  margin-right: 40px;\n  margin-bottom: 35px;\n  overflow: hidden;\n}\n.chooseus-features .cf-item .cf-pic {\n  width: 80px;\n  height: 80px;\n  background: #ffffff;\n  border-radius: 50%;\n  line-height: 80px;\n  text-align: center;\n  float: left;\n  margin-right: 20px;\n}\n.chooseus-features .cf-item .cf-text {\n  overflow: hidden;\n}\n.chooseus-features .cf-item .cf-text h5 {\n  color: #ffffff;\n  font-weight: 700;\n  margin-bottom: 10px;\n}\n.chooseus-features .cf-item .cf-text p {\n  margin-bottom: 0;\n  color: #ffffff;\n  opacity: 0.7;\n}\n\n/*---------------------\n  Feature Property\n-----------------------*/\n.feature-property-left {\n  background: #103230;\n  padding: 50px 50px 40px 50px;\n  height: 520px;\n}\n.feature-property-left .section-title {\n  margin-bottom: 35px;\n}\n.feature-property-left .section-title h4 {\n  color: #ffffff;\n}\n.feature-property-left ul {\n  margin-bottom: 45px;\n}\n.feature-property-left ul li {\n  font-size: 14px;\n  list-style: none;\n  color: #c4c4c4;\n  padding-bottom: 12px;\n  border-bottom: 1px solid #284745;\n  margin-bottom: 15px;\n  cursor: pointer;\n}\n.feature-property-left ul li:last-child {\n  margin-bottom: 0;\n  padding-bottom: 0;\n  border-bottom: none;\n}\n.feature-property-left ul li:hover {\n  color: #ffffff;\n  font-weight: 500;\n}\n.feature-property-left a {\n  display: block;\n  font-size: 14px;\n  font-weight: 700;\n  color: #00C89E;\n  background: #ffffff;\n  padding: 15px 0;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  text-align: center;\n}\n\n.fp-slider.owl-carousel .owl-nav button {\n  height: 40px;\n  width: 40px;\n  background: rgba(0, 0, 0, 0.5);\n  border-radius: 50%;\n  line-height: 45px;\n  text-align: center;\n  font-size: 24px;\n  color: #ffffff;\n  position: absolute;\n  left: 20px;\n  top: 50%;\n  transform: translateY(-20px);\n}\n.fp-slider.owl-carousel .owl-nav button.owl-next {\n  left: auto;\n  right: 20px;\n}\n.fp-slider .fp-item {\n  height: 520px;\n  position: relative;\n}\n.fp-slider .fp-item .fp-text {\n  position: absolute;\n  left: 0;\n  bottom: 30px;\n  width: 100%;\n  padding-left: 40px;\n}\n.fp-slider .fp-item .fp-text .title {\n  color: #ffffff;\n  font-weight: 700;\n  margin-bottom: 5px;\n  letter-spacing: 0.5px;\n}\n.fp-slider .fp-item .fp-text p {\n  color: #ffffff;\n  opacity: 0.7;\n}\n.fp-slider .fp-item .fp-text p span {\n  margin-right: 4px;\n}\n.fp-slider .fp-item .fp-text .label {\n  font-size: 12px;\n  display: inline-block;\n  text-transform: uppercase;\n  color: #ffffff;\n  padding: 2px 10px;\n  background: #32AA00;\n  font-weight: 600;\n  margin-right: 10px;\n}\n.fp-slider .fp-item .fp-text h5 {\n  color: #ffffff;\n  font-weight: 600;\n  display: inline-block;\n}\n.fp-slider .fp-item .fp-text h5 span {\n  color: #888888;\n  font-weight: 400;\n  font-size: 14px;\n}\n.fp-slider .fp-item .fp-text ul {\n  width: 210px;\n  position: absolute;\n  right: -25px;\n  top: 25px;\n}\n.fp-slider .fp-item .fp-text ul:after {\n  position: absolute;\n  left: -42px;\n  top: -22px;\n  height: 88px;\n  width: 1px;\n  background: #ffffff;\n  opacity: 0.2;\n  content: \"\";\n}\n.fp-slider .fp-item .fp-text ul li {\n  font-size: 15px;\n  color: #ffffff;\n  font-weight: 600;\n  list-style: none;\n  width: 50%;\n  float: left;\n  margin-bottom: 20px;\n}\n.fp-slider .fp-item .fp-text ul li i {\n  font-size: 14px;\n  color: #ffffff;\n  margin-right: 4px;\n  opacity: 0.5;\n}\n\n/*---------------------\n  Team Section\n-----------------------*/\n.team-section {\n  background: #f5f5f5;\n}\n.team-section .section-title {\n  margin-bottom: 50px;\n}\n.team-section .team-btn {\n  text-align: right;\n}\n.team-section .team-btn a {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  display: inline-block;\n  background: #ffffff;\n  padding: 12px 30px;\n}\n.team-section .team-btn a i {\n  color: #00C89E;\n  margin-right: 6px;\n}\n\n.ts-item {\n  background: #ffffff;\n  text-align: center;\n  padding: 35px 25px 30px 25px;\n  height: 330px;\n  overflow: hidden;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.ts-item:hover {\n  background: #00C89E;\n}\n.ts-item:hover .ts-text img {\n  height: 100px;\n  width: 100px;\n}\n.ts-item:hover .ts-text h5 {\n  color: #ffffff;\n}\n.ts-item:hover .ts-text span {\n  margin-bottom: 14px;\n  color: #ffffff;\n}\n.ts-item .ts-text img {\n  height: 190px;\n  width: 190px;\n  border-radius: 50%;\n  -webkit-transition: all 0.4s;\n  transition: all 0.4s;\n}\n.ts-item .ts-text h5 {\n  color: #111111;\n  font-weight: 700;\n  letter-spacing: 0.5px;\n  margin-bottom: 6px;\n  margin-top: 25px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.ts-item .ts-text span {\n  font-size: 14px;\n  color: #00C89E;\n  display: block;\n  font-weight: 600;\n  margin-bottom: 40px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.ts-item .ts-text p {\n  color: #ffffff;\n  margin-bottom: 8px;\n}\n.ts-item .ts-text .ts-social a {\n  font-size: 15px;\n  display: inline-block;\n  color: #ffffff;\n  margin-right: 12px;\n}\n.ts-item .ts-text .ts-social a:last-child {\n  margin-right: 0;\n}\n\n/*---------------------\n  Categories Section\n-----------------------*/\n.categories-section {\n  overflow: hidden;\n  padding-top: 10px;\n}\n\n.cs-item-list {\n  margin-right: -10px;\n}\n.cs-item-list .cs-item {\n  height: 376px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: calc(20% - 10px);\n  float: left;\n  margin-right: 10px;\n}\n.cs-item-list .cs-item .cs-text {\n  width: 190px;\n  background: #ffffff;\n  text-align: center;\n  padding: 16px 0 15px;\n}\n.cs-item-list .cs-item .cs-text h5 {\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 6px;\n}\n.cs-item-list .cs-item .cs-text span {\n  font-size: 12px;\n  color: #00C89E;\n  font-weight: 600;\n  display: block;\n}\n\n/*---------------------\n  Testimonial Section\n-----------------------*/\n.testimonial-section .section-title {\n  margin-bottom: 25px;\n  padding-left: 15px;\n}\n\n.testimonial-slider {\n  margin-left: 0;\n}\n.testimonial-slider.owl-carousel .owl-stage-outer {\n  padding-top: 15px;\n}\n.testimonial-slider.owl-carousel .col-lg-6 {\n  max-width: 100%;\n}\n.testimonial-slider.owl-carousel .owl-nav {\n  position: absolute;\n  right: 15px;\n  top: -62px;\n}\n.testimonial-slider.owl-carousel .owl-nav button {\n  height: 46px;\n  width: 46px;\n  background: #f2f2f2;\n  border-radius: 50%;\n  line-height: 53px;\n  text-align: center;\n  font-size: 27px;\n  color: #111111;\n  margin-left: 10px;\n}\n.testimonial-slider .testimonial-item .ti-text {\n  background: #ffffff;\n  box-shadow: 0px 3px 15px rgba(91, 91, 91, 0.15);\n  padding: 30px 25px 30px 40px;\n  margin-bottom: 30px;\n  position: relative;\n}\n.testimonial-slider .testimonial-item .ti-text:after {\n  position: absolute;\n  left: 84px;\n  bottom: -7px;\n  height: 14px;\n  width: 14px;\n  background: #ffffff;\n  content: \"\";\n  transform: rotate(45deg);\n  box-shadow: 0px 3px 15px rgba(91, 91, 91, 0.15);\n}\n.testimonial-slider .testimonial-item .ti-text p {\n  color: #444444;\n  line-height: 25px;\n  margin-bottom: 0;\n  font-weight: 500;\n}\n.testimonial-slider .testimonial-item .ti-author {\n  padding-left: 40px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-pic {\n  float: left;\n  margin-right: 20px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-pic img {\n  height: 100px;\n  width: 100px;\n  border-radius: 50%;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text {\n  padding-top: 15px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text h5 {\n  color: #111111;\n  font-weight: 700;\n  letter-spacing: 0.5px;\n  margin-bottom: 4px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text span {\n  font-size: 14px;\n  color: #00C89E;\n  display: block;\n  margin-bottom: 5px;\n}\n.testimonial-slider .testimonial-item .ti-author .ta-text .ta-rating i {\n  display: inline-block;\n  font-size: 10px;\n  color: #ffb129;\n  margin-right: -3px;\n}\n\n/*---------------------\n  Logo Carousel\n-----------------------*/\n.logo-carousel .lc-slider {\n  border-top: 1px solid #ebebeb;\n  padding: 50px 0;\n}\n.logo-carousel .lc-slider .lc-item {\n  display: table;\n  height: 97px;\n}\n.logo-carousel .lc-slider .lc-item .lc-item-inner {\n  display: table-cell;\n  vertical-align: middle;\n}\n\n/*---------------------\n  Contact Section\n-----------------------*/\n.contact-section {\n  position: relative;\n  background: #f7f7f7;\n  height: 450px;\n}\n\n.contact-info {\n  padding-top: 100px;\n}\n.contact-info .ci-item {\n  overflow: hidden;\n  margin-bottom: 40px;\n}\n.contact-info .ci-item .ci-icon {\n  height: 60px;\n  width: 60px;\n  border-radius: 50%;\n  background: #00C89E;\n  font-size: 24px;\n  color: #ffffff;\n  line-height: 60px;\n  text-align: center;\n  float: left;\n  margin-right: 20px;\n}\n.contact-info .ci-item .ci-text {\n  overflow: hidden;\n  padding-top: 5px;\n}\n.contact-info .ci-item .ci-text h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 8px;\n}\n.contact-info .ci-item .ci-text p {\n  color: #111111;\n  opacity: 0.7;\n  margin-bottom: 0;\n}\n.contact-info .ci-item .ci-text ul {\n  padding-top: 4px;\n}\n.contact-info .ci-item .ci-text ul li {\n  list-style: none;\n  display: inline-block;\n  color: #111111;\n  opacity: 0.7;\n  font-size: 14px;\n  margin-right: 20px;\n  position: relative;\n}\n.contact-info .ci-item .ci-text ul li:after {\n  position: absolute;\n  right: -14px;\n  top: -2px;\n  content: \"|\";\n}\n.contact-info .ci-item .ci-text ul li:last-child {\n  margin-right: 0;\n}\n.contact-info .ci-item .ci-text ul li:last-child:after {\n  display: none;\n}\n\n.cs-map {\n  height: 450px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 50%;\n}\n.cs-map iframe {\n  width: 100%;\n}\n\n/*---------------------\n  Footer\n-----------------------*/\n.footer-section {\n  background: #103230;\n  padding-top: 70px;\n}\n\n.fs-about {\n  margin-bottom: 30px;\n}\n.fs-about .fs-logo {\n  margin-bottom: 20px;\n}\n.fs-about .fs-logo a {\n  display: inline-block;\n}\n.fs-about p {\n  color: #ffffff;\n  line-height: 27px;\n  opacity: 0.7;\n  margin-bottom: 25px;\n}\n.fs-about .fs-social a {\n  display: inline-block;\n  font-size: 15px;\n  color: #ffffff;\n  height: 40px;\n  width: 40px;\n  background: rgba(225, 225, 225, 0.1);\n  line-height: 40px;\n  text-align: center;\n  border-radius: 50%;\n  margin-right: 4px;\n}\n.fs-about .fs-social a:last-child {\n  margin-right: 0;\n}\n\n.fs-widget {\n  margin-bottom: 30px;\n}\n.fs-widget h5 {\n  color: #ffffff;\n  text-transform: uppercase;\n  font-weight: 600;\n  margin-bottom: 26px;\n}\n.fs-widget ul li {\n  list-style: none;\n}\n.fs-widget ul li a {\n  font-size: 14px;\n  color: #ffffff;\n  opacity: 0.6;\n  line-height: 30px;\n}\n.fs-widget p {\n  color: #ffffff;\n  opacity: 0.6;\n}\n.fs-widget .subscribe-form input {\n  width: 100%;\n  height: 52px;\n  border: 1px solid #536A68;\n  font-size: 14px;\n  padding-left: 30px;\n  color: #ffffff;\n  opacity: 0.7;\n  background: transparent;\n  margin-bottom: 20px;\n}\n.fs-widget .subscribe-form input::placeholder {\n  color: #ffffff;\n  opacity: 0.7;\n}\n\n.copyright-text {\n  font-size: 14px;\n  letter-spacing: 0.5px;\n  color: #ffffff;\n  opacity: 0.6;\n  text-align: center;\n  border-top: 1px solid #284745;\n  padding: 25px 0;\n  margin-top: 40px;\n}\n\n/*--------------------------------- Other Pages Styles -----------------------------*/\n/*---------------------\n  Breadcrumb\n-----------------------*/\n.breadcrumb-text {\n  display: inline-block;\n  background: #ffffff;\n  padding: 35px 40px;\n}\n.breadcrumb-text h4 {\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 10px;\n}\n.breadcrumb-text .bt-option a {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 500;\n  margin-right: 20px;\n  position: relative;\n}\n.breadcrumb-text .bt-option a:after {\n  /* position: absolute;\n  right: -18px;\n  top: -1px; */\n  /* content: \"5\"; */\n  /* font-family: \"ElegantIcons\"; */\n}\n.breadcrumb-text .bt-option a i {\n  margin-right: 4px;\n}\n.breadcrumb-text .bt-option span {\n  font-size: 14px;\n  color: #888888;\n  font-weight: 500;\n}\n\n/*---------------------\n  Property Details\n-----------------------*/\n.property-details-section {\n  padding-bottom: 25px;\n}\n\n.property-pic-slider {\n  margin-right: -10px;\n  overflow: hidden;\n  margin-bottom: 60px;\n}\n.property-pic-slider.owl-carousel .owl-nav button {\n  height: 50px;\n  width: 50px;\n  background: #000000;\n  border-radius: 50%;\n  line-height: 58px;\n  text-align: center;\n  font-size: 30px;\n  color: #ffffff;\n  position: absolute;\n  left: 20px;\n  top: 50%;\n  transform: translateY(-30px);\n}\n.property-pic-slider.owl-carousel .owl-nav button.owl-next {\n  left: auto;\n  right: 20px;\n}\n.property-pic-slider .ps-item .container-fluid {\n  padding-right: 5px;\n}\n.property-pic-slider .ps-item .ps-item-inner {\n  height: 317px;\n  margin-bottom: 10px;\n  margin-right: 10px;\n}\n.property-pic-slider .ps-item .ps-item-inner.large-item {\n  height: 645px;\n}\n\n.pd-text .pd-title {\n  position: relative;\n  margin-bottom: 65px;\n}\n.pd-text .pd-title .heart-icon {\n  position: absolute;\n  right: 0;\n  top: 0;\n  content: \"\";\n  font-family: \"ElegantIcons\";\n  font-size: 18px;\n  color: #00C89E;\n}\n.pd-text .pd-title .label {\n  font-size: 12px;\n  font-weight: 600;\n  text-transform: uppercase;\n  padding: 3px 10px 2px;\n  display: inline-block;\n  background: #0166D0;\n  color: #ffffff;\n  margin-right: 10px;\n}\n.pd-text .pd-title .pt-price {\n  font-size: 18px;\n  font-weight: 700;\n  color: #00C89E;\n  margin-bottom: 10px;\n  display: inline-block;\n}\n.pd-text .pd-title .pt-price span {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 400;\n}\n.pd-text .pd-title h3 {\n  margin-bottom: 6px;\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  margin-bottom: 5px;\n}\n.pd-text .pd-title p {\n  font-weight: 500;\n}\n.pd-text .pd-title p span {\n  color: #00C89E;\n}\n.pd-text .pd-social {\n  text-align: right;\n  padding-top: 40px;\n  margin-bottom: 30px;\n}\n.pd-text .pd-social a {\n  display: inline-block;\n  font-size: 14px;\n  color: #111111;\n  height: 36px;\n  width: 36px;\n  background: #f2f2f2;\n  line-height: 36px;\n  text-align: center;\n  border-radius: 50%;\n  margin-right: 10px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.pd-text .pd-social a:hover {\n  background: #00C89E;\n  color: #ffffff;\n}\n.pd-text .pd-social a:last-child {\n  margin-right: 0;\n}\n.pd-text .pd-board {\n  margin-bottom: 65px;\n}\n.pd-text .pd-board .tab-board .nav-tabs {\n  background: #113220;\n  border-bottom: none;\n}\n.pd-text .pd-board .tab-board .nav-tabs .nav-item {\n  margin-bottom: 0;\n}\n.pd-text .pd-board .tab-board .nav-tabs .nav-item a {\n  font-size: 16px;\n  color: #ffffff;\n  display: inline-block;\n  padding: 14px 30px;\n  border: none;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n  font-family: \"Lato\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 700;\n}\n.pd-text .pd-board .tab-board .nav-tabs .nav-item a.active {\n  color: #ffffff;\n  background: #00C89E;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details {\n  border: 1px solid #e1e1e1;\n  overflow: hidden;\n  border-top: none;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul {\n  width: 50%;\n  float: left;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul.left-table li:nth-child(even) {\n  background: #f7f7f7;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul.right-table li:nth-child(odd) {\n  background: #f7f7f7;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul li {\n  font-size: 14px;\n  list-style: none;\n  font-weight: 500;\n  padding: 15px 0;\n  padding-left: 30px;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul li .type-name {\n  color: #111111;\n  width: 148px;\n  display: inline-block;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-details ul li .type-value {\n  color: #00C89E;\n  display: inline-block;\n}\n.pd-text .pd-board .tab-board .tab-content .tab-desc {\n  border: 1px solid #e1e1e1;\n  overflow: hidden;\n  border-top: none;\n  padding: 20px;\n}\n.pd-text .pd-widget {\n  margin-bottom: 65px;\n}\n.pd-text .pd-widget h4 {\n  color: #252525;\n  text-transform: uppercase;\n  font-weight: 700;\n  margin-bottom: 35px;\n}\n.pd-text .pd-widget .map {\n  height: 350px;\n}\n.pd-text .pd-widget .map iframe {\n  width: 100%;\n}\n.pd-text .pd-widget .map-location {\n  background: #f5f5f5;\n  padding: 35px 0 10px 40px;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item {\n  margin-bottom: 25px;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item h6 {\n  color: #111111;\n  text-transform: uppercase;\n  font-weight: 700;\n  margin-bottom: 6px;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item h6 span {\n  color: #00C89E;\n  text-transform: lowercase;\n  margin-left: 6px;\n  font-size: 14px;\n  font-weight: 400;\n}\n.pd-text .pd-widget .map-location .ml-item .ml-single-item p {\n  color: #888888;\n}\n.pd-text .pd-widget .pd-agent {\n  background: #f5f5f5;\n  overflow: hidden;\n  padding: 40px;\n}\n.pd-text .pd-widget .pd-agent .agent-pic {\n  float: left;\n  margin-right: 30px;\n}\n.pd-text .pd-widget .pd-agent .agent-pic img {\n  height: 200px;\n  width: 200px;\n  border-radius: 50%;\n}\n.pd-text .pd-widget .pd-agent .agent-text {\n  overflow: hidden;\n  padding-top: 10px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title {\n  margin-bottom: 20px;\n  position: relative;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title h6 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 6px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title span {\n  display: block;\n  font-size: 12px;\n  color: #00C89E;\n  font-weight: 500;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-title .primary-btn {\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n.pd-text .pd-widget .pd-agent .agent-text p {\n  color: #111111;\n  font-weight: 500;\n  margin-bottom: 24px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-number {\n  font-size: 14px;\n  color: #00C89E;\n  font-weight: 600;\n  display: inline-block;\n  padding: 10px 16px;\n  background: #ffffff;\n  margin-right: 6px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-social {\n  display: inline-block;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-social a {\n  font-size: 14px;\n  color: #111111;\n  background: #ffffff;\n  height: 40px;\n  width: 40px;\n  line-height: 40px;\n  text-align: center;\n  display: inline-block;\n  margin-right: 6px;\n}\n.pd-text .pd-widget .pd-agent .agent-text .at-option .at-social a:last-child {\n  margin-right: 0;\n}\n.pd-text .pd-widget .pd-review .pr-item {\n  margin-bottom: 34px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar {\n  overflow: hidden;\n  margin-bottom: 20px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-pic {\n  float: left;\n  margin-right: 20px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-pic img {\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text {\n  overflow: hidden;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text h6 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 5px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text span {\n  font-size: 12px;\n  color: #666666;\n  display: block;\n  margin-right: 4px;\n}\n.pd-text .pd-widget .pd-review .pr-item .pr-avatar .pr-text .pr-rating i {\n  font-size: 10px;\n  color: #f7a441;\n  margin-right: -4px;\n}\n\n.review-form,\n.leave-comment-form,\n.cc-form {\n  overflow: hidden;\n  position: relative;\n}\n.review-form .group-input,\n.leave-comment-form .group-input,\n.cc-form .group-input {\n  margin-right: -20px;\n}\n.review-form .group-input input,\n.leave-comment-form .group-input input,\n.cc-form .group-input input {\n  width: calc(33.33% - 20px);\n  float: left;\n  height: 46px;\n  font-size: 12px;\n  color: #888888;\n  padding-left: 20px;\n  border: 1px solid #e1e1e1;\n  margin-right: 20px;\n  margin-bottom: 20px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.review-form .group-input input::placeholder,\n.leave-comment-form .group-input input::placeholder,\n.cc-form .group-input input::placeholder {\n  color: #888888;\n}\n.review-form .group-input input:focus,\n.leave-comment-form .group-input input:focus,\n.cc-form .group-input input:focus {\n  border-color: #00C89E;\n}\n.review-form textarea,\n.leave-comment-form textarea,\n.cc-form textarea {\n  width: 100%;\n  height: 110px;\n  font-size: 12px;\n  color: #888888;\n  padding-left: 20px;\n  border: 1px solid #e1e1e1;\n  padding-top: 12px;\n  resize: none;\n  margin-bottom: 14px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.review-form textarea::placeholder,\n.leave-comment-form textarea::placeholder,\n.cc-form textarea::placeholder {\n  color: #888888;\n}\n.review-form textarea:focus,\n.leave-comment-form textarea:focus,\n.cc-form textarea:focus {\n  border-color: #00C89E;\n}\n.review-form .rating,\n.leave-comment-form .rating,\n.cc-form .rating {\n  position: absolute;\n  right: 5px;\n  bottom: 0;\n}\n.review-form .rating span,\n.leave-comment-form .rating span,\n.cc-form .rating span {\n  font-size: 14px;\n  color: #636363;\n  font-weight: 500;\n}\n.review-form .rating i,\n.leave-comment-form .rating i,\n.cc-form .rating i {\n  font-size: 12px;\n  color: #f7a441;\n  margin-right: -4px;\n}\n\n.property-sidebar .single-sidebar {\n  margin-bottom: 68px;\n}\n.property-sidebar .single-sidebar.slider-op {\n  margin-bottom: 60px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item {\n  overflow: hidden;\n  margin-bottom: 30px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-pic {\n  height: 130px;\n  width: 130px;\n  float: left;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text {\n  overflow: hidden;\n  border: 1px solid #ebebeb;\n  border-left: none;\n  height: 130px;\n  padding-top: 26px;\n  padding-left: 20px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text h6 {\n  margin-bottom: 8px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text h6 a {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text span {\n  font-size: 14px;\n  color: #888888;\n  display: block;\n  margin-bottom: 8px;\n}\n.property-sidebar .single-sidebar .top-agent .ta-item .ta-text .ta-num {\n  font-size: 14px;\n  color: #00C89E;\n  font-weight: 500;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots {\n  padding-top: 6px;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots button {\n  height: 2px;\n  width: 20px;\n  background: #d7d7d7;\n  margin-right: 10px;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots button.active {\n  height: 3px;\n  background: #00C89E;\n}\n.property-sidebar .single-sidebar .sf-slider.owl-carousel .owl-dots button:last-child {\n  margin-right: 0;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item {\n  height: 350px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item .sf-text {\n  background: #ffffff;\n  text-align: center;\n  padding: 16px 30px 15px;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item .sf-text h5 {\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 6px;\n}\n.property-sidebar .single-sidebar .sf-slider .sf-item .sf-text span {\n  font-size: 12px;\n  color: #00C89E;\n  font-weight: 500;\n  display: block;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input {\n  margin-bottom: 15px;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input p {\n  color: #111111;\n  margin-bottom: 8px;\n  font-weight: 500;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input input {\n  height: 46px;\n  background: transparent;\n  border: 1px solid #ededed;\n  width: 100%;\n  padding-left: 20px;\n  color: #666666;\n  opacity: 0.6;\n}\n.property-sidebar .single-sidebar .calculator-form .filter-input input::placeholder {\n  color: #666666;\n  opacity: 0.6;\n}\n.property-sidebar .single-sidebar .calculator-form .site-btn {\n  width: 100%;\n  margin-top: 15px;\n}\n\n/*---------------------\n  Product Compasion\n-----------------------*/\n.pc-table table {\n  text-align: center;\n  width: 100%;\n  padding-right: 30px;\n}\n.pc-table table thead tr th {\n  background: #f7f7f7;\n  padding: 22px 0 24px;\n}\n.pc-table table thead tr th.type {\n  font-size: 18px;\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n}\n.pc-table table thead tr th.compare-item {\n  padding-right: 30px;\n}\n.pc-table table thead tr th.compare-item.middle-item {\n  padding-right: 60px;\n}\n.pc-table table thead tr th.compare-item .title {\n  font-size: 20px;\n  font-weight: 700;\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 22px;\n}\n.pc-table table thead tr th.compare-item img {\n  margin-bottom: 22px;\n  min-width: 100%;\n}\n.pc-table table thead tr th.compare-item h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 6px;\n}\n.pc-table table thead tr th.compare-item p {\n  color: #666666;\n  margin-bottom: 0;\n}\n.pc-table table thead tr th.compare-item p span {\n  color: #00C89E;\n  margin-right: 5px;\n}\n.pc-table table tbody tr:nth-child(even) {\n  background: #f7f7f7;\n}\n.pc-table table tbody tr td {\n  font-size: 14px;\n  color: #636363;\n  font-weight: 500;\n  padding: 20px 0;\n}\n.pc-table table tbody tr td.p-type {\n  color: #111111;\n  font-weight: 600;\n  width: 335px;\n}\n.pc-table table tbody tr td.icon-check span {\n  color: #00C89E;\n}\n.pc-table table tbody tr td.icon-close span {\n  color: #f31700;\n}\n\n/*---------------------\n  Property Submit\n-----------------------*/\n.property-submit-form form h4 {\n  color: #252525;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 35px;\n}\n.property-submit-form form input {\n  height: 46px;\n  width: 100%;\n  background: transparent;\n  color: #666666;\n  padding-left: 20px;\n  font-size: 14px;\n  border: none;\n  border: 1px solid #e1e1e1;\n}\n.property-submit-form form input::placeholder {\n  color: #666666;\n}\n.property-submit-form form .pf-title {\n  margin-bottom: 75px;\n}\n.property-submit-form form .pf-title input {\n  padding-left: 30px;\n}\n.property-submit-form form .pf-summernote {\n  margin-bottom: 70px;\n}\n.property-submit-form form .pf-summernote .nav {\n  border-bottom: none;\n}\n.property-submit-form form .pf-summernote .nav li a {\n  font-size: 14px;\n  color: #666666;\n  border-bottom: none;\n  border: 1px solid #e1e1e1;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n  padding: 10px 60px;\n}\n.property-submit-form form .pf-summernote .nav li a.active {\n  background: #252525;\n  border-color: #252525;\n  color: #ffffff;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group {\n  border: 1px solid #e1e1e1;\n  padding-left: 30px;\n  position: relative;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group .btn-item {\n  background: transparent;\n  border: none;\n  font-size: 16px;\n  color: #666666;\n  padding-left: 0;\n  padding-right: 15px;\n  padding-top: 7px;\n  padding-bottom: 6px;\n  display: inline-block;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group .btn-item.media-insert {\n  background: #00C89E;\n  color: #ffffff;\n  padding-left: 34px;\n  padding-right: 26px;\n  position: absolute;\n  right: -1px;\n  top: -2px;\n  height: 40px;\n}\n.property-submit-form form .pf-summernote .text-editor .button-group .btn-item.media-insert i {\n  margin-right: 5px;\n}\n.property-submit-form form .pf-summernote .text-editor textarea {\n  height: 305px;\n  border: 1px solid #e1e1e1;\n  border-top: none;\n  width: 100%;\n  resize: none;\n}\n.property-submit-form form .pf-location {\n  margin-bottom: 45px;\n}\n.property-submit-form form .pf-location .location-inputs {\n  margin-right: -20px;\n  overflow: hidden;\n}\n.property-submit-form form .pf-location .location-inputs input {\n  width: calc(33.33% - 20px);\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-map {\n  margin-bottom: 75px;\n}\n.property-submit-form form .pf-map .map-inputs input {\n  width: 100%;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-map button {\n  width: 100%;\n  text-transform: initial;\n}\n.property-submit-form form .pf-map .g-map {\n  height: 245px;\n}\n.property-submit-form form .pf-map .g-map iframe {\n  width: 100%;\n}\n.property-submit-form form .pf-type {\n  margin-bottom: 60px;\n}\n.property-submit-form form .pf-type .type-item {\n  overflow: hidden;\n}\n.property-submit-form form .pf-type .type-item label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  float: left;\n  margin-bottom: 10px;\n  margin-right: 130px;\n}\n.property-submit-form form .pf-type .type-item label:last-child {\n  margin-right: 0;\n}\n.property-submit-form form .pf-type .type-item label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.property-submit-form form .pf-type .type-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n.property-submit-form form .pf-type .type-item label input:checked ~ span {\n  background: #666666;\n}\n.property-submit-form form .pf-status {\n  margin-bottom: 60px;\n}\n.property-submit-form form .pf-status .status-item label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  display: inline-block;\n  margin-bottom: 10px;\n  margin-right: 130px;\n}\n.property-submit-form form .pf-status .status-item label:last-child {\n  margin-right: 0;\n}\n.property-submit-form form .pf-status .status-item label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.property-submit-form form .pf-status .status-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n.property-submit-form form .pf-status .status-item label input:checked ~ span {\n  background: #666666;\n}\n.property-submit-form form .pf-feature-price {\n  margin-bottom: 55px;\n}\n.property-submit-form form .pf-feature-price .fp-inputs {\n  margin-right: -20px;\n  overflow: hidden;\n}\n.property-submit-form form .pf-feature-price .fp-inputs input {\n  width: calc(33.33% - 20px);\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-feature {\n  margin-bottom: 50px;\n}\n.property-submit-form form .pf-feature .features-list {\n  overflow: hidden;\n}\n.property-submit-form form .pf-feature .features-list .feature-item {\n  width: 25%;\n  float: left;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label {\n  font-size: 14px;\n  color: #666666;\n  font-weight: 500;\n  position: relative;\n  padding-left: 26px;\n  cursor: pointer;\n  display: block;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label:last-child {\n  margin-right: 0;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label .checkbox {\n  position: absolute;\n  left: 0;\n  top: 4px;\n  width: 12px;\n  height: 12px;\n  border: 1px solid #666666;\n  border-radius: 2px;\n  content: \"\";\n}\n.property-submit-form form .pf-feature .features-list .feature-item label input {\n  position: absolute;\n  visibility: hidden;\n}\n.property-submit-form form .pf-feature .features-list .feature-item label input:checked ~ span {\n  background: #666666;\n}\n.property-submit-form form .pf-feature-image {\n  margin-bottom: 75px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content {\n  background: #f5f5f5;\n  position: relative;\n}\n.property-submit-form form .pf-feature-image .feature-image-content .image-uploader {\n  min-height: 13rem;\n}\n.property-submit-form form .pf-feature-image .feature-image-content .image-uploader .uploaded .uploaded-image .delete-image i {\n  font-size: 15px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content .upload-input-class {\n  opacity: 0;\n  visibility: hidden;\n  position: absolute;\n  left: 0;\n  z-index: -999;\n}\n.property-submit-form form .pf-feature-image .feature-image-content p {\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content p i {\n  margin-right: 5px;\n}\n.property-submit-form form .pf-feature-image .feature-image-content div {\n  font-size: 14px;\n  color: #666666;\n  margin-bottom: 25px;\n}\n.property-submit-form form .pf-property-details .property-details-inputs {\n  margin-right: -20px;\n  overflow: hidden;\n}\n.property-submit-form form .pf-property-details .property-details-inputs input {\n  width: calc(33.33% - 20px);\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n.property-submit-form form .pf-property-details button {\n  width: 100%;\n}\n\n.richText {\n  background: transparent;\n}\n\n.richText .richText-help {\n  display: none;\n}\n\n.richText .richText-toolbar:last-child {\n  background-color: #FAFAFA;\n}\n\n.richText .richText-editor {\n  overflow-y: auto;\n}\n\n.richText .richText-editor:focus {\n  border-left: none;\n}\n\n.richText .richText-toolbar ul li a {\n  border: none;\n}\n\nli .richText-btn[data-command=toggleCode] {\n  opacity: 0;\n  visibility: hidden;\n}\n\n/*---------------------\n  Agent Section\n-----------------------*/\n.agent-section {\n  padding-bottom: 60px;\n}\n\n.agent-search-form {\n  position: relative;\n  margin-bottom: 20px;\n  padding-left: 15px;\n}\n.agent-search-form form input {\n  width: 100%;\n  height: 46px;\n  border: 1px solid #d7d7d7;\n  font-size: 14px;\n  color: #666666;\n  padding-left: 20px;\n  background: transparent;\n  font-weight: 500;\n}\n.agent-search-form form input::placeholder {\n  color: #666666;\n}\n.agent-search-form form button {\n  font-size: 13px;\n  color: #ffffff;\n  background: #00C89E;\n  border: none;\n  height: 100%;\n  width: 46px;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.as-slider .row {\n  margin-right: 0px;\n  margin-left: 0px;\n}\n.as-slider.owl-carousel .owl-stage-outer {\n  padding-top: 20px;\n}\n.as-slider.owl-carousel .owl-nav {\n  position: absolute;\n  right: 15px;\n  top: -66px;\n}\n.as-slider.owl-carousel .owl-nav button {\n  height: 46px;\n  width: 46px;\n  background: #f2f2f2;\n  border-radius: 50%;\n  line-height: 54px;\n  text-align: center;\n  font-size: 27px;\n  color: #111111;\n  margin-left: 10px;\n}\n\n.as-item {\n  text-align: center;\n  background: #ffffff;\n  padding: 35px 35px 30px 35px;\n  box-shadow: 0px 3px 15px rgba(91, 91, 91, 0.15);\n  margin-bottom: 40px;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.as-item:hover {\n  background: #00C89E;\n}\n.as-item:hover .as-pic .rating-point {\n  color: #00C89E;\n  background: #ffffff;\n}\n.as-item:hover .as-text .at-title {\n  border-color: #33d3b3;\n}\n.as-item:hover .as-text .at-title h6 {\n  color: #ffffff;\n}\n.as-item:hover .as-text ul li {\n  color: #ffffff;\n}\n.as-item:hover .as-text .primary-btn {\n  background: #ffffff;\n}\n.as-item .as-pic {\n  width: 151px;\n  height: 151px;\n  position: relative;\n  margin: 0 auto;\n  margin-bottom: 25px;\n}\n.as-item .as-pic img {\n  border-radius: 50%;\n}\n.as-item .as-pic .rating-point {\n  font-size: 16px;\n  font-weight: 600;\n  color: #ffffff;\n  background: #00C89E;\n  height: 50px;\n  width: 50px;\n  border-radius: 50%;\n  line-height: 50px;\n  text-align: center;\n  position: absolute;\n  left: -10px;\n  top: 0;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.as-item .as-text .at-title {\n  border-bottom: 1px solid #e1e1e1;\n  padding-bottom: 15px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.as-item .as-text .at-title h6 {\n  color: #111111;\n  text-transform: uppercase;\n  font-weight: 700;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.as-item .as-text .at-title .rating-star i {\n  font-size: 10px;\n  color: #ffb129;\n  margin-right: -4px;\n}\n.as-item .as-text ul {\n  text-align: left;\n  padding-top: 20px;\n  margin-bottom: 16px;\n}\n.as-item .as-text ul li {\n  list-style: none;\n  font-size: 14px;\n  color: #111111;\n  font-weight: 500;\n  line-height: 36px;\n  overflow: hidden;\n  -webkit-transition: all 22s;\n  transition: all 0.2s;\n}\n.as-item .as-text ul li span {\n  font-weight: 600;\n  float: right;\n}\n.as-item .as-text .primary-btn {\n  background: #f2f2f2;\n  color: #00C89E;\n  display: block;\n  padding: 14px 20px;\n  text-align: center;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n\n/*-----------------------\n  Profile Agent Content\n------------------------*/\n.profile-section {\n  padding-bottom: 0;\n}\n\n.profile-agent-content {\n  padding: 30px 50px 30px 30px;\n  border: 1px solid #e1e1e1;\n}\n.profile-agent-content .profile-agent-info {\n  position: relative;\n}\n.profile-agent-content .profile-agent-info:after {\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 1px;\n  height: 120px;\n  background: #ebebeb;\n  content: \"\";\n}\n.profile-agent-content .profile-agent-info .pi-pic {\n  width: 120px;\n  height: 120px;\n  position: relative;\n  float: left;\n  margin-right: 30px;\n}\n.profile-agent-content .profile-agent-info .pi-pic img {\n  border-radius: 50%;\n}\n.profile-agent-content .profile-agent-info .pi-pic .rating-point {\n  font-size: 14px;\n  font-weight: 600;\n  color: #ffffff;\n  background: #00C89E;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  line-height: 40px;\n  text-align: center;\n  position: absolute;\n  left: 0;\n  top: 0;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n.profile-agent-content .profile-agent-info .pi-text {\n  overflow: hidden;\n  padding-top: 20px;\n}\n.profile-agent-content .profile-agent-info .pi-text h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 4px;\n}\n.profile-agent-content .profile-agent-info .pi-text span {\n  font-size: 12px;\n  color: #2897bb;\n  font-weight: 500;\n}\n.profile-agent-content .profile-agent-info .pi-text p {\n  margin-bottom: 0;\n  color: #111111;\n  margin-top: 8px;\n}\n.profile-agent-content .profile-agent-widget {\n  padding-right: 50px;\n  position: relative;\n}\n.profile-agent-content .profile-agent-widget:after {\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 1px;\n  height: 120px;\n  background: #ebebeb;\n  content: \"\";\n}\n.profile-agent-content .profile-agent-widget ul {\n  padding-top: 5px;\n}\n.profile-agent-content .profile-agent-widget ul li {\n  list-style: none;\n  font-size: 14px;\n  color: #111111;\n  font-weight: 500;\n  line-height: 36px;\n  overflow: hidden;\n  -webkit-transition: all 22s;\n  transition: all 0.2s;\n}\n.profile-agent-content .profile-agent-widget ul li span {\n  font-weight: 600;\n  float: right;\n}\n.profile-agent-content .profile-agent-newslatter {\n  padding-top: 10px;\n}\n.profile-agent-content .profile-agent-newslatter h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 25px;\n}\n.profile-agent-content .profile-agent-newslatter form {\n  position: relative;\n}\n.profile-agent-content .profile-agent-newslatter form input {\n  height: 50px;\n  padding-left: 20px;\n  font-size: 14px;\n  color: #111111;\n  background: #f5f5f5;\n  border: none;\n  width: 100%;\n  font-weight: 500;\n}\n.profile-agent-content .profile-agent-newslatter form input::placeholder {\n  color: #111111;\n}\n.profile-agent-content .profile-agent-newslatter form button {\n  height: 50px;\n  width: 50px;\n  background: #00C89E;\n  color: #ffffff;\n  font-size: 18px;\n  border: none;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n/*---------------------\n  About\n-----------------------*/\n.about-section {\n  padding-bottom: 60px;\n}\n\n.about-text .at-title {\n  margin-bottom: 20px;\n}\n.about-text .at-title h3 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 15px;\n}\n.about-text .at-title p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.about-text .at-feature .af-item {\n  margin-bottom: 32px;\n}\n.about-text .at-feature .af-item .af-icon {\n  float: left;\n  margin-right: 30px;\n}\n.about-text .at-feature .af-item .af-text {\n  overflow: hidden;\n}\n.about-text .at-feature .af-item .af-text h6 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 8px;\n}\n.about-text .at-feature .af-item .af-text p {\n  color: #111111;\n  opacity: 0.7;\n  margin-bottom: 0;\n}\n\n.about-pic {\n  height: 423px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.about-pic .play-btn {\n  font-size: 42px;\n  color: #ffffff;\n}\n\n/*---------------------\n  Blog\n-----------------------*/\n.blog-item {\n  overflow: hidden;\n  padding-bottom: 30px;\n  border-bottom: 1px solid #e1e1e1;\n  margin-bottom: 30px;\n}\n.blog-item:last-child {\n  padding-bottom: 0;\n  border-bottom: none;\n  margin-bottom: 50px;\n}\n.blog-item.large-blog {\n  padding-bottom: 25px;\n}\n.blog-item.large-blog .bi-pic {\n  float: none;\n  margin-bottom: 25px;\n  margin-right: 0;\n}\n.blog-item.large-blog .bi-pic img {\n  min-width: 100%;\n}\n.blog-item.large-blog .bi-pic .bi-text {\n  overflow: visible;\n}\n.blog-item .bi-pic {\n  float: left;\n  margin-right: 30px;\n}\n.blog-item .bi-text {\n  overflow: hidden;\n}\n.blog-item .bi-text h4 {\n  margin-bottom: 6px;\n}\n.blog-item .bi-text h4 a {\n  line-height: 31px;\n  font-weight: 700;\n  color: #111111;\n}\n.blog-item .bi-text h5 {\n  margin-bottom: 6px;\n}\n.blog-item .bi-text h5 a {\n  font-size: 20px;\n  line-height: 31px;\n  font-weight: 700;\n  color: #111111;\n}\n.blog-item .bi-text ul {\n  margin-bottom: 16px;\n}\n.blog-item .bi-text ul li {\n  list-style: none;\n  display: inline-block;\n  position: relative;\n  font-size: 12px;\n  color: #999999;\n  font-weight: 500;\n  margin-right: 32px;\n}\n.blog-item .bi-text ul li:last-child {\n  margin-right: 0;\n}\n.blog-item .bi-text ul li:last-child:after {\n  display: none;\n}\n.blog-item .bi-text ul li span {\n  color: #111111;\n  font-weight: 600;\n}\n.blog-item .bi-text ul li:after {\n  position: absolute;\n  right: -23px;\n  top: 6px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.blog-item .bi-text .read-more {\n  font-size: 14px;\n  color: #111111;\n  font-weight: 600;\n}\n.blog-item .bi-text .read-more span {\n  font-size: 16px;\n  position: relative;\n  top: 4px;\n  right: -2px;\n  font-weight: 600;\n}\n\n.blog-sidebar .follow-us {\n  margin-bottom: 60px;\n}\n.blog-sidebar .follow-us .fu-links a {\n  font-size: 14px;\n  color: #ffffff;\n  height: 46px;\n  width: 46px;\n  background: #3263AF;\n  line-height: 46px;\n  text-align: center;\n  border-radius: 50%;\n  display: inline-block;\n  margin-right: 10px;\n}\n.blog-sidebar .follow-us .fu-links a:last-child {\n  margin-right: 0;\n}\n.blog-sidebar .follow-us .fu-links a.twitter {\n  background: #40C4FF;\n}\n.blog-sidebar .follow-us .fu-links a.youtube {\n  background: #FF0000;\n}\n.blog-sidebar .follow-us .fu-links a.instagram {\n  background: linear-gradient(45deg, #af00e1, #ff9e35);\n}\n.blog-sidebar .feature-post {\n  margin-bottom: 60px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item {\n  overflow: hidden;\n  margin-bottom: 30px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-pic {\n  float: left;\n  margin-right: 20px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text h6 {\n  margin-bottom: 4px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text h6 a {\n  color: #111111;\n  font-weight: 700;\n  font-family: \"Lato\", sans-serif;\n  line-height: 21px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text span {\n  font-size: 12px;\n  color: #999999;\n  position: relative;\n  padding-left: 22px;\n}\n.blog-sidebar .feature-post .recent-post .rp-item .rp-text span:after {\n  position: absolute;\n  left: 0;\n  top: 5px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.blog-sidebar .subscribe-form {\n  background: #f5f5f5;\n  padding: 30px;\n}\n.blog-sidebar .subscribe-form .section-title {\n  margin-bottom: 25px;\n}\n.blog-sidebar .subscribe-form form input {\n  font-size: 14px;\n  color: #999999;\n  font-weight: 500;\n  width: 100%;\n  height: 50px;\n  border: 1px solid #cccccc;\n  padding-left: 20px;\n  background: transparent;\n  margin-bottom: 20px;\n}\n.blog-sidebar .subscribe-form form input::placeholder {\n  color: #999999;\n}\n\n/*---------------------\n  Blog Details\n-----------------------*/\n.blog-details-section {\n  padding-top: 80px;\n  padding-bottom: 60px;\n}\n\n.blog-details-content .bc-top {\n  margin-bottom: 24px;\n}\n.blog-details-content .bc-top p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-details {\n  margin-bottom: 15px;\n  overflow: hidden;\n}\n.blog-details-content .bc-details .bc-pic {\n  float: left;\n  margin-right: 30px;\n}\n.blog-details-content .bc-details .bc-text {\n  overflow: hidden;\n}\n.blog-details-content .bc-details .bc-text p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-desc {\n  margin-bottom: 30px;\n}\n.blog-details-content .bc-desc p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-quote {\n  overflow: hidden;\n  margin-bottom: 6px;\n}\n.blog-details-content .bc-quote .bq-icon {\n  width: 75px;\n  height: 75px;\n  border: 1px solid #e1e1e1;\n  border-radius: 50%;\n  line-height: 75px;\n  text-align: center;\n  font-size: 30px;\n  color: #00C89E;\n  float: left;\n  margin-right: 20px;\n}\n.blog-details-content .bc-quote .bq-text {\n  overflow: hidden;\n}\n.blog-details-content .bc-quote .bq-text p {\n  color: #111111;\n  font-size: 16px;\n  font-weight: 600;\n  font-style: italic;\n  line-height: 30px;\n}\n.blog-details-content .bc-desc-last {\n  margin-bottom: 33px;\n}\n.blog-details-content .bc-desc-last p {\n  font-size: 15px;\n  line-height: 27px;\n}\n.blog-details-content .bc-tags {\n  margin-bottom: 50px;\n}\n.blog-details-content .bc-tags a {\n  font-size: 13px;\n  color: #666666;\n  display: inline-block;\n  border: 1px solid #e1e1e1;\n  padding: 8px 15px;\n  margin-right: 6px;\n  margin-bottom: 10px;\n}\n.blog-details-content .bc-related-post {\n  background: #f5f5f5;\n  padding: 15px 20px 12px;\n  margin-bottom: 65px;\n}\n.blog-details-content .bc-related-post .previous-post,\n.blog-details-content .bc-related-post .next-post {\n  font-size: 14px;\n  text-transform: uppercase;\n  font-weight: 700;\n  color: #111111;\n}\n.blog-details-content .bc-related-post .previous-post i,\n.blog-details-content .bc-related-post .next-post i {\n  margin-right: 5px;\n  font-weight: 700;\n}\n.blog-details-content .bc-related-post .next-post {\n  float: right;\n}\n.blog-details-content .bc-related-post .next-post i {\n  margin-left: 5px;\n  margin-right: 0;\n}\n.blog-details-content .bc-widget {\n  margin-bottom: 30px;\n}\n.blog-details-content .bc-widget h4 {\n  color: #111111;\n  text-transform: uppercase;\n  margin-bottom: 35px;\n  font-weight: 700;\n}\n.blog-details-content .bc-widget .related-post .related-item {\n  margin-bottom: 30px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-pic {\n  margin-bottom: 15px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-pic img {\n  min-width: 100%;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-text h6 {\n  color: #111111;\n  font-size: 15px;\n  font-weight: 600;\n  line-height: 20px;\n  margin-bottom: 4px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-text span {\n  font-size: 12px;\n  color: #999999;\n  position: relative;\n  padding-left: 22px;\n}\n.blog-details-content .bc-widget .related-post .related-item .ri-text span:after {\n  position: absolute;\n  left: 0;\n  top: 5px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.blog-details-content .bc-widget .comment-option {\n  margin-bottom: 55px;\n}\n.blog-details-content .bc-widget .comment-option .co-item {\n  overflow: hidden;\n  margin-bottom: 20px;\n}\n.blog-details-content .bc-widget .comment-option .co-item.reply-item {\n  padding-left: 115px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-pic {\n  float: left;\n  margin-right: 25px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-pic img {\n  height: 90px;\n  width: 90px;\n  border-radius: 50%;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text {\n  overflow: hidden;\n  position: relative;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text h5 {\n  color: #111111;\n  font-weight: 700;\n  margin-bottom: 13px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text p {\n  font-size: 15px;\n  line-height: 26px;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul {\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul li {\n  list-style: none;\n  font-size: 12px;\n  color: #888888;\n  margin-right: 25px;\n  display: inline-block;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul li:last-child {\n  margin-right: 0;\n}\n.blog-details-content .bc-widget .comment-option .co-item .ci-text ul li i {\n  font-size: 14px;\n  color: #00C89E;\n  margin-right: 5px;\n}\n\n/*---------------------\n  Blog Hero\n-----------------------*/\n.blog-hero-section {\n  height: 640px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n}\n\n.bh-text {\n  display: inline-block;\n  background: #ffffff;\n  text-align: center;\n  padding: 35px 65px 32px 65px;\n}\n.bh-text h4 {\n  margin-bottom: 6px;\n  line-height: 31px;\n  font-weight: 700;\n  color: #111111;\n}\n.bh-text ul li {\n  list-style: none;\n  display: inline-block;\n  position: relative;\n  font-size: 12px;\n  color: #999999;\n  font-weight: 500;\n  margin-right: 32px;\n}\n.bh-text ul li:last-child {\n  margin-right: 0;\n}\n.bh-text ul li:last-child:after {\n  display: none;\n}\n.bh-text ul li span {\n  color: #111111;\n  font-weight: 600;\n}\n.bh-text ul li:after {\n  position: absolute;\n  right: -23px;\n  top: 6px;\n  height: 6px;\n  width: 6px;\n  border: 1px solid #dcdcdc;\n  content: \"\";\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n\n/*---------------------\n  Contact Form\n-----------------------*/\n.cf-content {\n  text-align: center;\n}\n.cf-content .cc-title {\n  margin-bottom: 35px;\n}\n.cf-content .cc-title h4 {\n  color: #111111;\n  font-weight: 700;\n  text-transform: uppercase;\n  margin-bottom: 8px;\n}\n.cf-content .cc-form input {\n  margin-bottom: 24px;\n}\n.cf-content .cc-form textarea {\n  margin-bottom: 10px;\n}\n\n/*--------------------------------- Responsive Media Quaries -----------------------------*/\n@media only screen and (min-width: 1600px) and (max-width: 1920px) {\n  .hs-slider.owl-carousel .owl-nav button {\n    left: -220px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: -220px;\n  }\n}\n@media only screen and (min-width: 1200px) and (max-width: 1350px) {\n  .hs-slider.owl-carousel .owl-nav button {\n    left: 0px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: 0px;\n  }\n}\n@media only screen and (min-width: 1200px) {\n  .container {\n    max-width: 1170px;\n  }\n}\n/* Medium Device = 1200px */\n@media only screen and (min-width: 992px) and (max-width: 1199px) {\n  .hs-top .ht-widget .hw-btn {\n    font-size: 11px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button {\n    left: 0;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: 0;\n  }\n\n  .property-item .pi-text ul li {\n    margin-right: 25px;\n  }\n\n  .feature-property-left {\n    padding: 40px 30px 30px 30px;\n  }\n\n  .cs-item-list .cs-item .cs-text {\n    width: 160px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-title .primary-btn {\n    position: relative;\n    top: 10px;\n  }\n\n  .property-submit-form form .pf-map button {\n    font-size: 12px;\n  }\n\n  .property-submit-form form .pf-type .type-item label {\n    margin-right: 70px;\n  }\n\n  .profile-agent-content {\n    padding: 30px 20px 30px 20px;\n  }\n\n  .ts-item {\n    padding: 25px 25px 30px 25px;\n  }\n}\n/* Tablet Device = 768px */\n@media only screen and (min-width: 768px) and (max-width: 991px) {\n  .hs-slider.owl-carousel .owl-nav button {\n    left: -30px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: -30px;\n  }\n\n  .change-btn {\n    text-align: left;\n    margin-bottom: 20px;\n  }\n\n  .property-controls {\n    text-align: left;\n    margin-bottom: 20px;\n  }\n\n  .chooseus-features .cf-item {\n    width: 100%;\n  }\n\n  .chooseus-features .cf-item .cf-text {\n    overflow: hidden;\n    padding-top: 20px;\n  }\n\n  .team-section .team-btn a {\n    padding: 12px 26px;\n  }\n\n  .ts-item .ts-text img {\n    height: 160px;\n    width: 160px;\n  }\n\n  .ts-item {\n    margin-bottom: 20px;\n  }\n\n  .cs-item-list .cs-item {\n    width: calc(33.33% - 10px);\n    margin-bottom: 10px;\n  }\n\n  .contact-section {\n    height: auto;\n  }\n\n  .cs-map {\n    height: 450px;\n    position: relative;\n    width: 100%;\n  }\n\n  .pd-text .pd-social {\n    text-align: left;\n    padding-top: 0;\n  }\n\n  .pd-text .pd-title {\n    margin-bottom: 30px;\n  }\n\n  .property-submit-form form .pf-summernote .text-editor .button-group .btn-item {\n    padding-right: 10px;\n  }\n\n  .property-submit-form form .pf-map .g-map {\n    margin-top: 30px;\n  }\n\n  .property-submit-form form .pf-type .type-item label {\n    margin-right: 30px;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .agent-search-form {\n    margin-bottom: 70px;\n  }\n\n  .as-slider.owl-carousel .owl-nav {\n    top: -50px;\n  }\n\n  .profile-agent-content .profile-agent-info {\n    margin-bottom: 20px;\n    overflow: hidden;\n  }\n  .profile-agent-content .profile-agent-info:after {\n    display: none;\n  }\n\n  .profile-agent-content .profile-agent-widget {\n    margin-bottom: 15px;\n  }\n  .profile-agent-content .profile-agent-widget:after {\n    display: none;\n  }\n\n  .blog-sidebar {\n    padding-top: 50px;\n  }\n\n  .review-form .group-input input,\n.leave-comment-form .group-input input,\n.cc-form .group-input input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .review-form .group-input,\n.leave-comment-form .group-input,\n.cc-form .group-input {\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .feature-property-left {\n    height: auto;\n  }\n\n  .hs-top .ht-widget {\n    border-bottom: none;\n    display: none;\n  }\n\n  .nav-menu {\n    display: none;\n  }\n\n  .hs-nav .hn-social {\n    display: none;\n  }\n\n  .hs-top .container {\n    position: relative;\n  }\n\n  .offcanvas-menu-overlay {\n    position: fixed;\n    height: 100%;\n    width: 100%;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 99;\n    left: 0;\n    top: 0;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n    visibility: hidden;\n  }\n  .offcanvas-menu-overlay.active {\n    visibility: visible;\n  }\n\n  .canvas-open {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 37px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 0;\n    top: 26px;\n    display: block;\n  }\n  .canvas-open span {\n    font-weight: 600;\n  }\n\n  .offcanvas-menu-wrapper {\n    width: 300px;\n    position: fixed;\n    height: 100%;\n    background: #ffffff;\n    overflow-y: scroll;\n    padding: 70px 30px 30px 30px;\n    z-index: 99;\n    left: -300px;\n    top: 0;\n    opacity: 0;\n    display: block;\n    visibility: hidden;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n  }\n  .offcanvas-menu-wrapper.show-offcanvas-menu-wrapper {\n    left: 0;\n    opacity: 1;\n    visibility: visible;\n  }\n  .offcanvas-menu-wrapper .canvas-close {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 35px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 30px;\n    top: 30px;\n  }\n  .offcanvas-menu-wrapper .canvas-close span {\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .logo {\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .logo a {\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-widget {\n    margin-bottom: 30px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul {\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li {\n    list-style: none;\n    font-size: 14px;\n    color: #444444;\n    font-weight: 500;\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li i {\n    display: inline-block;\n    font-size: 16px;\n    color: #00c8a0;\n    height: 46px;\n    width: 46px;\n    background: #f5f5f5;\n    line-height: 46px;\n    text-align: center;\n    margin-right: 10px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span {\n    margin-left: 20px;\n    display: inline-block;\n    position: relative;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span:after {\n    position: absolute;\n    left: -13px;\n    top: -2px;\n    content: \"|\";\n  }\n  .offcanvas-menu-wrapper .om-widget .hw-btn {\n    font-size: 14px;\n    color: #ffffff;\n    font-weight: 700;\n    letter-spacing: 0.5px;\n    background: #00C89E;\n    padding: 14px 30px;\n    text-transform: uppercase;\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-menu {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_btn {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav {\n    display: block !important;\n  }\n  .offcanvas-menu-wrapper .slicknav_menu {\n    background: transparent;\n    padding: 0;\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav ul {\n    margin: 0;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav .slicknav_row,\n.offcanvas-menu-wrapper .slicknav_nav a {\n    padding: 10px 0;\n    margin: 0;\n    color: #111111;\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav a:hover {\n    -webkit-border-radius: 0;\n    border-radius: 0;\n    background: transparent;\n    color: #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li {\n    border-bottom: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li .dropdown {\n    border-top: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .om-social a {\n    font-size: 16px;\n    color: #111111;\n    height: 35px;\n    width: 35px;\n    line-height: 35px;\n    text-align: center;\n    border: 1px solid #111111;\n    border-radius: 50%;\n    display: inline-block;\n    margin-right: 6px;\n  }\n}\n/* Wide Mobile = 480px */\n@media only screen and (max-width: 767px) {\n  .ts-item {\n    margin-bottom: 20px;\n  }\n\n  .cs-item-list .cs-item {\n    margin-bottom: 10px;\n  }\n\n  .hs-item {\n    height: auto;\n    padding: 113px 15px;\n  }\n\n  .pd-text .pd-social {\n    text-align: left;\n    padding-top: 0;\n  }\n\n  .pd-text .pd-title {\n    margin-bottom: 30px;\n  }\n\n  .property-submit-form form .pf-map .g-map {\n    margin-top: 30px;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .agent-search-form {\n    margin-bottom: 70px;\n  }\n\n  .as-slider.owl-carousel .owl-nav {\n    top: -50px;\n  }\n\n  .profile-agent-content .profile-agent-info {\n    margin-bottom: 20px;\n    overflow: hidden;\n  }\n\n  .profile-agent-content .profile-agent-widget {\n    margin-bottom: 15px;\n  }\n  .profile-agent-content .profile-agent-widget:after {\n    display: none;\n  }\n\n  .profile-agent-content .profile-agent-info:after {\n    display: none;\n  }\n\n  .blog-sidebar {\n    padding-top: 50px;\n  }\n\n  .review-form .group-input input,\n.leave-comment-form .group-input input,\n.cc-form .group-input input {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .review-form .group-input,\n.leave-comment-form .group-input,\n.cc-form .group-input {\n    margin-right: 0;\n  }\n\n  .property-submit-form form .pf-location .location-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-feature-price .fp-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .property-submit-form form .pf-property-details .property-details-inputs {\n    margin-right: 0;\n    overflow: visible;\n  }\n\n  .hs-item .hc-inner-text .hc-text {\n    float: none;\n    margin-right: 0;\n  }\n\n  .hs-item .hc-inner-text .hc-widget {\n    overflow: hidden;\n    width: auto;\n    position: relative;\n    right: 0;\n    top: 18px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button {\n    left: 0;\n  }\n\n  .hs-slider.owl-carousel .owl-nav button.owl-next {\n    right: 0;\n  }\n\n  .search-form-content .filter-form {\n    margin-right: 0;\n  }\n\n  .search-form-content .filter-form .sm-width {\n    width: 100%;\n    margin-bottom: 20px;\n    margin-right: 0 !important;\n  }\n\n  .change-btn {\n    text-align: left;\n    margin-bottom: 20px;\n  }\n\n  .property-controls {\n    text-align: left;\n  }\n\n  .property-controls ul li {\n    margin-right: 24px;\n    margin-bottom: 20px;\n  }\n\n  .property-controls ul li:after {\n    right: -17px;\n  }\n\n  .chooseus-features .cf-item {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .fp-slider .fp-item .fp-text ul {\n    position: relative;\n    right: 0;\n  }\n\n  .team-section .team-btn {\n    text-align: left;\n    margin-bottom: 25px;\n  }\n\n  .cs-item-list .cs-item {\n    width: calc(50% - 10px);\n  }\n\n  .testimonial-section .section-title {\n    margin-bottom: 80px;\n  }\n\n  .testimonial-slider.owl-carousel .owl-nav {\n    top: -50px;\n  }\n\n  .contact-section {\n    height: auto;\n  }\n\n  .cs-map {\n    height: 450px;\n    position: relative;\n    width: 100%;\n  }\n\n  .pd-text .pd-board .tab-board .tab-content .tab-details ul {\n    width: 100%;\n    float: left;\n  }\n  .pd-text .pd-board .tab-board .tab-content .tab-details ul.left-table {\n    margin-bottom: 10px;\n  }\n\n  .pd-text .pd-board .tab-board .nav-tabs .nav-item a {\n    padding: 14px 26px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-pic {\n    float: none;\n    margin-right: 0;\n    margin-bottom: 20px;\n  }\n\n  .pc-table {\n    overflow-x: auto;\n  }\n\n  .contact-info {\n    padding-top: 60px;\n  }\n\n  .blog-item .bi-pic {\n    float: none;\n    margin-right: 0;\n    margin-bottom: 20px;\n  }\n\n  .bh-text ul li {\n    margin-right: 26px;\n  }\n\n  .bh-text ul li:after {\n    right: -19px;\n  }\n\n  .blog-details-section .p-0 {\n    padding: 0 15px !important;\n  }\n\n  .blog-details-content .bc-details .bc-pic {\n    float: none;\n    margin-right: 0;\n    margin-bottom: 20px;\n  }\n  .blog-details-content .bc-details .bc-pic img {\n    min-width: 100%;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item .ci-text ul {\n    position: relative;\n  }\n\n  .feature-property-left {\n    height: auto;\n  }\n\n  .property-submit-form form .pf-type .type-item label {\n    margin-right: 20px;\n  }\n\n  .property-submit-form form .pf-feature .features-list .feature-item {\n    width: 100%;\n    float: none;\n  }\n\n  .more-option .card .card-body .mo-list .ml-column {\n    width: 100%;\n    float: none;\n  }\n\n  .property-submit-form form .pf-summernote .text-editor .button-group .btn-item.media-insert {\n    position: relative;\n    right: 0;\n    top: 0;\n    height: auto;\n  }\n\n  .hs-top .ht-widget {\n    border-bottom: none;\n    display: none;\n  }\n\n  .nav-menu {\n    display: none;\n  }\n\n  .hs-nav .hn-social {\n    display: none;\n  }\n\n  .hs-top .container {\n    position: relative;\n  }\n\n  .offcanvas-menu-overlay {\n    position: fixed;\n    height: 100%;\n    width: 100%;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 99;\n    left: 0;\n    top: 0;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n    visibility: hidden;\n  }\n  .offcanvas-menu-overlay.active {\n    visibility: visible;\n  }\n\n  .canvas-open {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 37px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 0;\n    top: 26px;\n    display: block;\n  }\n  .canvas-open span {\n    font-weight: 600;\n  }\n\n  .offcanvas-menu-wrapper {\n    width: 300px;\n    position: fixed;\n    height: 100%;\n    background: #ffffff;\n    overflow-y: scroll;\n    padding: 70px 30px 30px 30px;\n    z-index: 99;\n    left: -300px;\n    top: 0;\n    opacity: 0;\n    display: block;\n    visibility: hidden;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s;\n  }\n  .offcanvas-menu-wrapper.show-offcanvas-menu-wrapper {\n    left: 0;\n    opacity: 1;\n    visibility: visible;\n  }\n  .offcanvas-menu-wrapper .canvas-close {\n    font-size: 22px;\n    height: 35px;\n    width: 35px;\n    border: 1px solid #111111;\n    display: inline-block;\n    line-height: 35px;\n    text-align: center;\n    cursor: pointer;\n    position: absolute;\n    right: 30px;\n    top: 30px;\n  }\n  .offcanvas-menu-wrapper .canvas-close span {\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .logo {\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .logo a {\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-widget {\n    margin-bottom: 30px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul {\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li {\n    list-style: none;\n    font-size: 14px;\n    color: #444444;\n    font-weight: 500;\n    margin-bottom: 20px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li i {\n    display: inline-block;\n    font-size: 16px;\n    color: #00c8a0;\n    height: 46px;\n    width: 46px;\n    background: #f5f5f5;\n    line-height: 46px;\n    text-align: center;\n    margin-right: 10px;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span {\n    margin-left: 20px;\n    display: inline-block;\n    position: relative;\n  }\n  .offcanvas-menu-wrapper .om-widget ul li span:after {\n    position: absolute;\n    left: -13px;\n    top: -2px;\n    content: \"|\";\n  }\n  .offcanvas-menu-wrapper .om-widget .hw-btn {\n    font-size: 14px;\n    color: #ffffff;\n    font-weight: 700;\n    letter-spacing: 0.5px;\n    background: #00C89E;\n    padding: 14px 30px;\n    text-transform: uppercase;\n    display: inline-block;\n  }\n  .offcanvas-menu-wrapper .om-menu {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_btn {\n    display: none;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav {\n    display: block !important;\n  }\n  .offcanvas-menu-wrapper .slicknav_menu {\n    background: transparent;\n    padding: 0;\n    margin-bottom: 40px;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav ul {\n    margin: 0;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav .slicknav_row,\n.offcanvas-menu-wrapper .slicknav_nav a {\n    padding: 10px 0;\n    margin: 0;\n    color: #111111;\n    font-weight: 600;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav a:hover {\n    -webkit-border-radius: 0;\n    border-radius: 0;\n    background: transparent;\n    color: #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li {\n    border-bottom: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .slicknav_nav li .dropdown {\n    border-top: 1px solid #111111;\n  }\n  .offcanvas-menu-wrapper .om-social a {\n    font-size: 16px;\n    color: #111111;\n    height: 35px;\n    width: 35px;\n    line-height: 35px;\n    text-align: center;\n    border: 1px solid #111111;\n    border-radius: 50%;\n    display: inline-block;\n    margin-right: 6px;\n  }\n}\n\n/* Small Device = 320px */\n@media only screen and (max-width: 479px) {\n  .hs-item .hc-inner-text {\n    padding: 25px 14px;\n  }\n\n  .hs-slider.owl-carousel .owl-nav {\n    display: none;\n  }\n\n  .ts-item {\n    padding: 25px 25px 30px 25px;\n  }\n\n  .pd-text .pd-board .tab-board .tab-content .tab-details ul li {\n    padding-left: 15px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-title .primary-btn {\n    position: relative;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-title span {\n    margin-bottom: 15px;\n  }\n\n  .pd-text .pd-widget .pd-agent .agent-text .at-option .at-social {\n    margin-top: 10px;\n  }\n\n  .review-form .rating,\n.leave-comment-form .rating,\n.cc-form .rating {\n    position: relative;\n    right: 0;\n    margin-bottom: 20px;\n  }\n\n  .property-sidebar .single-sidebar .top-agent .ta-item .ta-text {\n    padding-top: 20px;\n  }\n\n  .property-submit-form form .pf-summernote .nav li a {\n    padding: 10px 50px;\n  }\n\n  .profile-agent-content .profile-agent-info .pi-pic {\n    float: none;\n    margin-right: 0;\n  }\n\n  .profile-agent-content .profile-agent-widget ul li span {\n    display: block;\n    float: none;\n  }\n\n  .cs-item-list .cs-item {\n    width: 100%;\n    float: none;\n    margin-right: 0;\n  }\n\n  .profile-agent-content {\n    padding: 30px 30px 30px 30px;\n  }\n\n  .property-item .pi-text ul li {\n    margin-right: 20px;\n  }\n\n  .breadcrumb-text {\n    padding: 35px 35px;\n  }\n\n  .bh-text {\n    padding: 35px 50px 32px 50px;\n  }\n\n  .bh-text ul li {\n    display: block;\n    text-align: center;\n    margin-right: 0;\n    margin-bottom: 10px;\n  }\n\n  .bh-text ul li:after {\n    display: none;\n  }\n\n  .blog-details-content .bc-related-post .next-post {\n    float: none;\n    display: block;\n    text-align: right;\n    margin-top: 10px;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item.reply-item {\n    padding-left: 0;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item .ci-text ul li {\n    margin-right: 5px;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item .ci-pic {\n    float: none;\n    margin-bottom: 20px;\n  }\n\n  .blog-details-content .bc-widget .comment-option .co-item.reply-item {\n    padding-left: 10%;\n  }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64538,7 +64957,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_Property_vue":1,"resources_js_views_ProperyDetails_vue":1,"resources_js_views_SubmitProperty_vue":1,"resources_js_views_About_vue":1,"resources_js_views_Blog_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Login_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_ForgotPassword_vue":1,"resources_js_views_404_vue":1,"resources_js_views_Chat_vue":1,"resources_js_views_admin_Index_vue":1,"resources_js_views_admin_Property_vue":1,"resources_js_views_admin_NewsLatter_vue":1,"resources_js_views_admin_User_vue":1,"resources_js_views_admin_ContactMessage_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_Property_vue":1,"resources_js_views_ProperyDetails_vue":1,"resources_js_views_SubmitProperty_vue":1,"resources_js_views_About_vue":1,"resources_js_views_Blog_vue":1,"resources_js_views_ContactUs_vue":1,"resources_js_views_Login_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_ForgotPassword_vue":1,"resources_js_views_404_vue":1,"resources_js_views_Chat_vue":1,"resources_js_views_ProfileEdit_vue":1,"resources_js_views_admin_Index_vue":1,"resources_js_views_admin_Property_vue":1,"resources_js_views_admin_NewsLatter_vue":1,"resources_js_views_admin_User_vue":1,"resources_js_views_admin_AddUser_vue":1,"resources_js_views_admin_ContactMessage_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

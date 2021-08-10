@@ -65,7 +65,7 @@ const routes = [
             layout: 'default',
             role: '1',
         },
-        component: Blogs
+        component: () => import('../views/Blogs')
     },
     {
         path: '/blog/:id',
@@ -149,7 +149,18 @@ const routes = [
             layout: 'default',
         },
         component: () => import('../views/Chat')
-    }
+    },
+    {
+        path: '/profile/',
+        name: 'profile',
+        meta: {
+            title: 'Profile',
+            layout: 'default',
+            guard: 'authuser',
+            role: '1',
+        },
+        component: () => import('../views/ProfileEdit'),
+    },
 
 ]
 
@@ -158,6 +169,9 @@ const Router = createRouter({
     base: base,
     history: createWebHistory(),
     routes: routes.concat(AdminRoutes),
+    scrollBehavior(to, from, savedPosition) {
+        return { top: 0, behavior: 'smooth' }
+    }
 });
 
 Router.beforeEach((to, from, next) => {

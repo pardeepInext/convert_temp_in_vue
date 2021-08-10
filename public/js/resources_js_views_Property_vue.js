@@ -524,7 +524,8 @@ var _hoisted_29 = {
   "class": "property-section spad"
 };
 var _hoisted_30 = {
-  "class": "container"
+  "class": "container",
+  id: "property-list"
 };
 var _hoisted_31 = {
   key: 0

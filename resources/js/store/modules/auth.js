@@ -2,6 +2,8 @@ import axios from '../axios';
 import router from '../../router/index';
 import { gapi, loadClientAuth2, loadAuth2, loadGapiInsideDOM } from 'gapi-script';
 import facebookLogin from 'facebook-login';
+import {Loading} from 'notiflix';
+import { replace } from 'lodash';
 const state = {
      isLogin: false,
      loginError: {},
@@ -48,11 +50,14 @@ const actions = {
           localStorage.setItem('token', payload.token);
           localStorage.setItem('user', JSON.stringify(payload.user));
           commit('Is_Auth', true)
-          payload.user.role_id == 1 ? router.push({ name: 'home' }) : router.push({ name: 'dashboard' });
+          const push = payload.user.role_id == 1 ? { name: 'home' } : { name: 'dashboard' };
+          router.push(push);
+
      },
      async logout({ commit, dispatch }, id) {
-          axios.delete(`api/logout/${id}`)
-               .then(res => res.success ? dispatch('afterLogout') : '')
+        Loading.dots("Processing logout...");
+         await axios.delete(`api/logout/${id}`)
+               //.then(res => res.success ? dispatch('afterLogout') : '')
                .then(res => dispatch('afterLogout'))
                .catch(err => console.log(err));
 
@@ -65,6 +70,7 @@ const actions = {
                localStorage.removeItem('user');
           }
           commit('Is_Auth', false)
+          Loading.remove();
           router.push({ name: 'login' })
      },
      async googleLogin({ dispatch, commit }, payload) {

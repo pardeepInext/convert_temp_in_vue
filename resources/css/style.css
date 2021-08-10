@@ -4189,9 +4189,6 @@ li .richText-btn[data-command=toggleCode] {
   }
 }
 
-#home-bg{
-  background-image: url('../../public/assets/img/blog/bh-bg.jpg');
-}
 /* Small Device = 320px */
 @media only screen and (max-width: 479px) {
   .hs-item .hc-inner-text {

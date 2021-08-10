@@ -2,7 +2,7 @@
   <Header />
    <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
-      <component :is="isLoading? Skeleton : Component" :key="$route.path" @hook:mounted="test" />
+      <component :is="Component" :key="$route.path" id="content" />
     </transition>
   </router-view>
   <Footer />
@@ -14,7 +14,7 @@ import Footer from "../components/Footer";
 export default {
   data(){
        return {
-         isLoading:false,
+         loading:false,
        }
   },
   components: {
@@ -23,19 +23,17 @@ export default {
     Skeleton
   },
   computed:{
-      //  isLoading:{
-      //    get(){
-      //      return this.isLoading
-      //    },
-      //    set(newValue){
-      //      return this.isLoading = newValue;
-      //    }
-      //  }
+       isLoading:{
+         get(){
+           return this.loading
+         },
+         set(newValue){
+           return this.loading = newValue;
+         }
+       }
   },
   methods:{
-       test(){
-         console.log("hello");
-       }
+
   },
   mounted() {
     let _this = this;
@@ -52,7 +50,7 @@ export default {
 <style lang="css" scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.9s;
 }
 
 .fade-enter,

@@ -20,7 +20,10 @@
                       </div>
                     </div>
                   </div>
-                  <ul class="users">
+                  <p class="text-center" v-if="isConversationLoading">
+                    <i class="fas fa-spinner fa-pulse"></i> Loading...
+                  </p>
+                  <ul class="users" v-else>
                     <conversation
                       v-for="conversation in conversations.data"
                       :key="conversation"
@@ -37,7 +40,7 @@
                 <div class="chat-container" ref="chatContainer">
                   <ul class="chat-box chatContainerScroll" v-if="messages">
                     <message
-                      v-for="message in messages"
+                      v-for="message in fetchMessages.reverse()"
                       :key="message.id"
                       :message="message"
                     />
@@ -46,14 +49,13 @@
                     >Select Conversation</span
                   >
                 </div>
-                <div class="mt-3 mb-3 row" v-if="messages">
+                <div class="mt-3 mb-3 row">
                   <div class="col-md-9">
                     <textarea
                       class="form-control"
                       rows="3"
                       placeholder="Type your message here..."
-                      v-model="messageData.message"
-                      @keyup="typing"
+                      v-model="messageSent.text"
                     ></textarea>
                   </div>
                   <div class="col-md-3">
@@ -78,7 +80,7 @@
                       >
                         <i class="fas fa-paperclip"></i>
                       </button>
-                      <button class="btn btn-info" type="submit">
+                      <button class="btn btn-info" type="submit" v-if="messages">
                         <i class="fas fa-paper-plane"></i>
                       </button>
                     </form>
@@ -108,16 +110,23 @@ export default {
       attachmentName: "",
       error: "",
       id: "",
+      test:"",
       currentPage: 0,
       lastPage: 0,
-      messageData: {
-        message: "",
+      messageSent: {
+        text: "",
         attachment: {},
       },
     };
   },
   computed: {
-    ...mapGetters("Chat", ["conversations", "messages", "fetchMessages"]),
+    ...mapGetters("Chat", [
+      "conversations",
+      "messages",
+      "fetchMessages",
+      "isConversationLoading",
+      "isChatLoading",
+    ]),
     conversationId: {
       get() {
         return this.id;
@@ -126,34 +135,27 @@ export default {
         return (this.id = newId);
       },
     },
-    messages: {
-      get() {
-        return this.fetchMessages.reverse();
-      },
-      set(newMessage) {
-        return this.fetchMessages.push(newMessage);
-      },
-    },
   },
   methods: {
     ...mapActions("Chat", ["fetchConversation", "fetchChat", "sendMessage"]),
     getAttachment(e) {
       this.attachmentName = e.target.files[0].name;
-      this.messageData.attachment = e.target.files;
+      this.messageSent.attachment = e.target.files;
     },
     getConversation(convesationId) {
       this.conversationId = convesationId;
       this.fetchChat({ conversation_id: convesationId, page: 1 });
+      
     },
     submitMessage() {
       this.error = "";
-      if (this.messageData.message == "") {
+      if (this.messageSent.text == "") {
         this.error = "blank message can't be send";
       }
 
       const formData = new FormData();
-      formData.append("message", this.messageData.message);
-      formData.append("attachment", this.messageData.attachment);
+      formData.append("message", this.messageSent.text);
+      formData.append("attachment", this.messageSent.attachment);
       formData.append("sender_id", this.currentUserId);
       formData.append("conversation_id", this.conversationId);
       this.sendMessage(formData);
@@ -168,7 +170,7 @@ export default {
         user.proifie_image,
         user.img
       );
-      Echo.channel("demo").whisper('typing',{profile:profile});
+      Echo.channel("demo").whisper("typing", { profile: profile });
     },
     loadMoreMessage() {
       let messages = this.messages;
@@ -190,15 +192,14 @@ export default {
       if (_this.$refs.chatContainer.scrollTop == 0) _this.loadMoreMessage();
     });
 
-    Echo.channel("demo").listen("MessageSent", function (e) {
-      console.log(_this.messages);
-      _this.messages = e.message;
-      console.log(_this.messages);
+    Echo.private(`conversation.${this.conversationId}`).listen("MessageSent", function (e) {
+      console.log(e.message);
+     // _this.fetchMessages.unshift(e.message);
     });
 
-    Echo.channel("demo").listenForWhisper('typing', (e) => {
-        console.log(e);
-    });
+    // Echo.channel("demo").listenForWhisper("typing", (e) => {
+    //   console.log(e);
+    // });
   },
 };
 </script>

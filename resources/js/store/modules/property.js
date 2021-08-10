@@ -1,5 +1,6 @@
 import axios from '../axios';
 import Router from '../../router/index';
+import Notiflix from 'notiflix';
 const states = {
     countries: [],
     countryMatch: false,
@@ -64,14 +65,16 @@ const actions = {
 
     },
     async fetchproperties({ commit }, data) {
+        Notiflix.Block.dots('#property-list');
         commit('PROPERTIES_LOADING', true);
         let page = data.hasOwnProperty("page") ? data.page : 1;
-        axios.get(`api/propery?page=${page}`, { params: data })
+       await axios.get(`api/propery?page=${page}`, { params: data })
             .then((res) => {
                 commit('GET_PROPERTIES', res);
                 commit('PROPERTIES_LOADING', false);
             })
             .catch((err) => console.log(err));
+        Notiflix.Block.remove('#property-list');
     },
     async fetchproperty({ commit }, id) {
         commit('PROPERTY_LOADING', true);

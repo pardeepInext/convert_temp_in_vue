@@ -112,5 +112,9 @@ Route::get('/homepage', [APIController::class, 'homePage']);
 Route::prefix('admin')->group(function () {
     Route::get('/property', [AdminController::class, 'propertyList']);
     Route::get('/property/{id}', [AdminController::class, 'propertyDetails']);
-    Route::get('/newsLatter',[AdminController::class,'newsLatter']);
+    Route::get('/newsLatter', [AdminController::class, 'newsLatter']);
+    Route::get('/contactus', [AdminController::class, 'contactUs']);
+    Route::get('/users', [AdminController::class, 'users']);
+    Route::get('/user/{id}', [AdminController::class, 'userDetails']);
+    Route::post('/users', [AdminController::class, 'addUser']);
 });

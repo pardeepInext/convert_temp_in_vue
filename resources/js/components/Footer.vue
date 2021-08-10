@@ -24,26 +24,22 @@
           </div>
         </div>
         <div class="col-lg-2 col-sm-6">
-          <div class="fs-widget">
-            <h5>Help</h5>
-            <ul>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Contact Support</a></li>
-              <li><a href="#">Knowledgebase</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">FAQs</a></li>
-            </ul>
-          </div>
         </div>
         <div class="col-lg-2 col-sm-6">
           <div class="fs-widget">
             <h5>Links</h5>
             <ul>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Create Property</a></li>
-              <li><a href="#">My Properties</a></li>
-              <li><a href="#">Register</a></li>
-              <li><a href="#">Login</a></li>
+              <li>
+                <router-link :to="{ name: 'contactus' }">Contact</router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'property-submit' }"
+                  >Add property for Sell</router-link
+                >
+              </li>
+              <li><router-link to="">My Properties</router-link></li>
+              <li><router-link :to="{ name: 'register' }">Register</router-link></li>
+              <li><router-link :to="{ name: 'login' }">Login</router-link></li>
             </ul>
           </div>
         </div>
@@ -123,7 +119,7 @@ export default {
           }
           this.isNewslatteloading = false;
         })
-        .catch((err)=>{
+        .catch((err) => {
           Notify.failure("Something went wrong!please try again.");
           this.isNewslatteloading = false;
         });

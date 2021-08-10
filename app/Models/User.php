@@ -16,7 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = ['proifie_image'];
+    protected $appends = ['proifie_image','image'];
     protected $fillable = [
         'name',
         'email',
@@ -47,6 +47,10 @@ class User extends Authenticatable
 
     function getProifieImageAttribute(){
          return $this->img != Null ? asset("assets/img/user/$this->img") : asset("assets/img/user/defaultuser.png"); 
+    }
+
+    function getImageAttribute(){
+        return $this->role_id != NULL ? $this->img : ($this->img != Null ? asset("assets/img/user/$this->img") : asset("assets/img/user/defaultuser.png"));
     }
 
     function role(){

@@ -172,7 +172,7 @@
       </div>
     </section>
     <section class="property-section spad">
-      <div class="container">
+      <div class="container" id="property-list">
         <div v-if="getProperties">
           <div v-if="propertyList.length > 0" class="row">
             <property

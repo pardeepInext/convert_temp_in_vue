@@ -109,10 +109,6 @@ export default {
   },
   mounted() {
     this.index();
-    console.log("mounted");
-  },
-  beforeMount(){
-    console.log("beforemount");
   }
 };
 </script>

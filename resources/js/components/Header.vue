@@ -71,7 +71,7 @@
                   <span>125-668-886</span>
                 </li>
               </ul>
-              <button
+              <!-- <button
                 class="hw-btn logout"
                 v-if="token || isAuth"
                 data-bs-toggle="collapse"
@@ -80,13 +80,14 @@
                 aria-controls="collapseExample"
               >
                 Logout
-              </button>
+              </button> -->
+              <router-link class="hw-btn" v-if="token || isAuth" :to="{name:'profile'}">Profile</router-link>
               <router-link class="hw-btn" :to="{ name: 'login' }" v-else
                 >Login</router-link
               >
-              <div class="collapse" id="collapseExample"   v-if="token || isAuth">
+              <!-- <div class="collapse" id="collapseExample"   v-if="token || isAuth">
                 <a href="javascript:void(0);" @click="logout(user.id)">Logout</a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

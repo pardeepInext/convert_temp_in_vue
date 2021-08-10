@@ -18,4 +18,9 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-//Broadcast::channel('conversation.{id}', fn($id) => Conversation::findOrFail($id));
+Broadcast::channel('conversation.{id}', function($user,$id){
+    $conversation = Conversation::findOrFail($id);
+    return $conversation;
+    // if($conversation->user_1 == $user->id) return true;
+    // else if($conversation->user_2 == $user->id) return true;
+});

@@ -4,9 +4,9 @@ const AdminRoutes = [
         name: 'dashboard',
         meta: {
             title: 'Dashboard',
-            layout:'admin',
+            layout: 'admin',
             guard: 'authuser',
-            role:'3',
+            role: '3',
         },
         component: () => import('../views/admin/Index')
     },
@@ -15,9 +15,9 @@ const AdminRoutes = [
         name: 'propertylist',
         meta: {
             title: 'Property',
-            layout:'admin',
+            layout: 'admin',
             guard: 'authuser',
-            role:'3',
+            role: '3',
         },
         component: () => import('../views/admin/Property')
     },
@@ -26,9 +26,9 @@ const AdminRoutes = [
         name: 'newslatter',
         meta: {
             title: 'Newsletter',
-            layout:'admin',
+            layout: 'admin',
             guard: 'authuser',
-            role:'3',
+            role: '3',
         },
         component: () => import('../views/admin/NewsLatter')
     },
@@ -37,20 +37,32 @@ const AdminRoutes = [
         name: 'users',
         meta: {
             title: 'Users',
-            layout:'admin',
+            layout: 'admin',
             guard: 'authuser',
-            role:'3',
+            role: '3',
         },
         component: () => import('../views/admin/User')
     },
+    {
+        path: '/add/user',
+        name: 'users-add',
+        meta: {
+            title: 'Add',
+            layout: 'admin',
+            guard: 'authuser',
+            role: '3',
+        },
+        component: () => import('../views/admin/AddUser')
+    },
+
     {
         path: '/contactmessage',
         name: 'contactmessage',
         meta: {
             title: 'Contact',
-            layout:'admin',
+            layout: 'admin',
             guard: 'authuser',
-            role:'3',
+            role: '3',
         },
         component: () => import('../views/admin/ContactMessage')
     }

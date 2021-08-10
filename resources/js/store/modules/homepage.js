@@ -49,7 +49,6 @@ const actions = {
             }
         })
             .then(res => {
-                // commit('Search_Property', res);
                 router.push({ name: 'properties' });
             })
             .catch(err => console.log(err));

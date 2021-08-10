@@ -61,11 +61,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     SocialLogin: _components_SocialLogin_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)("Auth", ["loginError"])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)("Auth", ["getLoginErrors", "getIsLogin"])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("Auth", ["login", "scrollToTop"])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("Auth", ["login", "scrollToTop"])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)("Auth", ["Login_Error"])), {}, {
     passwordHideShow: function passwordHideShow() {
       this.isPasswordShow = !this.isPasswordShow;
     }
-  })
+  }),
+  mounted: function mounted() {
+    this.Login_Error({});
+  }
 });
 
 /***/ }),
@@ -262,7 +265,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.passwordHideShow && $options.passwordHideShow.apply($options, arguments);
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.isPasswordShow ? 'Hide' : 'Show'), 1
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.isPasswordShow ? "Hide" : "Show"), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "forgot-link float-end my-2",

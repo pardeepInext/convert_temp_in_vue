@@ -62,11 +62,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     SocialLogin: _components_SocialLogin_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('Auth', ['registerError', 'isRegister'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("Auth", ["socialLogin", "register"])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("Auth", ["socialLogin", "register"])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)("Auth", ["Register_Error"])), {}, {
     passwordHideShow: function passwordHideShow() {
       this.isPasswordShow = !this.isPasswordShow;
     }
-  })
+  }),
+  mounted: function mounted() {
+    this.Register_Error({});
+  }
 });
 
 /***/ }),
